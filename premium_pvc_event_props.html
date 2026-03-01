@@ -1,0 +1,850 @@
+<!DOCTYPE html><html lang="en" class=""><head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Panta Props | Premium PVC Event Props</title>
+
+    <!-- Essential Scripts & Styles -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#e12d75",
+                        "primary-dark": "#b01e58",
+                        "secondary": "#0f82c4",
+                        "whatsapp": "#25D366",
+                        "background-light": "#f8f6f7",
+                        "background-dark": "#211117",
+                        "surface": "#ffffff",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"],
+                        "body": ["Manrope", "sans-serif"],
+                    },
+                    borderRadius: {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "2xl": "4rem",
+                        "full": "9999px"
+                    },
+                    animation: {
+                        marquee: 'marquee 25s linear infinite',
+                        float: 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        marquee: {
+                            '0%': { transform: 'translateX(0%)' },
+                            '100%': { transform: 'translateX(-100%)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
+                    },
+                    boxShadow: {
+                        'float': '0 12px 32px rgba(15, 130, 196, 0.08)',
+                        'glow': '0 0 20px rgba(225, 45, 117, 0.3)',
+                    }
+                },
+            },
+        }
+    </script>
+
+    <style>
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        .hero-card { transition: flex-grow 0.5s cubic-bezier(0.25, 1, 0.5, 1), filter 0.5s ease; }
+        .pattern-bg {
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23e12d75' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        .comparison-slider-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            user-select: none;
+        }
+        .text-gradient-primary {
+            background: linear-gradient(135deg, #e12d75 0%, #0f82c4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .squircle-checkbox {
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #e5e7eb;
+            border-radius: 6px;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.2s ease;
+        }
+        .squircle-checkbox:checked { background-color: #0f82c4; border-color: #0f82c4; }
+        .squircle-checkbox:checked::after {
+            content: '✓'; color: white; position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%); font-size: 12px; font-weight: bold;
+        }
+    </style>
+
+    <!-- React Dependencies -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/history@5/umd/history.development.js"></script>
+    <script src="https://unpkg.com/react-router@6.3.0/umd/react-router.development.js"></script>
+    <script src="https://unpkg.com/react-router-dom@6.3.0/umd/react-router-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 transition-colors duration-300 pattern-bg">
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+        const { createRoot } = ReactDOM;
+        const { MemoryRouter, Routes, Route, Link, useNavigate, useLocation } = ReactRouterDOM;
+
+        /** 
+         * COMMON COMPONENTS
+         */
+        const Navbar = () => {
+            const navigate = useNavigate();
+            return (
+                <div className="fixed top-6 left-0 right-0 z-50 flex justify-center px-4">
+                    <nav className="bg-white/95 dark:bg-slate-900/95 backdrop-blur-md shadow-float rounded-full px-6 py-3 flex items-center justify-between w-full max-w-5xl border border-white/50 dark:border-slate-800">
+                        <Link to="/" className="flex items-center gap-2 group">
+                            <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white rotate-3 group-hover:rotate-12 transition-transform duration-300">
+                                <span className="material-symbols-outlined text-xl">celebration</span>
+                            </div>
+                            <span className="font-extrabold text-xl tracking-tight text-slate-900 dark:text-white">Panta Props</span>
+                        </Link>
+                        <div className="hidden md:flex items-center gap-8">
+                            <Link to="/shop" className="text-sm font-bold text-slate-600 dark:text-slate-300 hover:text-primary transition-colors">Shop Stock</Link>
+                            <Link to="/custom" className="text-sm font-bold text-slate-600 dark:text-slate-300 hover:text-primary transition-colors">Custom Design</Link>
+                            <Link to="/story" className="text-sm font-bold text-slate-600 dark:text-slate-300 hover:text-primary transition-colors">Our Story</Link>
+                            <Link to="/community" className="text-sm font-bold text-slate-600 dark:text-slate-300 hover:text-primary transition-colors">Community</Link>
+                        </div>
+                        <div className="flex items-center gap-3">
+                            <button className="hidden md:flex items-center gap-2 bg-whatsapp hover:bg-[#1ebd59] text-white px-5 py-2.5 rounded-full text-sm font-bold transition-all shadow-lg shadow-green-500/20" onClick={() => navigate('/success')}>
+                                <span className="material-symbols-outlined text-lg">chat</span>
+                                <span>WhatsApp</span>
+                            </button>
+                        </div>
+                    </nav>
+                </div>
+            );
+        };
+
+        const Footer = () => (
+            <footer className="bg-slate-900 text-white py-16 px-6 mt-20">
+                <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
+                    <div className="col-span-1 md:col-span-1">
+                        <div className="flex items-center gap-3 text-primary mb-6">
+                            <span className="material-symbols-outlined text-3xl">celebration</span>
+                            <h2 className="text-white text-lg font-bold">Panta Props</h2>
+                        </div>
+                        <p className="text-slate-400 text-sm leading-relaxed">
+                            Elevating events with high-end props and neon solutions since 2018.
+                        </p>
+                    </div>
+                    <div>
+                        <h4 className="font-bold mb-6">Explore</h4>
+                        <ul className="space-y-4 text-slate-400 text-sm">
+                            <li><Link to="/shop" className="hover:text-primary">Shop All</Link></li>
+                            <li><Link to="/custom" className="hover:text-primary">Custom Orders</Link></li>
+                            <li><Link to="/community" className="hover:text-primary">Panta in the Wild</Link></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 className="font-bold mb-6">Support</h4>
+                        <ul className="space-y-4 text-slate-400 text-sm">
+                            <li><a href="#" className="hover:text-primary">Shipping & Returns</a></li>
+                            <li><a href="#" className="hover:text-primary">Rental Policy</a></li>
+                            <li><a href="#" className="hover:text-primary">Privacy</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 className="font-bold mb-6">Stay Bright</h4>
+                        <div className="flex gap-2">
+                            <input className="bg-slate-800 border-none rounded-full px-4 py-2 text-sm w-full" placeholder="Email address" type="email"/>
+                            <button className="bg-primary p-2 rounded-full flex items-center justify-center">
+                                <span className="material-symbols-outlined">arrow_forward</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div className="max-w-7xl mx-auto border-t border-slate-800 mt-16 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-slate-500 text-xs">
+                    <p>© 2024 Panta Props Inc. All rights reserved.</p>
+                </div>
+            </footer>
+        );
+
+        /** 
+         * SCREEN 1: COMMUNITY (Panta in the Wild)
+         */
+        const CommunityPage = () => {
+            return (
+                <div className="min-h-screen">
+                    <Navbar />
+                    <main className="max-w-7xl mx-auto w-full px-6 py-32">
+                        <section className="flex flex-col md:flex-row justify-between items-end gap-6 mb-12">
+                            <div className="max-w-2xl">
+                                <h1 className="text-5xl md:text-6xl font-black text-slate-900 dark:text-white mb-4 tracking-tight">
+                                    Panta in the <span className="text-primary">Wild</span>
+                                </h1>
+                                <p className="text-lg text-slate-600 dark:text-slate-400 font-medium">
+                                    See how our community brings the party to life! From neon nuptials to corporate glow-ups.
+                                </p>
+                            </div>
+                            <div className="flex gap-2 p-1 bg-primary/5 rounded-full border border-primary/10">
+                                <button className="px-6 py-2 rounded-full bg-primary text-white text-sm font-bold shadow-lg shadow-primary/20">All</button>
+                                <button className="px-6 py-2 rounded-full hover:bg-primary/10 text-slate-600 dark:text-slate-400 text-sm font-bold">Weddings</button>
+                                <button className="px-6 py-2 rounded-full hover:bg-primary/10 text-slate-600 dark:text-slate-400 text-sm font-bold">Parties</button>
+                            </div>
+                        </section>
+
+                        <section className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-6 space-y-6 mb-20">
+                            {[
+                                { img: "https://lh3.googleusercontent.com/aida-public/AB6AXuD9QrSlX4--DKAKag1_S4lxOGg6kxNm6MnxoIqFpfxmhC1d9mpp-nuLwrDseK3qAHe16P2idaRfcmDrG0XySXpV-GGrg6oBsyZvHhIr1dMvquYZ-WwXCcHHuykyKWKo0DlzgdP59Ba5o8ofGyXmyVKs9wRUe8C-l2PEFeFUHx8TSdvJauz-3YR1BDfFr5Qoo9_2MspNlBy07IPkDyM4maj_uenHDm8FMWInSZVAtwfjImgkQgYvb0XRvioHZBXyhCy5Rp6tlgax43A", title: "The Miller Wedding", tag: "#Weddings" },
+                                { img: "https://lh3.googleusercontent.com/aida-public/AB6AXuCTFxteNeuzh2EgiUuCPydjf5ax8RtfatXPDdycf9CENledtKCgyOOeMYnd1bTabaDX3TBdzFak3VfB1iA13IpLwdO2nXymOp5hf9RrssV3p_7Ri2msgARDvPuP5-ZmbZOI178-Vd45ltueIo1ZXfKvMKYJxwzCvxHvWEvTY5O_kljTGnFNCmm0oihUd8ZSgxFgnVji-zHGVLBdSiCEbA4W3cNdLToWVV_P0ToBkCwXyBLQpk6eQ-Ev2mdP33CqweJvGE6WQLh2tG4", title: "TechCorp Gala", tag: "#Corporate" },
+                                { img: "https://lh3.googleusercontent.com/aida-public/AB6AXuCraKwpeJIQf9XTzXQcxNMgSuSb_xkaARZi-Z9QT9dRi7edcQK6gFi6z2U-koykcLbe6XLcIAbacCwDD1xYqz50p6nHI2GWeoDaaIttjMbExekqt13WSo2QOfy9rDYzmvH3n4nyeSUke_aLdrCjxDwxhghBTWO-FACvsAuMLMsBDkykosdRaT6WZTKVcfK-qmCVvqEnnYJbpBjhf64e8jtHZd8YnLwmd3Z0TesWegJgGhFKfItLf1XmAw3Hz1YoPCwoaoELC0s0iJ4", title: "Leo's 30th Glow", tag: "#Parties" },
+                                { img: "https://lh3.googleusercontent.com/aida-public/AB6AXuCDuSmbq6XOGL8dN1vCqckhcU_guat9X9dOfu36v3D_wpYdTwRdKaIHVAI754yGcKpoYhIEdl-x44C3CvmSfE3vYpcQcSn-It0LKko9e4x-qqXdKB9JHrbpkBMD-iEPYh-K5wcfRD5skG-ScmdkcCixZFyjap_9o_W8SEzX7a_6OZN4iD5la1k3OyeYmGa2uqv8APwqIBFKTsv30CYIKRQOFW0WbUCBU7-umcK3uDscphxCGyO397dT_JPdQUJv67DloiI8ZCycHuY", title: "Coastal Vibe", tag: "#Weddings" },
+                            ].map((item, idx) => (
+                                <div key={idx} className="break-inside-avoid group relative overflow-hidden rounded-xl bg-slate-200 aspect-[3/4]">
+                                    <img className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src={item.img} />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                                        <p className="text-white font-bold">{item.title}</p>
+                                        <span className="text-white/70 text-sm">{item.tag}</span>
+                                    </div>
+                                </div>
+                            ))}
+                        </section>
+
+                        <section className="bg-white dark:bg-slate-900 rounded-xl p-8 lg:p-12 shadow-xl border border-primary/10 relative overflow-hidden">
+                            <div className="grid lg:grid-cols-2 gap-12 relative z-10">
+                                <div className="space-y-6">
+                                    <h2 className="text-4xl font-black tracking-tight text-slate-900 dark:text-white">Share Your <span className="text-primary">Pop</span></h2>
+                                    <p className="text-slate-600 dark:text-slate-400 text-lg">
+                                        Upload your photos for a chance to be featured and win a 15% discount.
+                                    </p>
+                                </div>
+                                <div className="border-2 border-dashed border-primary/30 rounded-xl p-10 flex flex-col items-center justify-center bg-background-light dark:bg-slate-800/50 hover:bg-primary/5 cursor-pointer">
+                                    <span className="material-symbols-outlined text-3xl text-primary mb-4">cloud_upload</span>
+                                    <p className="text-lg font-bold text-slate-900 dark:text-white">Drop photos here</p>
+                                    <button className="mt-6 bg-primary text-white font-bold py-3 px-8 rounded-full shadow-lg">Browse Files</button>
+                                </div>
+                            </div>
+                        </section>
+                    </main>
+                    <Footer />
+                </div>
+            );
+        };
+
+        /** 
+         * SCREEN 2: LANDING (Playful Pop)
+         */
+        const LandingPage = () => {
+            const navigate = useNavigate();
+            return (
+                <div className="min-h-screen">
+                    <Navbar />
+                    <main className="flex-grow pt-32 pb-10 px-4 md:px-8 max-w-[1600px] mx-auto w-full flex flex-col gap-16 md:gap-24 relative">
+                        <section className="h-[80vh] min-h-[600px] w-full flex flex-col md:flex-row gap-4 md:gap-6 group">
+                            <div onClick={() => navigate('/shop')} className="hero-card relative flex-1 hover:flex-[1.5] bg-[#FFF0F5] dark:bg-slate-800 rounded-[32px] overflow-hidden cursor-pointer group/card shadow-lg">
+                                <div className="absolute inset-0 bg-cover bg-center" style={{backgroundImage: "url('https://lh3.googleusercontent.com/aida-public/AB6AXuBGzhgCKioX5pjR9C3MhUmASG8uCJWruGQrhI1H-MJuOjqJmmO6aEqB2L5SXv75vbPwrfmK6BlTctCwLOqF1xXPzScWuv4pR_105NXvid8293ADt6FNHIsS7UnlHS-ErdBDD0r3-2XkeQpDY186t5alhZYNyFZ9BbYZhkmV2lvg2YOe_pie0S9o06LcBAyziaCWGpo8bZOxux7Xyewat6g3Zw1NX_538unDFNnJ-1X1PfaHlo5FBoJVnr9FP_lIR9RJ32SKAI2CWWU')"}}>
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+                                </div>
+                                <div className="absolute bottom-0 left-0 p-8 md:p-12 w-full flex flex-col items-start gap-4">
+                                    <h2 className="text-6xl md:text-8xl font-black text-white leading-[0.85] tracking-tight">Shop<br/>The Drop</h2>
+                                    <button className="bg-white text-primary px-8 py-4 rounded-full font-bold uppercase text-sm">Browse Stock</button>
+                                </div>
+                            </div>
+                            <div onClick={() => navigate('/custom')} className="hero-card relative flex-1 hover:flex-[1.5] bg-[#E0F7FA] dark:bg-slate-800 rounded-[32px] overflow-hidden cursor-pointer group/card shadow-lg">
+                                <div className="absolute inset-0 bg-cover bg-center" style={{backgroundImage: "url('https://lh3.googleusercontent.com/aida-public/AB6AXuATTrbgMTwdhfTrP9CYgBXFxb_OMrNrt6ytXPQIxVfYbemj4Aonjz5vOMiY5WDq30szll6aICJNSm4a960agqIYFEVYjdrmcR5PqU14mmKdX3cXUWsvCZrOBG7hXR3MP9FpKGVVxI8LD1uKoTlAM1rPwL_YSXR2IjQaki6WbvuRQDO1uAPrkBj3M45DTBUyvB9vYfmdAj0i3X8O38LWtFBVJr8xZIYv_r9TZQXldcTxqSzaKXbz7XE2c4IbbxT09RSc9wRSjYdv3Rs')"}}>
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+                                </div>
+                                <div className="absolute bottom-0 left-0 p-8 md:p-12 w-full flex flex-col items-start gap-4">
+                                    <h2 className="text-6xl md:text-8xl font-black text-white leading-[0.85] tracking-tight">Make<br/>It Yours</h2>
+                                    <button className="bg-primary text-white px-8 py-4 rounded-full font-bold uppercase text-sm">Start Custom Order</button>
+                                </div>
+                            </div>
+                        </section>
+
+                        <div className="relative w-screen -ml-[50vw] left-[50%] overflow-hidden bg-slate-900 text-white py-4 rotate-1 shadow-xl">
+                            <div className="flex whitespace-nowrap animate-marquee items-center">
+                                <span className="text-2xl font-black uppercase tracking-[0.05em] mx-8">NO MORE FLOPPY CARDBOARD • 5MM THICK PVC • ANTI-GLARE • 100% WATERPROOF •</span>
+                                <span className="text-2xl font-black uppercase tracking-[0.05em] mx-8">NO MORE FLOPPY CARDBOARD • 5MM THICK PVC • ANTI-GLARE • 100% WATERPROOF •</span>
+                            </div>
+                        </div>
+
+                        <section className="flex flex-col gap-8">
+                            <h3 className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white px-2">Shop By Vibe</h3>
+                            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+                                {['Weddings', 'Corporate', 'Parties', 'Holiday'].map((vibe, i) => (
+                                    <Link key={i} to="/shop" className="group relative aspect-square rounded-[2rem] overflow-hidden bg-gray-200">
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent z-10"></div>
+                                        <div className="absolute bottom-6 left-6 z-20">
+                                            <h4 className="text-white text-xl font-extrabold">{vibe}</h4>
+                                        </div>
+                                    </Link>
+                                ))}
+                            </div>
+                        </section>
+                    </main>
+                    <Footer />
+                </div>
+            );
+        };
+
+        /** 
+         * SCREEN 3: BRAND STORY (Comparison)
+         */
+        const StoryPage = () => {
+            const [sliderPos, setSliderPos] = useState(50);
+            const sliderRef = useRef(null);
+            
+            const handleMouseMove = (e) => {
+                if (!sliderRef.current) return;
+                const rect = sliderRef.current.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                let percent = (x / rect.width) * 100;
+                setSliderPos(Math.min(100, Math.max(0, percent)));
+            };
+
+            return (
+                <div className="min-h-screen">
+                    <Navbar />
+                    <main className="pt-32 pb-20 px-4 md:px-8 max-w-7xl mx-auto flex flex-col gap-24">
+                        <section className="flex flex-col items-center text-center gap-8">
+                            <h1 className="text-4xl md:text-6xl font-extrabold text-slate-900 leading-tight">
+                                Ditch the <span className="text-slate-400 line-through decoration-primary/50">Flop</span>.<br/>
+                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-purple-600">Pop the Prop.</span>
+                            </h1>
+                            <div 
+                                ref={sliderRef}
+                                className="relative w-full max-w-5xl aspect-[16/9] md:aspect-[21/9] rounded-2xl md:rounded-[3rem] shadow-2xl overflow-hidden group border-4 border-white"
+                                onMouseMove={handleMouseMove}
+                            >
+                                <div className="absolute inset-0 w-full h-full bg-slate-200">
+                                    <img className="w-full h-full object-cover grayscale opacity-60" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRSZuHcvtUgN_Rn4YALuPFzo4ki7MpaitFkkGXCJHknp9u-afUb5exDE53E0d2Kl5GdagWA0Xdbxu0DOycXMhxwVeR6VRU2HO-HV4H_KsAYHk8Toei5E__ZF7T9ZrQ54DftEr9PBSHi3bnaZmnUluZ-UKoynntqtaVt_IrUuDAoYDOlJXT5Jydc1HP86M_ILG93JEpAZg1RO1VppHIt3oLjYq9xJ7ybojqvLvKDNrDwhPBHrbpedtoXmw3G4I8boCa4q-nWKDh9HM" />
+                                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                                        <span className="bg-black/50 text-white px-4 py-2 rounded-lg backdrop-blur-sm font-bold text-xl">Sad Cardboard 😢</span>
+                                    </div>
+                                </div>
+                                <div className="absolute inset-0 overflow-hidden" style={{ width: `${sliderPos}%` }}>
+                                    <img className="absolute top-0 left-0 h-full object-cover" style={{ width: `${10000 / sliderPos}%` }} src="https://lh3.googleusercontent.com/aida-public/AB6AXuCV_IWwa95ARcSX0yKdrcoq4dWbdF0Jk2tP49FlItS95aKhIzy55YYqbrxEDIHSPp_kUdL2alDnUh5fI_IIVtzWcAechpYbJ-4dG573VHRc-YEZhyhGNFJsDdabToVHqdpEtjKN1m-QXeGllROoOAJQ9IQCpqxgq4waneYYZdt6o_950UkVU2_ajcFVaX6d0_9NjOqDVjUqjQ4uZHfexpzcogpXTOlaQ6RgHc067jytGfg6C-YYnvMru6DhAQaPZxHwe77fl7-E1hc" />
+                                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none" style={{ width: `${100 / (sliderPos / 100)}%` }}>
+                                        <span className="bg-primary/80 text-white px-4 py-2 rounded-lg backdrop-blur-sm font-bold text-xl shadow-glow">Happy Panta 🤩</span>
+                                    </div>
+                                </div>
+                                <div className="absolute top-0 bottom-0 w-1 bg-white shadow-xl cursor-ew-resize" style={{ left: `${sliderPos}%` }}>
+                                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-12 bg-primary border-4 border-white rounded-full flex items-center justify-center shadow-lg">
+                                        <span className="material-symbols-outlined text-white">code</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        
+                        <section className="grid grid-cols-1 md:grid-cols-3 gap-12 w-full max-w-5xl mx-auto">
+                            {[
+                                { icon: 'local_shipping', label: 'Props Shipped', value: '50k+' },
+                                { icon: 'sentiment_very_satisfied', label: 'Bent Corners', value: '0' },
+                                { icon: 'recycling', label: 'Sustainable', value: '100%' },
+                            ].map((stat, i) => (
+                                <div key={i} className="bg-white p-8 rounded-2xl shadow-float flex flex-col items-center text-center gap-2 group hover:-translate-y-1 transition-transform">
+                                    <div className="size-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-2 group-hover:bg-primary group-hover:text-white transition-colors">
+                                        <span className="material-symbols-outlined text-3xl">{stat.icon}</span>
+                                    </div>
+                                    <h3 className="text-5xl font-extrabold text-slate-900">{stat.value}</h3>
+                                    <p className="font-bold text-slate-500 uppercase tracking-wide text-sm">{stat.label}</p>
+                                </div>
+                            ))}
+                        </section>
+                    </main>
+                    <Footer />
+                </div>
+            );
+        };
+
+        /** 
+         * SCREEN 4: PRODUCT DETAIL
+         */
+        const ProductDetailPage = () => {
+            const navigate = useNavigate();
+            return (
+                <div className="min-h-screen">
+                    <Navbar />
+                    <main className="pt-32 pb-20 px-4 md:px-10 max-w-[1200px] mx-auto w-full">
+                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+                            <div className="lg:col-span-7 flex flex-col gap-6">
+                                <div className="group relative aspect-[4/3] w-full overflow-hidden rounded-2xl bg-white shadow-float ring-1 ring-slate-100">
+                                    <img className="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCja-lIkhqC8AtPsRUfcnHq-hIFq8J1aXYFgr63GnABkZV2bD4f9_650wxRmG4bcG9MpU6bCn20ZLpEHyz-GREL_xlqCvFlr8L2R1f5bNGY1ukKpoQ63GCGlZpAjwCdwGgxg_IvMtfeQorAy3DzYv6s7zuKcKgWmtPHLfbJHjgbYkJFf5kqhK0elDysVwrmGrA6cUsP1mECO69FaQJh0pUolCbNybzQivmSY8haV9Wogj5tp6SlJTpnQAu2lq6tPVv1nlweDJ1O4uM" />
+                                </div>
+                                <div className="flex gap-4 overflow-x-auto hide-scrollbar">
+                                    <div className="h-24 w-24 shrink-0 rounded-xl bg-slate-200 overflow-hidden ring-2 ring-primary"></div>
+                                    <div className="h-24 w-24 shrink-0 rounded-xl bg-slate-200 overflow-hidden"></div>
+                                    <div className="h-24 w-24 shrink-0 rounded-xl bg-slate-200 overflow-hidden"></div>
+                                </div>
+                            </div>
+                            <div className="lg:col-span-5">
+                                <div className="sticky top-32 flex flex-col gap-6">
+                                    <h1 className="text-4xl font-extrabold text-slate-900">The "Neon Party" Prop Set</h1>
+                                    <div className="flex items-center gap-4">
+                                        <div className="flex text-[#FFD166]">
+                                            {[1,2,3,4,5].map(s => <span key={s} className="material-symbols-outlined text-xl fill-current">star</span>)}
+                                        </div>
+                                        <span className="text-sm font-bold text-slate-600 underline">124 Reviews</span>
+                                    </div>
+                                    <div className="p-5 rounded-2xl bg-white shadow-sm border border-slate-100 flex flex-col gap-5">
+                                        <div className="flex items-baseline justify-between">
+                                            <span className="text-3xl font-extrabold text-primary">$45.00</span>
+                                            <span className="text-sm font-medium text-slate-400 line-through">$55.00</span>
+                                        </div>
+                                        <div className="bg-slate-100 p-1 rounded-full flex">
+                                            <div className="flex-1 text-center py-2 bg-white rounded-full text-sm font-bold text-primary shadow-sm">Full Party Kit</div>
+                                            <div className="flex-1 text-center py-2 text-sm font-bold text-slate-500">Single Prop ($12)</div>
+                                        </div>
+                                    </div>
+                                    <div className="bg-[#F0F7FA] p-4 rounded-xl border border-[#E1F0F7] flex items-center gap-4">
+                                        <span className="material-symbols-outlined text-[#0F82C4] text-3xl">layers</span>
+                                        <div>
+                                            <h4 className="font-bold text-[#0F82C4] text-sm">Thicker than a Quarter</h4>
+                                            <p className="text-xs text-slate-600">Solid 5mm PVC. No bending, no flopping.</p>
+                                        </div>
+                                    </div>
+                                    <button onClick={() => navigate('/success')} className="bg-whatsapp hover:bg-green-500 text-white font-extrabold text-lg py-4 rounded-full shadow-lg flex items-center justify-center gap-3">
+                                        <span className="material-symbols-outlined">chat</span>
+                                        <span>Buy on WhatsApp</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </main>
+                    <Footer />
+                </div>
+            );
+        };
+
+        /** 
+         * SCREEN 5: SHOP LISTING
+         */
+        const ShopPage = () => {
+            const navigate = useNavigate();
+            const products = [
+                { id: 1, name: "Neon Party Set", price: "$45.00", badge: "Best Seller", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuAVqUWHy7YTXEi8sg44S-GO6juq0txmFLWjBdae32RyPggPb1lBleusJQmuJt1P_a9mdNYTeQ2bY98lMtcEmvHaE02z6jwETplgM3Q5Rb8ONSUt4kBILmoAuQAz93I79wV-HoF14CuCzfvg8oHTF_n3MuiDa3a6pt8tyOcSck6hj-uJRiY_NKJvn9Pyjcm8R16vXKV4C9wFHeQ1XYD4cbzOSv6dRaRvTk3-zsCN6f0a9S4DAHuaBFP_UJrAK1AtP6sRkhLkyjQx6YE" },
+                { id: 2, name: "Speech Bubble Pack", price: "$25.00", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuBWN3CkA7IKKjFCebgQnOzhMDl9GQzJB4kPw-cNhc5xleAb44JSJ_bd11ApGNfIftc0xlarvzrBEBef11wtwtqbsGw463cI-3oyD5xf849Odev3vXOFeLaEHAfIZhIgGlxIRKDUl4lnzzLqb2Q1BGSlm7b8zVvT_p3UHyEYIwD9aOl97LJksVrVidReNJpGgRRK3i6GiTXvS6knubvTM3BHzUCFyiuIbJShBXZGoFoh1xBz5dDpzcDTqyXM1QXMOo_ZxVmeFZrSk-4" },
+                { id: 3, name: "Team Bride/Groom", price: "$30.00", badge: "Hot", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuDXOzTBREJmzxdlKfWaVj_ImEvxYHwk-qGyW8eAvOikaTQrg25809WBYt0ERGIHulIczOhAy4wV9nQSeUlPA2VU9Gzrrl5fppST8vvDkk3ZMjk11Fu6ZNdHlU6UXhaPK_-f7_0TZz_llMwTYUsv1cS45FEO9LPbHwB-xmNKKBqPTFZFS2CTehh7V42oYB9sJJsCp4HudImwou09SXBmpIj05lHtYtOv0umqJBehMWad2wWg-5e7l8WAYKj7Bc7XHcLuS4sZbnVPx94" },
+                { id: 4, name: "Level Up Sign", price: "$50.00", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuBSBllcwo-yQtfMwatx0nktu8O08ZCNKwQQh3uZNERmvuLMkngN-e_8ET4f7ddqcUDRn69-Ipt83zULNwF2C-1ZUcUjxZI1t9Tb6F-A8FtJrWDs1ykS1NmO2r3vqFBYwHJteEvgdxuhU7DoXxNFG_KbL01h1O3EtCJ_8EUB34epo1DMCPbOV6ibFzPTBxwiwPHCHwISfkicg1pMMN3YcwD7EeVvo-12rijL-Y0h0UGmW6ZYsb-ehel9kvKmvVC3hPkkgQnD_XGa28g" },
+            ];
+            
+            return (
+                <div className="min-h-screen">
+                    <Navbar />
+                    <main className="max-w-7xl mx-auto px-6 py-32">
+                        <header className="text-center mb-12">
+                            <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight mb-3">
+                                <span className="text-gradient-primary">All Props</span>
+                            </h1>
+                            <p className="text-slate-500 text-lg font-medium">Ready to ship in 24 hours. No floppy cardboard allowed.</p>
+                        </header>
+                        <div className="flex flex-col lg:flex-row gap-10">
+                            <aside className="w-full lg:w-64 space-y-8 sticky top-32">
+                                <div className="space-y-4">
+                                    <h3 className="font-bold text-lg">Event Type</h3>
+                                    <div className="space-y-2">
+                                        {['Weddings', 'Birthdays', 'Corporate'].map(cat => (
+                                            <label key={cat} className="flex items-center gap-3 cursor-pointer">
+                                                <input type="checkbox" className="squircle-checkbox" />
+                                                <span className="text-slate-600 font-medium">{cat}</span>
+                                            </label>
+                                        ))}
+                                    </div>
+                                </div>
+                            </aside>
+                            <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                                {products.map(p => (
+                                    <div key={p.id} onClick={() => navigate('/product')} className="group bg-white rounded-2xl shadow-float hover:shadow-lg transition-all cursor-pointer overflow-hidden">
+                                        <div className="relative aspect-[4/5] overflow-hidden bg-slate-100">
+                                            {p.badge && <span className="absolute top-4 left-4 z-10 bg-accent-yellow text-xs font-black uppercase px-3 py-1.5 rounded-full">{p.badge}</span>}
+                                            <img src={p.img} className="w-full h-full object-cover transition-transform group-hover:scale-110" />
+                                            <button className="absolute bottom-4 right-4 z-20 w-12 h-12 bg-whatsapp text-white rounded-full flex items-center justify-center translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all">
+                                                <span className="material-symbols-outlined">chat</span>
+                                            </button>
+                                        </div>
+                                        <div className="p-6">
+                                            <h3 className="text-xl font-bold">{p.name}</h3>
+                                            <span className="text-2xl font-extrabold text-primary">{p.price}</span>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </main>
+                    <Footer />
+                </div>
+            );
+        };
+
+        /** 
+         * SCREEN 6: CUSTOM DESIGN
+         */
+        const CustomPage = () => {
+            const navigate = useNavigate();
+            return (
+                <div className="min-h-screen">
+                    <Navbar />
+                    <main className="max-w-7xl mx-auto px-6 py-32 space-y-24">
+                        <section className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                            <div className="space-y-6">
+                                <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full text-primary font-bold uppercase text-xs">
+                                    <span className="material-symbols-outlined text-sm">auto_awesome</span> Bespoke Service
+                                </div>
+                                <h1 className="text-5xl lg:text-7xl font-extrabold tracking-tight leading-[1.1]">
+                                    Your Vibe, <br/><span className="text-gradient-primary">Our Vinyl.</span>
+                                </h1>
+                                <p className="text-xl text-slate-600 max-w-md">Durable, camera-ready custom props designed from your sketches and shipped in 3 days.</p>
+                                <div className="flex gap-4">
+                                    <button onClick={() => navigate('/success')} className="bg-primary text-white px-8 py-4 rounded-full font-bold shadow-lg shadow-primary/30">Start Order</button>
+                                    <button className="bg-white border px-8 py-4 rounded-full font-bold">View Gallery</button>
+                                </div>
+                            </div>
+                            <div className="relative group">
+                                <div className="absolute inset-0 bg-primary/20 rounded-[3rem] rotate-3 blur-xl"></div>
+                                <div className="relative rounded-[3rem] overflow-hidden shadow-2xl bg-white aspect-square">
+                                    <img className="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuABCl6A-OKfPRR0ZRSZ4bCP63g6iDI2BwGmuv2cH6DG1_XPB8usjQagE_E32ZM6hRinx9JMJFXfOXs4YU4TL5T9dxsydG_Aj25Ebj1mKDoBBencn4qKa7o_iBaVCRGvhHNzdZFoGpTy9eOq-imP6tGT5V6O9RXdDBRTQX6Phs7MrfdauyjfEi2LSor_Yxz-SG1Tk5tfalMljH95_mUzIDnmusfoo2HuTJNlLg61aR2QOOq3PqVJ2waP3iyr_CUwzFdLWiimgYqrg0M" />
+                                </div>
+                            </div>
+                        </section>
+                        
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                            {[
+                                { step: "1. The Idea", icon: "lightbulb", desc: "Send us your text, logo, or napkin sketch via WhatsApp." },
+                                { step: "2. The Design", icon: "draw", desc: "We create a digital proof and mock it up within 24 hours." },
+                                { step: "3. Production", icon: "factory", desc: "Laser cut from 5mm PVC, packed, and shipped in 3 days." },
+                            ].map((s, i) => (
+                                <div key={i} className="space-y-4">
+                                    <div className="size-20 bg-primary/10 rounded-full mx-auto flex items-center justify-center text-primary">
+                                        <span className="material-symbols-outlined text-4xl">{s.icon}</span>
+                                    </div>
+                                    <h3 className="text-xl font-bold">{s.step}</h3>
+                                    <p className="text-slate-500">{s.desc}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </main>
+                    <Footer />
+                </div>
+            );
+        };
+
+        /** 
+         * SCREEN 7: INQUIRY SUCCESS (Success Modal)
+         */
+        const SuccessPage = () => {
+            const navigate = useNavigate();
+            return (
+                <div className="min-h-screen bg-background-light dark:bg-background-dark flex flex-col relative overflow-hidden">
+                    <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary via-transparent to-transparent"></div>
+                    <header className="relative z-20 flex items-center justify-between px-6 py-4 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md">
+                        <Link to="/" className="flex items-center gap-4">
+                            <span className="material-symbols-outlined text-primary text-3xl">celebration</span>
+                            <h2 className="text-xl font-bold">Panta Props</h2>
+                        </Link>
+                        <button onClick={() => navigate('/')} className="size-10 flex items-center justify-center bg-slate-100 rounded-full">
+                            <span className="material-symbols-outlined">close</span>
+                        </button>
+                    </header>
+                    <main className="flex-grow flex items-center justify-center relative z-10 p-6">
+                        <div className="max-w-[520px] w-full bg-white dark:bg-slate-800 rounded-3xl shadow-2xl overflow-hidden animate-fade-in-up">
+                            <div className="h-2 bg-gradient-to-r from-primary to-purple-600"></div>
+                            <div className="p-10 flex flex-col items-center text-center">
+                                <div className="relative mb-8 size-24 flex items-center justify-center">
+                                    <div className="absolute inset-0 rounded-full bg-whatsapp/20 animate-ping"></div>
+                                    <div className="relative size-20 rounded-full bg-whatsapp flex items-center justify-center text-white shadow-lg">
+                                        <span className="material-symbols-outlined text-4xl">chat</span>
+                                    </div>
+                                </div>
+                                <h1 className="text-4xl font-black mb-3">Opening WhatsApp...</h1>
+                                <p className="text-lg text-slate-500 mb-8 leading-relaxed">We've prepared your message. Just hit <span className="text-whatsapp font-bold">send</span> in the chat to start your order!</p>
+                                
+                                <div className="w-full space-y-4 mb-10">
+                                    {[
+                                        { n: "1", t: "Send pre-filled message", s: "It contains your product details." },
+                                        { n: "2", t: "Get a reply in < 10 mins", s: "Our team is online and ready." }
+                                    ].map(step => (
+                                        <div key={step.n} className="flex gap-4 text-left p-4 bg-slate-50 rounded-2xl">
+                                            <span className="size-6 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold text-xs">{step.n}</span>
+                                            <div>
+                                                <p className="font-bold text-sm">{step.t}</p>
+                                                <p className="text-xs text-slate-500">{step.s}</p>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+
+                                <div className="w-full space-y-3">
+                                    <button className="w-full py-4 bg-whatsapp text-white font-bold rounded-full shadow-lg hover:scale-105 transition-transform flex items-center justify-center gap-2">
+                                        <span className="material-symbols-outlined">open_in_new</span> Launch WhatsApp
+                                    </button>
+                                    <button onClick={() => navigate('/shop')} className="w-full py-4 text-slate-500 font-bold hover:text-primary transition-colors">Keep Browsing Props</button>
+                                </div>
+                            </div>
+                        </div>
+                    </main>
+                </div>
+            );
+        };
+
+        /** 
+         * ROOT APPLICATION
+         */
+        const App = () => {
+            const { pathname } = useLocation();
+            
+            // Scroll to top on every route change
+            useEffect(() => {
+                window.scrollTo(0, 0);
+            }, [pathname]);
+
+            return (
+                <Routes>
+                    <Route path="/" element={<LandingPage />} />
+                    <Route path="/shop" element={<ShopPage />} />
+                    <Route path="/product" element={<ProductDetailPage />} />
+                    <Route path="/story" element={<StoryPage />} />
+                    <Route path="/custom" element={<CustomPage />} />
+                    <Route path="/community" element={<CommunityPage />} />
+                    <Route path="/success" element={<SuccessPage />} />
+                </Routes>
+            );
+        };
+
+        const RootApp = () => (
+            <MemoryRouter>
+                <App />
+            </MemoryRouter>
+        );
+
+        const container = document.getElementById('root');
+        const root = createRoot(container);
+        root.render(<RootApp />);
+    </script>
+
+<!-- AI Chat Widget -->
+
+  <!-- Standard Global Footer -->
+  
+  <!-- Standard Global Footer -->
+  
+  <!-- Standard Global Footer -->
+  
+  <!-- Standard Global Footer -->
+  
+  <!-- Standard Global Footer -->
+  <footer class="bg-[#1f1619] py-16 px-8 mt-auto w-full border-t border-[#312226]">
+    <div class="max-w-[1200px] mx-auto flex flex-col md:flex-row justify-between gap-12 font-sans">
+      <div class="flex flex-col gap-6 md:w-1/2">
+        <!-- Logo -->
+        <a href="index.html" class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-[#e81e62] text-2xl">camera</span>
+          <div class="w-8 h-[2px] bg-[#e81e62]"></div>
+          <span class="material-symbols-outlined text-[#e81e62] text-2xl">photo_camera</span>
+          <span class="text-white font-bold text-3xl tracking-tight ml-2">Panta</span>
+        </a>
+        
+        <!-- Descriptions -->
+        <p class="text-[#a19598] text-lg max-w-md leading-relaxed mt-2">
+          Ditch the flop. Premium, durable photo booth props<br>
+          designed for events that demand better.
+        </p>
+
+        <!-- Social Icons -->
+        <div class="flex gap-4 mt-6">
+          <a href="https://www.instagram.com/pantaprops_/_/" class="w-12 h-12 rounded-full bg-[#312328] flex items-center justify-center text-white hover:bg-[#e81e62] transition-colors">
+            <span class="material-symbols-outlined text-[20px]">photo_camera</span>
+          </a>
+          <a href="https://youtube.com/@pantaprops" class="w-12 h-12 rounded-full bg-[#312328] flex items-center justify-center text-white hover:bg-[#e81e62] transition-colors">
+            <span class="material-symbols-outlined text-[22px]">play_arrow</span>
+          </a>
+          <a href="contact.html" class="w-12 h-12 rounded-full bg-[#312328] flex items-center justify-center text-white hover:bg-[#e81e62] transition-colors">
+            <span class="material-symbols-outlined text-[20px]">mail</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Right Side Columns -->
+      <div class="flex flex-col sm:flex-row gap-10 sm:gap-20 md:gap-32 w-full md:w-auto mt-2">
+        <div class="flex flex-col gap-5">
+          <h4 class="text-white font-bold text-xl mb-2">Shop</h4>
+          <a href="stocked_shop_collection.html" class="text-[#a19598] hover:text-white transition-colors">All Props</a>
+          <a href="stocked_shop_collection.html?category=wedding" class="text-[#a19598] hover:text-white transition-colors">Wedding Sets</a>
+          <a href="custom_services_landing.html" class="text-[#a19598] hover:text-white transition-colors">Corporate Events</a>
+          <a href="custom_services_landing.html" class="text-[#a19598] hover:text-white transition-colors">Custom Orders</a>
+        </div>
+        <div class="flex flex-col gap-5">
+          <h4 class="text-white font-bold text-xl mb-2">Company</h4>
+          <a href="brand_story.html" class="text-[#a19598] hover:text-white transition-colors">Our Story</a>
+          <a href="community_gallery.html" class="text-[#a19598] hover:text-white transition-colors">Community</a>
+          <a href="brand_story.html#faq" class="text-[#a19598] hover:text-white transition-colors">FAQ</a>
+          <a href="contact.html" class="text-[#a19598] hover:text-white transition-colors">Contact</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+
+
+<div id="ai-chat-widget" class="fixed bottom-6 right-6 z-50 font-display flex flex-col items-end">
+  <!-- Chat Window (Hidden by default) -->
+  <div id="ai-chat-window" class="hidden flex-col w-[350px] h-[500px] bg-white rounded-[2rem] shadow-2xl overflow-hidden border border-slate-100 mb-4 origin-bottom-right transition-all duration-300 transform scale-95 opacity-0">
+    <!-- Header -->
+    <div class="bg-gradient-to-r from-primary to-purple-600 p-4 flex justify-between items-center text-white">
+      <div class="flex items-center gap-2">
+        <span class="material-symbols-outlined">smart_toy</span>
+        <span class="font-bold">Panta AI</span>
+      </div>
+      <button id="close-ai-chat" class="hover:bg-white/20 rounded-full p-1 transition-colors flex items-center justify-center">
+        <span class="material-symbols-outlined text-sm">close</span>
+      </button>
+    </div>
+    <!-- Messages Body -->
+    <div id="ai-chat-messages" class="flex-1 p-4 bg-slate-50 overflow-y-auto flex flex-col gap-3">
+      <div class="self-start bg-white border border-slate-100 p-3 rounded-2xl rounded-tl-sm shadow-sm text-sm text-slate-700 max-w-[85%]">
+        Hi there! 👋 I'm Panta AI. I can help you find the perfect prop, process custom designs, or answer any questions. How can I help you today?
+      </div>
+    </div>
+    <!-- Input -->
+    <div class="p-3 bg-white border-t border-slate-100 flex items-center gap-2">
+      <input type="text" id="ai-chat-input" placeholder="Ask me anything..." class="flex-1 bg-slate-100 border-none rounded-full px-4 py-2 text-sm focus:ring-2 focus:ring-primary/50 outline-none">
+      <button id="send-ai-chat" class="bg-primary text-white size-9 rounded-full flex items-center justify-center hover:bg-pink-600 transition-colors shrink-0 shadow-md">
+        <span class="material-symbols-outlined text-[18px]">send</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Toggle Button -->
+  <button id="toggle-ai-chat" class="size-14 bg-gradient-to-r from-primary to-purple-600 rounded-full flex items-center justify-center text-white shadow-[0_8px_30px_rgb(225,45,117,0.3)] hover:scale-105 transition-transform flex group">
+    <span class="material-symbols-outlined text-2xl group-hover:hidden block">smart_toy</span>
+    <span class="material-symbols-outlined text-2xl hidden group-hover:block transition-all">chat</span>
+  </button>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Only bind if the elements exist to avoid errors
+    const toggleBtn = document.getElementById('toggle-ai-chat');
+    const closeBtn = document.getElementById('close-ai-chat');
+    const chatWindow = document.getElementById('ai-chat-window');
+    const chatMessages = document.getElementById('ai-chat-messages');
+    const chatInput = document.getElementById('ai-chat-input');
+    const sendBtn = document.getElementById('send-ai-chat');
+
+    if (!toggleBtn || !chatWindow) return;
+
+    function toggleChat() {
+      if (chatWindow.classList.contains('hidden')) {
+        chatWindow.classList.remove('hidden');
+        chatWindow.classList.add('flex');
+        
+        // small delay for transition
+        setTimeout(() => {
+          chatWindow.classList.remove('scale-95', 'opacity-0');
+          chatWindow.classList.add('scale-100', 'opacity-100');
+        }, 10);
+      } else {
+        chatWindow.classList.remove('scale-100', 'opacity-100');
+        chatWindow.classList.add('scale-95', 'opacity-0');
+        setTimeout(() => {
+          chatWindow.classList.add('hidden');
+          chatWindow.classList.remove('flex');
+        }, 300);
+      }
+    }
+
+    if(toggleBtn) toggleBtn.addEventListener('click', toggleChat);
+    if(closeBtn) closeBtn.addEventListener('click', toggleChat);
+
+    function addMessage(text, isUser = false) {
+      const msgDiv = document.createElement('div');
+      msgDiv.className = `p-3 rounded-2xl shadow-sm text-sm max-w-[85%] ${isUser ? 'self-end bg-gradient-to-r from-primary to-purple-600 text-white rounded-tr-sm' : 'self-start bg-white border border-slate-100 text-slate-700 rounded-tl-sm'}`;
+      msgDiv.textContent = text;
+      chatMessages.appendChild(msgDiv);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+      return msgDiv;
+    }
+
+    function showTyping() {
+       const typingDiv = document.createElement('div');
+       typingDiv.id = 'ai-typing';
+       typingDiv.className = 'self-start bg-white border border-slate-100 p-4 rounded-2xl rounded-tl-sm shadow-sm text-slate-500 max-w-[85%] flex items-center gap-1.5 h-10';
+       typingDiv.innerHTML = '<div class="size-1.5 bg-slate-400 rounded-full animate-bounce"></div><div class="size-1.5 bg-slate-400 rounded-full animate-bounce" style="animation-delay: 0.15s"></div><div class="size-1.5 bg-slate-400 rounded-full animate-bounce" style="animation-delay: 0.3s"></div>';
+       chatMessages.appendChild(typingDiv);
+       chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function removeTyping() {
+       const typingDiv = document.getElementById('ai-typing');
+       if (typingDiv) typingDiv.remove();
+    }
+
+    
+    function getBotResponse(text) {
+      const lower = text.toLowerCase();
+      
+      // Material & Thickness logic
+      if (lower.includes('material') || lower.includes('made of') || lower.includes('pvc') || lower.includes('thick') || lower.includes('mm')) {
+         return "Our stock props are made from durable, premium 5mm expanded PVC with a matte finish to prevent glare. If you place a Custom Order, we upgrade that to extra-durable 8mm PVC!";
+      }
+      
+      // Custom order logic
+      if (lower.includes('custom') || lower.includes('bespoke') || lower.includes('my own')) {
+         return "We absolutely do custom orders! We can design and laser-cut your custom props from 8mm PVC and ship them in just 3 days. Check out the 'Custom Orders' page for more info.";
+      }
+      
+      // Shipping / Location logic
+      if (lower.includes('ship') || lower.includes('long') || lower.includes('where')) {
+         return "We ship worldwide! Stock items usually process in 1-2 days, while custom orders take about 3 days to design and cut before shipping.";
+      }
+
+      // Default fallback
+      return "Thanks for your message! My AI brain is currently powering up 🔋 to answer that fully, but a totally real human will hop in and reply to your message in just a moment!";
+    }
+
+    function handleSend() {
+      const text = chatInput.value.trim();
+      if (!text) return;
+      
+      addMessage(text, true);
+      chatInput.value = '';
+      
+      showTyping();
+      setTimeout(() => {
+        removeTyping();
+        const response = getBotResponse(text);
+        addMessage(response);
+        
+        // Store common questions to pass to the human agent later
+      }, Math.random() * 1000 + 800); // Random delay between 0.8s and 1.8s for realism
+    }
+
+    if(sendBtn) sendBtn.addEventListener('click', handleSend);
+    if(chatInput) {
+        chatInput.addEventListener('keypress', (e) => {
+          if (e.key === 'Enter') handleSend();
+        });
+    }
+  });
+</script>
+
+
+</body></html>

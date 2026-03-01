@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Panta Props - Admin Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#e12d75",
+                        "background-light": "#fbf8fa",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <meta name="robots" content="noindex, nofollow">
+</head>
+
+<body
+    class="bg-background-light font-display text-slate-900 min-h-screen flex flex-col selection:bg-primary selection:text-white pb-20">
+
+    <!-- Header -->
+    <header class="bg-white shadow-[0_8px_30px_rgb(0,0,0,0.04)] sticky top-0 z-40 border-b border-slate-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-slate-900 flex items-center justify-center text-white">
+                    <span class="material-symbols-outlined">shield_person</span>
+                </div>
+                <h1 class="font-extrabold text-2xl tracking-tight text-slate-900">Admin Dashboard</h1>
+            </div>
+            <button id="logoutBtn"
+                class="hidden text-sm font-bold text-slate-500 hover:text-primary transition-colors flex items-center gap-1">
+                <span class="material-symbols-outlined text-sm">logout</span> Logout
+            </button>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pt-10">
+
+        <!-- Login Section -->
+        <div id="loginSection"
+            class="max-w-md mx-auto mt-20 bg-white rounded-3xl p-8 shadow-xl border border-slate-100 text-center">
+            <div
+                class="w-16 h-16 rounded-full bg-primary/10 text-primary flex items-center justify-center mx-auto mb-6">
+                <span class="material-symbols-outlined text-3xl">lock</span>
+            </div>
+            <h2 class="text-2xl font-bold mb-2">Admin Access Required</h2>
+            <p class="text-slate-500 mb-8 text-sm">Please enter your secure access token to view custom orders.</p>
+
+            <form id="loginForm" class="space-y-4">
+                <input type="password" id="adminToken" placeholder="Enter Token (panta_admin_123)" required=""
+                    class="w-full bg-slate-50 text-slate-900 rounded-xl px-4 py-3 border border-slate-200 focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-colors text-center">
+                <button type="submit"
+                    class="w-full bg-slate-900 hover:bg-primary text-white font-bold py-3 rounded-xl shadow-lg transition-colors">
+                    Unlock Dashboard
+                </button>
+            </form>
+            <div id="loginError" class="hidden text-red-500 text-sm font-bold mt-4">Invalid token. Please try again.
+            </div>
+        </div>
+
+        <!-- Dashboard Section -->
+        <div id="dashboardSection" class="hidden flex flex-col gap-8">
+
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
+                <div class="flex-1">
+                    <h2 class="text-3xl font-extrabold flex items-center gap-2">
+                        Lead Management <span
+                            class="bg-green-100 text-green-700 text-sm py-1 px-3 rounded-full font-bold"
+                            id="leadCount">0 Total</span>
+                    </h2>
+                    <p class="text-slate-500 mt-1">Review and update custom prop order requests.</p>
+                </div>
+
+                <div class="w-full text-left md:w-auto flex flex-col sm:flex-row gap-3 items-center">
+                    <!-- Search & Filter Controls -->
+                    <div class="relative w-full sm:w-64">
+                        <span
+                            class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm">search</span>
+                        <input type="text" id="searchInput" placeholder="Search leads..."
+                            class="w-full bg-white text-slate-900 rounded-xl pl-10 pr-4 py-2 border border-slate-200 focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-colors text-sm font-medium">
+                    </div>
+                    <select id="filterSelect"
+                        class="w-full sm:w-auto bg-white border border-slate-200 text-slate-700 font-bold text-sm rounded-xl px-4 py-2 outline-none focus:ring-1 focus:ring-primary appearance-none cursor-pointer">
+                        <option value="All">All Types</option>
+                        <option value="Custom Order">Custom Order</option>
+                        <option value="General Inquiry">General Inquiry</option>
+                    </select>
+
+                    <button id="refreshBtn"
+                        class="bg-white border w-full sm:w-auto border-slate-200 hover:bg-slate-50 text-slate-700 px-4 py-2 rounded-xl font-bold text-sm flex items-center justify-center gap-2 shadow-sm transition-colors whitespace-nowrap">
+                        <span class="material-symbols-outlined text-sm">refresh</span> Refresh
+                    </button>
+                </div>
+            </div>
+
+            <!-- Leads Table Container -->
+            <div
+                class="bg-white rounded-[2rem] shadow-[0_20px_40px_-12px_rgba(0,0,0,0.05)] border border-slate-100 overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr
+                                class="bg-slate-50 border-b border-slate-100 text-slate-500 text-sm font-bold tracking-wide">
+                                <th class="p-5 pl-8 uppercase">Date</th>
+                                <th class="p-5 uppercase">Client Details</th>
+                                <th class="p-5 uppercase">Request</th>
+                                <th class="p-5 uppercase">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="leadsTableBody" class="divide-y divide-slate-100 align-top">
+                            <!-- JS will populate rows here -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Empty State -->
+                <div id="emptyState" class="hidden flex-col items-center justify-center py-20 px-4 text-center">
+                    <div
+                        class="w-20 h-20 bg-slate-50 rounded-full flex items-center justify-center text-slate-400 mb-4">
+                        <span class="material-symbols-outlined text-4xl">inbox</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-1">No leads yet!</h3>
+                    <p class="text-slate-500 max-w-sm">When customers submit the custom order form, their requests will
+                        appear here.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gallery Moderation Section -->
+        <div id="gallerySection"
+            class="hidden flex flex-col gap-8 mt-12 bg-white rounded-[2rem] shadow-[0_20px_40px_-12px_rgba(0,0,0,0.05)] border border-slate-100 p-8">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mb-4">
+                <div>
+                    <h2 class="text-2xl font-extrabold flex items-center gap-2">
+                        Gallery Moderation
+                    </h2>
+                    <p class="text-slate-500 mt-1">Review, approve, or delete community photo submissions.</p>
+                </div>
+                <button id="refreshGalleryBtn"
+                    class="bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 px-4 py-2 rounded-xl font-bold text-sm flex items-center gap-2 shadow-sm transition-colors">
+                    <span class="material-symbols-outlined text-sm">refresh</span> Refresh Gallery
+                </button>
+            </div>
+
+            <div id="adminGalleryGrid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <!-- JS will populate gallery items here -->
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        let authToken = localStorage.getItem('pantaAdminToken') || '';
+
+        const loginSection = document.getElementById('loginSection');
+        const dashboardSection = document.getElementById('dashboardSection');
+        const loginForm = document.getElementById('loginForm');
+        const tokenInput = document.getElementById('adminToken');
+        const loginError = document.getElementById('loginError');
+        const leadsTableBody = document.getElementById('leadsTableBody');
+        const emptyState = document.getElementById('emptyState');
+        const leadCount = document.getElementById('leadCount');
+        const searchInput = document.getElementById('searchInput');
+        const filterSelect = document.getElementById('filterSelect');
+        const refreshBtn = document.getElementById('refreshBtn');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const gallerySection = document.getElementById('gallerySection');
+        const adminGalleryGrid = document.getElementById('adminGalleryGrid');
+        const refreshGalleryBtn = document.getElementById('refreshGalleryBtn');
+
+        let allLeads = []; // Global store for leads
+
+        if (refreshGalleryBtn) refreshGalleryBtn.addEventListener('click', fetchAdminGallery);
+
+        // Filters Event Listeners
+        if (searchInput) searchInput.addEventListener('input', applyFilters);
+        if (filterSelect) filterSelect.addEventListener('change', applyFilters);
+
+        // Init state
+        if (authToken) {
+            showDashboard();
+            fetchLeads();
+            fetchAdminGallery();
+        }
+
+        // Login Form Handler
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            authToken = 'Bearer ' + tokenInput.value;
+
+            // Test the token
+            fetch('/api/admin/leads', {
+                headers: { 'Authorization': authToken }
+            }).then(res => {
+                if (res.ok) {
+                    localStorage.setItem('pantaAdminToken', authToken);
+                    showDashboard();
+                    fetchLeads();
+                    fetchAdminGallery();
+                } else {
+                    loginError.classList.remove('hidden');
+                }
+            }).catch(err => {
+                loginError.classList.remove('hidden');
+            });
+        });
+
+        logoutBtn.addEventListener('click', () => {
+            localStorage.removeItem('pantaAdminToken');
+            authToken = '';
+            tokenInput.value = '';
+            loginError.classList.add('hidden');
+            loginSection.classList.remove('hidden');
+            dashboardSection.classList.add('hidden');
+            gallerySection.classList.add('hidden');
+            logoutBtn.classList.add('hidden');
+        });
+
+        refreshBtn.addEventListener('click', fetchLeads);
+
+        function showDashboard() {
+            loginSection.classList.add('hidden');
+            dashboardSection.classList.remove('hidden');
+            gallerySection.classList.remove('hidden');
+            logoutBtn.classList.remove('hidden');
+        }
+
+        async function fetchLeads() {
+            refreshBtn.innerHTML = '<span class="material-symbols-outlined text-sm animate-spin">progress_activity</span> Updating...';
+            try {
+                const response = await fetch('/api/admin/leads', {
+                    headers: { 'Authorization': authToken }
+                });
+
+                if (response.status === 403) {
+                    logoutBtn.click(); // invalid token
+                    return;
+                }
+
+                const leads = await response.json();
+                allLeads = leads; // Store all returned leads globally
+                applyFilters();
+            } catch (err) {
+                console.error("Failed to fetch leads", err);
+            } finally {
+                refreshBtn.innerHTML = '<span class="material-symbols-outlined text-sm">refresh</span> Refresh';
+            }
+        }
+
+        // Apply filters locally without refetching from DB
+        function applyFilters() {
+            const searchTerm = searchInput.value.toLowerCase().trim();
+            const filterValue = filterSelect.value;
+
+            const filteredLeads = allLeads.filter(lead => {
+                const matchesSearch =
+                    lead.first_name.toLowerCase().includes(searchTerm) ||
+                    lead.last_name.toLowerCase().includes(searchTerm) ||
+                    lead.email.toLowerCase().includes(searchTerm) ||
+                    lead.description.toLowerCase().includes(searchTerm);
+
+                let matchesCategory = true;
+                if (filterValue !== 'All') {
+                    // Normalize slightly to match "Custom Order" vs "General Inquiry" etc
+                    matchesCategory = lead.event_type.toLowerCase().includes(filterValue.toLowerCase());
+                }
+
+                return matchesSearch && matchesCategory;
+            });
+
+            renderLeads(filteredLeads);
+        }
+
+        function renderLeads(leads) {
+            leadsTableBody.innerHTML = '';
+            leadCount.textContent = `${leads.length} Total`;
+
+            if (leads.length === 0) {
+                emptyState.classList.remove('hidden');
+                leadsTableBody.closest('table').classList.add('hidden');
+                return;
+            }
+
+            emptyState.classList.add('hidden');
+            leadsTableBody.closest('table').classList.remove('hidden');
+
+            leads.forEach(lead => {
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-slate-50/50 transition-colors group';
+
+                const date = new Date(lead.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+
+                // Parse images if available
+                let imagesHtml = '';
+                if (lead.reference_images) {
+                    try {
+                        const paths = JSON.parse(lead.reference_images);
+                        if (paths.length > 0) {
+                            imagesHtml = `<div class="mt-4 flex flex-wrap gap-2">` +
+                                paths.map(p => `
+                  <a href="${p}" target="_blank" class="block w-16 h-16 rounded-lg overflow-hidden border border-slate-200 hover:border-primary transition-colors flex-shrink-0">
+                    <img src="${p}" class="w-full h-full object-cover" alt="Reference">
+                  </a>
+                `).join('') + `</div>`;
+                        }
+                    } catch (e) { }
+                }
+
+                const statusColors = {
+                    'New': 'bg-blue-100 text-blue-800 border-blue-200',
+                    'Contacted': 'bg-yellow-100 text-yellow-800 border-yellow-200',
+                    'In Progress': 'bg-purple-100 text-purple-800 border-purple-200',
+                    'Closed': 'bg-slate-100 text-slate-800 border-slate-200'
+                };
+
+                const currentStatusColor = statusColors[lead.status] || statusColors['New'];
+
+                tr.innerHTML = `
+          <td class="p-5 pl-8 align-top py-8 w-40">
+            <span class="text-slate-500 font-medium whitespace-nowrap">${date}</span>
+            <div class="text-xs text-slate-400 mt-1 uppercase tracking-wider font-bold">#${lead.id}</div>
+          </td>
+          <td class="p-5 align-top py-8 w-64">
+            <div class="font-bold text-slate-900">${lead.first_name} ${lead.last_name}</div>
+            <a href="mailto:${lead.email}" class="text-primary hover:underline text-sm mt-1 inline-flex items-center gap-1">
+              <span class="material-symbols-outlined text-[14px]">mail</span> ${lead.email}
+            </a>
+            <div class="mt-3 inline-block bg-slate-100 text-slate-600 text-xs font-bold px-2.5 py-1 rounded-full border border-slate-200">
+              ${lead.event_type}
+            </div>
+          </td>
+          <td class="p-5 align-top py-8 max-w-md">
+            <p class="text-slate-700 whitespace-pre-wrap leading-relaxed">${lead.description}</p>
+            ${imagesHtml}
+          </td>
+          <td class="p-5 align-top py-8 w-48">
+            <select class="status-select w-full ${currentStatusColor} font-bold text-sm rounded-xl border px-3 py-2 outline-none focus:ring-2 focus:ring-primary/20 appearance-none cursor-pointer transition-colors" data-id="${lead.id}">
+                <option value="New" ${lead.status === 'New' ? 'selected' : ''}>🔵 New</option>
+                <option value="Contacted" ${lead.status === 'Contacted' ? 'selected' : ''}>🟡 Contacted</option>
+                <option value="In Progress" ${lead.status === 'In Progress' ? 'selected' : ''}>🟣 In Progress</option>
+                <option value="Closed" ${lead.status === 'Closed' ? 'selected' : ''}>⚪ Closed</option>
+            </select>
+          </td>
+        `;
+
+                leadsTableBody.appendChild(tr);
+            });
+
+            // Bind status updates
+            document.querySelectorAll('.status-select').forEach(select => {
+                select.addEventListener('change', async (e) => {
+                    const id = e.target.getAttribute('data-id');
+                    const newStatus = e.target.value;
+                    e.target.disabled = true;
+                    try {
+                        const response = await fetch(`/api/admin/leads/${id}/status`, {
+                            method: 'PUT',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Authorization': authToken
+                            },
+                            body: JSON.stringify({ status: newStatus })
+                        });
+
+                        if (response.ok) {
+                            // Update global state without refetching
+                            const leadIndex = allLeads.findIndex(l => l.id == id);
+                            if (leadIndex !== -1) {
+                                allLeads[leadIndex].status = newStatus;
+                            }
+
+                            // Let the background transition handle it instead of full re-render
+                            Object.values(statusColors).forEach(c => {
+                                e.target.classList.remove(...c.split(' '));
+                            });
+                            e.target.classList.add(...(statusColors[newStatus] || statusColors['New']).split(' '));
+                        }
+                    } catch (err) {
+                        console.error("Failed to update status", err);
+                    } finally {
+                        e.target.disabled = false;
+                    }
+                });
+            });
+        }
+
+        async function fetchAdminGallery() {
+            if (refreshGalleryBtn) refreshGalleryBtn.innerHTML = '<span class="material-symbols-outlined text-sm animate-spin">progress_activity</span> Updating...';
+            try {
+                // For the admin view, we use the public endpoint to get all posts
+                const response = await fetch('/api/gallery');
+                const posts = await response.json();
+                renderAdminGallery(posts);
+            } catch (err) {
+                console.error("Failed to fetch gallery", err);
+            } finally {
+                if (refreshGalleryBtn) refreshGalleryBtn.innerHTML = '<span class="material-symbols-outlined text-sm">refresh</span> Refresh Gallery';
+            }
+        }
+
+        function renderAdminGallery(posts) {
+            adminGalleryGrid.innerHTML = '';
+
+            if (posts.length === 0) {
+                adminGalleryGrid.innerHTML = '<div class="col-span-full text-center py-10 text-slate-500">No community uploads yet.</div>';
+                return;
+            }
+
+            posts.forEach(post => {
+                const div = document.createElement('div');
+                div.className = 'relative group bg-slate-100 rounded-xl overflow-hidden aspect-square border border-slate-200';
+
+                const isVideo = post.media_type === 'video';
+                const mediaTag = isVideo
+                    ? `<video src="${post.file_path}" autoplay loop muted playsinline class="w-full h-full object-cover"></video>`
+                    : `<img src="${post.file_path}" class="w-full h-full object-cover">`;
+
+                div.innerHTML = `
+                    ${mediaTag}
+                    <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-between p-4">
+                        <div class="text-white text-sm font-bold truncate">${post.submitter_name}</div>
+                        <div class="flex gap-2 justify-center">
+                            <button onclick="approvePost('${post.id}', this)" class="bg-green-500 hover:bg-green-600 text-white p-2 rounded-full shadow transition-transform hover:scale-110" title="Approve">
+                                <span class="material-symbols-outlined text-sm">check</span>
+                            </button>
+                            <button onclick="deletePost('${post.id}', this)" class="bg-red-500 hover:bg-red-600 text-white p-2 rounded-full shadow transition-transform hover:scale-110" title="Delete">
+                                <span class="material-symbols-outlined text-sm">delete</span>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                adminGalleryGrid.appendChild(div);
+            });
+        }
+
+        async function approvePost(id, btn) {
+            btn.innerHTML = '<span class="material-symbols-outlined text-sm animate-spin">progress_activity</span>';
+            try {
+                await fetch(`/api/admin/gallery/${id}/status`, {
+                    method: 'PUT',
+                    headers: { 'Authorization': authToken }
+                });
+                btn.className = 'bg-slate-800 text-white p-2 rounded-full shadow cursor-default';
+                btn.innerHTML = '<span class="material-symbols-outlined text-sm">verified</span>';
+                btn.onclick = null;
+            } catch (e) { console.error(e); }
+        }
+
+        async function deletePost(id, btn) {
+            if (!confirm("Are you sure you want to delete this post?")) return;
+            const card = btn.closest('.group');
+            card.style.opacity = '0.5';
+            try {
+                const res = await fetch(`/api/admin/gallery/${id}`, {
+                    method: 'DELETE',
+                    headers: { 'Authorization': authToken }
+                });
+                if (res.ok) {
+                    card.remove();
+                }
+            } catch (e) { console.error(e); card.style.opacity = '1'; }
+        }
+
+    </script>
+
+
+
+
+
+    <!-- Standard Global Footer -->
+
+    <!-- Standard Global Footer -->
+    <footer class="bg-[#1f1619] py-16 px-8 mt-auto w-full border-t border-[#312226]">
+        <div class="max-w-[1200px] mx-auto flex flex-col md:flex-row justify-between gap-12 font-sans">
+            <div class="flex flex-col gap-6 md:w-1/2">
+                <!-- Logo -->
+                <a href="index.html" class="flex items-center gap-2">
+                    <span class="material-symbols-outlined text-[#e81e62] text-2xl">camera</span>
+                    <div class="w-8 h-[2px] bg-[#e81e62]"></div>
+                    <span class="material-symbols-outlined text-[#e81e62] text-2xl">photo_camera</span>
+                    <span class="text-white font-bold text-3xl tracking-tight ml-2">Panta</span>
+                </a>
+
+                <!-- Descriptions -->
+                <p class="text-[#a19598] text-lg max-w-md leading-relaxed mt-2">
+                    Ditch the flop. Premium, durable photo booth props<br>
+                    designed for events that demand better.
+                </p>
+
+                <!-- Social Icons -->
+                <div class="flex gap-4 mt-6">
+                    <a href="https://www.instagram.com/pantaprops_/_/"
+                        class="w-12 h-12 rounded-full bg-[#312328] flex items-center justify-center text-white hover:bg-[#e81e62] transition-colors">
+                        <span class="material-symbols-outlined text-[20px]">photo_camera</span>
+                    </a>
+                    <a href="https://youtube.com/@pantaprops"
+                        class="w-12 h-12 rounded-full bg-[#312328] flex items-center justify-center text-white hover:bg-[#e81e62] transition-colors">
+                        <span class="material-symbols-outlined text-[22px]">play_arrow</span>
+                    </a>
+                    <a href="contact.html"
+                        class="w-12 h-12 rounded-full bg-[#312328] flex items-center justify-center text-white hover:bg-[#e81e62] transition-colors">
+                        <span class="material-symbols-outlined text-[20px]">mail</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Right Side Columns -->
+            <div class="flex flex-col sm:flex-row gap-10 sm:gap-20 md:gap-32 w-full md:w-auto mt-2">
+                <div class="flex flex-col gap-5">
+                    <h4 class="text-white font-bold text-xl mb-2">Shop</h4>
+                    <a href="stocked_shop_collection.html" class="text-[#a19598] hover:text-white transition-colors">All
+                        Props</a>
+                    <a href="stocked_shop_collection.html?category=wedding"
+                        class="text-[#a19598] hover:text-white transition-colors">Wedding Sets</a>
+                    <a href="custom_services_landing.html"
+                        class="text-[#a19598] hover:text-white transition-colors">Corporate Events</a>
+                    <a href="custom_services_landing.html"
+                        class="text-[#a19598] hover:text-white transition-colors">Custom Orders</a>
+                </div>
+                <div class="flex flex-col gap-5">
+                    <h4 class="text-white font-bold text-xl mb-2">Company</h4>
+                    <a href="brand_story.html" class="text-[#a19598] hover:text-white transition-colors">Our Story</a>
+                    <a href="community_gallery.html"
+                        class="text-[#a19598] hover:text-white transition-colors">Community</a>
+                    <a href="brand_story.html#faq" class="text-[#a19598] hover:text-white transition-colors">FAQ</a>
+                    <a href="contact.html" class="text-[#a19598] hover:text-white transition-colors">Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>

@@ -1,0 +1,510 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Panta Props - Playful Pop</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#e12d75",
+              "primary-dark": "#b01e58",
+              "secondary": "#0F82C4",
+              "whatsapp": "#25D366",
+              "background-light": "#fbf8fa",
+              "background-dark": "#211117",
+            },
+            fontFamily: {
+              "display": ["Manrope", "sans-serif"],
+              "body": ["Manrope", "sans-serif"],
+            },
+            borderRadius: {
+              "DEFAULT": "1rem",
+              "lg": "2rem",
+              "xl": "3rem",
+              "2xl": "4rem",
+              "full": "9999px"
+            },
+            animation: {
+              marquee: 'marquee 25s linear infinite',
+              float: 'float 6s ease-in-out infinite',
+            },
+            keyframes: {
+              marquee: {
+                '0%': { transform: 'translateX(0%)' },
+                '100%': { transform: 'translateX(-100%)' },
+              },
+              float: {
+                '0%, 100%': { transform: 'translateY(0)' },
+                '50%': { transform: 'translateY(-20px)' },
+              }
+            },
+          },
+        },
+      }
+    </script>
+<style>
+        /* Custom scrollbar for horizontal scrolling sections */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        .hero-card {
+            transition: flex-grow 0.5s cubic-bezier(0.25, 1, 0.5, 1), filter 0.5s ease;
+        }
+        
+        .group:hover .hero-card:not(:hover) {
+            filter: grayscale(0.5) opacity(0.8);
+        }
+        
+        .pattern-bg {
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23e12d75' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen flex flex-col pattern-bg overflow-x-hidden selection:bg-primary selection:text-white font-body">
+<!-- Floating NavPill -->
+<div class="fixed top-6 left-0 right-0 z-50 flex justify-center px-4">
+<nav class="bg-white/95 backdrop-blur-md shadow-float rounded-full px-6 py-3 flex items-center justify-between w-full max-w-5xl border border-white/50">
+<!-- Logo -->
+<a class="flex items-center gap-2 group" href="index.html">
+<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white rotate-3 group-hover:rotate-12 transition-transform duration-300">
+<span class="material-symbols-outlined text-xl">temp_preferences_custom</span>
+</div>
+<span class="font-extrabold text-xl tracking-tight text-slate-900 dark:text-white">Panta Props</span>
+</a>
+<!-- Desktop Links -->
+<div class="hidden md:flex items-center gap-8">
+                <a class="text-sm font-bold text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary transition-colors" href="stocked_shop_collection.html">Shop Props</a>
+                <a class="text-sm font-bold text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary transition-colors" href="custom_services_landing.html">Custom Orders</a>
+                <a class="text-sm font-bold text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary transition-colors" href="community_gallery.html">Community</a>
+                <a class="text-sm font-bold text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary transition-colors" href="brand_story.html">Our Story</a>
+            </div>
+<!-- CTA -->
+<div class="flex items-center gap-3">
+<button class="md:hidden p-2 text-slate-600 dark:text-white">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<button class="hidden md:flex items-center gap-2 bg-whatsapp hover:bg-[#1ebd59] text-white px-5 py-2.5 rounded-full text-sm font-bold transition-all shadow-lg shadow-green-500/20 hover:shadow-green-500/30 transform hover:-translate-y-0.5" onclick="window.location.href='https://wa.me/?text=Hi%20Panta!'">
+<span class="material-symbols-outlined text-lg">chat</span>
+<span>Chat on WhatsApp</span>
+</button>
+</div>
+</nav>
+</div>
+<!-- Main Content -->
+<main class="flex-grow pt-28 pb-10 px-4 md:px-8 max-w-[1600px] mx-auto w-full flex flex-col gap-16 md:gap-24 relative">
+<!-- Decorative Floaters -->
+<div class="absolute top-20 left-[5%] w-24 h-24 bg-gradient-to-br from-yellow-300 to-orange-400 rounded-full blur-xl opacity-30 animate-float pointer-events-none -z-10"></div>
+<div class="absolute top-40 right-[10%] w-32 h-32 bg-gradient-to-br from-primary to-purple-500 rounded-full blur-2xl opacity-20 animate-float pointer-events-none -z-10" style="animation-delay: 2s;"></div>
+<!-- Split Hero Section -->
+<section class="h-[80vh] min-h-[600px] w-full flex flex-col md:flex-row gap-4 md:gap-6 group">
+<!-- Left Card: Stock -->
+<div class="hero-card relative flex-1 hover:flex-[1.5] bg-[#FFF0F5] dark:bg-slate-800 rounded-[32px] overflow-hidden cursor-pointer group/card shadow-[0_20px_40px_-12px_rgba(0,0,0,0.1)]">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover/card:scale-105" data-alt="Colorful party props arranged playfully on a bright background" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBGzhgCKioX5pjR9C3MhUmASG8uCJWruGQrhI1H-MJuOjqJmmO6aEqB2L5SXv75vbPwrfmK6BlTctCwLOqF1xXPzScWuv4pR_105NXvid8293ADt6FNHIsS7UnlHS-ErdBDD0r3-2XkeQpDY186t5alhZYNyFZ9BbYZhkmV2lvg2YOe_pie0S9o06LcBAyziaCWGpo8bZOxux7Xyewat6g3Zw1NX_538unDFNnJ-1X1PfaHlo5FBoJVnr9FP_lIR9RJ32SKAI2CWWU');">
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+</div>
+<div class="absolute bottom-0 left-0 p-8 md:p-12 w-full flex flex-col items-start gap-4">
+<span class="bg-white/20 backdrop-blur-md text-white border border-white/30 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Ready to Ship</span>
+<h2 class="text-6xl md:text-7xl lg:text-8xl font-black text-white leading-[0.85] tracking-[-0.02em] font-display">Shop<br>The Drop</h2>
+<p class="text-white/90 text-lg font-medium max-w-sm">Skip the wait. Browse our curated collection of high-end PVC props.</p>
+<button class="mt-4 bg-white text-primary hover:scale-105 px-8 py-4 rounded-pill font-bold transition-all flex items-center gap-2 shadow-lg tracking-[0.05em] uppercase text-sm" onclick="window.location.href='stocked_shop_collection.html'">
+                        Browse Stock
+                        <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Right Card: Custom -->
+<div class="hero-card relative flex-1 hover:flex-[1.5] bg-[#E0F7FA] dark:bg-slate-800 rounded-[32px] overflow-hidden cursor-pointer group/card shadow-[0_20px_40px_-12px_rgba(0,0,0,0.1)]">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover/card:scale-105" data-alt="Designer sketching a custom prop idea on a tablet with colorful swatches nearby" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuATTrbgMTwdhfTrP9CYgBXFxb_OMrNrt6ytXPQIxVfYbemj4Aonjz5vOMiY5WDq30szll6aICJNSm4a960agqIYFEVYjdrmcR5PqU14mmKdX3cXUWsvCZrOBG7hXR3MP9FpKGVVxI8LD1uKoTlAM1rPwL_YSXR2IjQaki6WbvuRQDO1uAPrkBj3M45DTBUyvB9vYfmdAj0i3X8O38LWtFBVJr8xZIYv_r9TZQXldcTxqSzaKXbz7XE2c4IbbxT09RSc9wRSjYdv3Rs');">
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+</div>
+<div class="absolute bottom-0 left-0 p-8 md:p-12 w-full flex flex-col items-start gap-4">
+<span class="bg-white/20 backdrop-blur-md text-white border border-white/30 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Bespoke Service</span>
+<h2 class="text-6xl md:text-7xl lg:text-8xl font-black text-white leading-[0.85] tracking-[-0.02em] font-display">Make<br>It Yours</h2>
+<p class="text-white/90 text-lg font-medium max-w-sm">Your brand, your vibe. Custom designed and laser cut in 3 days.</p>
+<button class="mt-4 bg-primary text-white hover:scale-105 px-8 py-4 rounded-pill font-bold transition-all flex items-center gap-2 shadow-lg tracking-[0.05em] uppercase text-sm" onclick="window.location.href='custom_services_landing.html'">
+                        Start Custom Order
+                        <span class="material-symbols-outlined">draw</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Marquee Banner -->
+<div class="relative w-screen -ml-[50vw] left-[50%] overflow-hidden bg-slate-900 dark:bg-white text-white dark:text-slate-900 py-4 rotate-1 md:rotate-2 shadow-xl z-10">
+<div class="flex whitespace-nowrap animate-marquee items-center"><span class="text-2xl font-black uppercase tracking-[0.05em] mx-8">NO MORE FLOPPY CARDBOARD • 5MM THICK PVC • ANTI-GLARE •</span><span class="text-2xl font-black uppercase tracking-[0.05em] mx-8">NO MORE FLOPPY CARDBOARD • 5MM THICK PVC • ANTI-GLARE •</span><span class="text-2xl font-black uppercase tracking-[0.05em] mx-8">NO MORE FLOPPY CARDBOARD • 5MM THICK PVC • ANTI-GLARE •</span><span class="text-2xl font-black uppercase tracking-[0.05em] mx-8">NO MORE FLOPPY CARDBOARD • 5MM THICK PVC • ANTI-GLARE •</span></div>
+</div>
+<!-- Shop By Vibe (Categories) -->
+<section class="flex flex-col gap-8">
+<div class="flex items-end justify-between px-2">
+<div>
+<h3 class="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white">Shop By Vibe</h3>
+<p class="text-slate-500 dark:text-slate-400 mt-2 font-medium">Find the perfect props for your event type</p>
+</div>
+<a class="hidden md:flex items-center gap-1 text-primary font-bold hover:underline decoration-2 underline-offset-4" href="stocked_shop_collection.html">
+                    View all Categories <span class="material-symbols-outlined text-sm">arrow_outward</span>
+</a>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+<!-- Category 1 -->
+<a class="group relative aspect-square rounded-[2rem] overflow-hidden bg-gray-200" href="stocked_shop_collection.html">
+<img alt="Elegant wedding table setting with white flowers" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Wedding themed props background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBl0JcDN-LJkkL1KvDb2KDsgsSPhBEP0IGYRw-lNPL-Qi_YqESjxTg-6O42--RVpjePKAPvvgfCCAm-wGH_KdMu6p0KJnC89DuGaVZBrEDGgtrmtRJIpcwzSgAg1lT0DSnsJ9PwOHv7o6PyMSy5TTCOkEHCIBzsLWTy6QGRTpKoeugLdu73803L9wGNeAaxzn63Ia68kjJCggRjp-OR_yIzWYS2L9FC_JEm0oqNaOi56t7vksW8icP7VLqDxhPrme4FVjPASTLr6pQ">
+<div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+<div class="absolute bottom-6 left-6">
+<h4 class="text-white text-xl md:text-2xl font-extrabold tracking-tight">Weddings</h4>
+</div>
+</a>
+<!-- Category 2 -->
+<a class="group relative aspect-square rounded-[2rem] overflow-hidden bg-gray-200" href="stocked_shop_collection.html">
+<img alt="Modern corporate meeting room with glass walls" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Corporate event environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvD06PoKAESylHKsoOcE5EBo7xXweyDpaHcOKsdcQQo7McRYlRR8hDbgsm9sGCY1-DfkuHddATLVdE-yYzeeGWNeEVFkke_pDhYEjIu6t-MuLEDnsSyPgwoybQ7hCyXHUr7xm1xqD_BuW9nI42jc806EhSbOeJpfFh4ndfmB6F5dKScsDkqOcw47Cq3FiT6ZUQrAIhOUSra2tk_Po0p586VKXtQBvRVgmHT5qtcrGTrcTMcz3GstU2d_ItfBFKqWItkRfWM2P6cSA">
+<div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+<div class="absolute bottom-6 left-6">
+<h4 class="text-white text-xl md:text-2xl font-extrabold tracking-tight">Corporate</h4>
+</div>
+</a>
+<!-- Category 3 -->
+<a class="group relative aspect-square rounded-[2rem] overflow-hidden bg-gray-200" href="stocked_shop_collection.html">
+<img alt="Vibrant birthday party with balloons and confetti" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Party vibe with bright colors" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBTl5QvfDvkBIjJ-uGRQEJVl2gaCnRi3QtofOKzRObQaKZlhynWsbhxkY0WteNS8u9GXu0chbcsW1XXu9kvZG6oWVOfOFlYAeb2IibBmdghJ3Yw3ic4I-N4KCEW8Rao7ju-bglUPnzormBubQT2NAzCb-3TprJHbm_XP8c3YG7HcEdp9wqL5SNnQS5dGdT6zx7Mvord7hBDQpKpKPRDJwc8j3qo0yAS2bXXi5PYNcm_75KvBphLEDp7OOIg17RF4MfjKvS46PCQ6HA">
+<div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+<div class="absolute bottom-6 left-6">
+<h4 class="text-white text-xl md:text-2xl font-extrabold tracking-tight">Parties</h4>
+</div>
+</a>
+<!-- Category 4 -->
+<a class="group relative aspect-square rounded-[2rem] overflow-hidden bg-gray-200" href="stocked_shop_collection.html">
+<img alt="Festive holiday decoration with lights" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Holiday seasonal props" src="https://lh3.googleusercontent.com/aida-public/AB6AXuByX_qyaL3PUDOJcf1hzZoT5AC-cPQlRjELxOAkJ4htmQdQKS4oqHe3HDJShcrUoLRUx1J7XpjSpzwK-SvKuTrX2LjAjGYYra9QE7Bdm-2S8zEr7d_6PIqa8SuywdflmwpFMZ0RdBT6PdVCvfBxk4sKL6FEfjlNMFxEdow_7HZ87sD5fKLKOBikj_SEdSFNg73tjWi2wICAUcTT8yVwe0-MGSbpEczRW5wXBiT1dRFCabx00DmbyNTm4EdU4QP_Ir9Kk_ufU-_cQYA">
+<div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+<div class="absolute bottom-6 left-6">
+<h4 class="text-white text-xl md:text-2xl font-extrabold tracking-tight">Holiday</h4>
+</div>
+</a>
+</div>
+</section>
+<!-- Featured Products Horizontal Scroll -->
+<section class="flex flex-col gap-8 pb-10">
+<div class="flex items-center gap-4 px-2">
+<div class="h-10 w-10 rounded-full bg-secondary/10 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined">local_fire_department</span>
+</div>
+<h3 class="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white">Trending Now</h3>
+</div>
+<!-- Scroll Container -->
+<div class="flex overflow-x-auto gap-6 pb-8 -mx-4 px-4 md:mx-0 md:px-0 no-scrollbar snap-x snap-mandatory">
+<!-- Product Card 1 -->
+<div class="min-w-[280px] md:min-w-[320px] snap-center bg-surface rounded-card p-4 shadow-float hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group">
+<div class="relative aspect-[4/5] bg-gray-100 dark:bg-slate-700 rounded-2xl overflow-hidden mb-4">
+<div class="absolute top-3 left-3 z-10 bg-yellow-400 text-slate-900 text-xs font-bold px-3 py-1.5 rounded-full shadow-sm">
+                            Best Seller
+                        </div>
+<img alt="Neon pink party sign prop" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Neon pink party sign prop" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDi5LzYmefeXjQBPampcXv2pttd3OH91dt2vySXNe9DlgzHLmFOGFCRWgtU7tvn2S0n2Kmqzz6AnkBOyW64ShzEMtGW87rfoe2MMpACGvfofKxrHOhaIkdi6S1cFBaRMI7OIqPR43Bwl0I7HFzX0v4c66zsMOcqDYK7wH6-nQN45dqqH8y0pMki2zwsPs2UTNF2kVdc-owGtTzPL4Or6bbxdHQcgJcdMmvv9Ix2xIytAM74zMIbXBJ50Jd73yKLOnNKyncJt_djKNU">
+<!-- Quick Buy Float -->
+<button class="absolute bottom-3 right-3 h-12 w-12 rounded-full bg-whatsapp text-white flex items-center justify-center shadow-lg translate-y-16 group-hover:translate-y-0 transition-transform duration-300 hover:bg-[#1ebd59]" onclick="window.location.href='https://wa.me/?text=Hi%20Panta!'">
+<span class="material-symbols-outlined">chat</span>
+</button>
+</div>
+<div>
+<h4 class="text-lg font-bold text-text-charcoal mb-1">Neon Party Set</h4>
+<div class="flex items-center justify-between">
+<span class="text-primary font-bold text-xl font-display">$45.00</span>
+<div class="flex text-yellow-400 text-sm">
+<span class="material-symbols-outlined text-[16px] fill-current">star</span>
+<span class="material-symbols-outlined text-[16px] fill-current">star</span>
+<span class="material-symbols-outlined text-[16px] fill-current">star</span>
+<span class="material-symbols-outlined text-[16px] fill-current">star</span>
+<span class="material-symbols-outlined text-[16px] fill-current">star</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Product Card 2 -->
+<div class="min-w-[280px] md:min-w-[320px] snap-center bg-surface rounded-card p-4 shadow-float hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group">
+<div class="relative aspect-[4/5] bg-gray-100 dark:bg-slate-700 rounded-2xl overflow-hidden mb-4">
+<div class="absolute top-3 left-3 z-10 bg-primary text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-sm">
+                            New
+                        </div>
+<img alt="Golden mustache and glasses prop on stick" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Golden mustache and glasses prop" src="https://lh3.googleusercontent.com/aida-public/AB6AXuByuGZrNYm53peBcpt4Tr4andwpRcVHeTkZV1xL_J70aSYBbq3t00R9CvK3v_1VEsp_F1DBwybdoxKlH_1wuzFsPCJn9-IyohgASSNI2mNXffzaZf7xtWcKRdJnOUbMAmMF-d95rgCKvjbR7xtoEh2oOt1a1TcamgQk2AdZlC1xa_g1ricYRMTwGtVmJC61U_0vKfaVra10XvjFP4mB4S_m7qeHbaA2JMlkgC4Usw0yqPJuuL14BJKH0F9oWqLP3THYS12fuCyg00c">
+<button class="absolute bottom-3 right-3 h-12 w-12 rounded-full bg-whatsapp text-white flex items-center justify-center shadow-lg translate-y-16 group-hover:translate-y-0 transition-transform duration-300 hover:bg-[#1ebd59]" onclick="window.location.href='https://wa.me/?text=Hi%20Panta!'">
+<span class="material-symbols-outlined">chat</span>
+</button>
+</div>
+<div>
+<h4 class="text-lg font-bold text-text-charcoal mb-1">Gentleman's Kit</h4>
+<div class="flex items-center justify-between">
+<span class="text-primary font-bold text-xl font-display">$32.00</span>
+<div class="flex text-yellow-400 text-sm">
+<span class="material-symbols-outlined text-[16px] fill-current">star</span>
+<span class="material-symbols-outlined text-[16px] fill-current">star</span>
+<span class="material-symbols-outlined text-[16px] fill-current">star</span>
+<span class="material-symbols-outlined text-[16px] fill-current">star</span>
+<span class="material-symbols-outlined text-[16px]">star</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Product Card 3 -->
+<div class="min-w-[280px] md:min-w-[320px] snap-center bg-surface rounded-card p-4 shadow-float hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group">
+<div class="relative aspect-[4/5] bg-gray-100 dark:bg-slate-700 rounded-2xl overflow-hidden mb-4">
+<img alt="Speech bubble props with funny text" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Speech bubble props" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTVtErA2tZSbtLjyrqcMmmkIeTA1r6d4qPGlDbs0677AIjEnU5z2_IpgxgkgNuANyy96KxojdPklH8arxHq18MuK6E8lNNlH5K1o5fWCLo5K5RLwvelxDgvRZW54xVRsfydL9z69MYgOAtO9bDo9YkCejnq_YdRrUf9fpBqvjkKKbirjQGgxSCNs0HENViHbGYFVsTBdX2PGrJ35ECQBkyX1tesqdS1TsBuxhPDTOVN66-WZ7S9PL-9Tc39yFRw3l2mKoCBK-NZSM">
+<button class="absolute bottom-3 right-3 h-12 w-12 rounded-full bg-whatsapp text-white flex items-center justify-center shadow-lg translate-y-16 group-hover:translate-y-0 transition-transform duration-300 hover:bg-[#1ebd59]" onclick="window.location.href='https://wa.me/?text=Hi%20Panta!'">
+<span class="material-symbols-outlined">chat</span>
+</button>
+</div>
+<div>
+<h4 class="text-lg font-bold text-text-charcoal mb-1">Sass Bubbles</h4>
+<div class="flex items-center justify-between">
+<span class="text-primary font-bold text-xl font-display">$28.00</span>
+<div class="flex text-yellow-400 text-sm">
+<span class="material-symbols-outlined text-[16px] fill-current">star</span>
+<span class="material-symbols-outlined text-[16px] fill-current">star</span>
+<span class="material-symbols-outlined text-[16px] fill-current">star</span>
+<span class="material-symbols-outlined text-[16px] fill-current">star</span>
+<span class="material-symbols-outlined text-[16px] fill-current">star_half</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Product Card 4 -->
+<div class="min-w-[280px] md:min-w-[320px] snap-center bg-surface rounded-card p-4 shadow-float hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group">
+<div class="relative aspect-[4/5] bg-gray-100 dark:bg-slate-700 rounded-2xl overflow-hidden mb-4">
+<img alt="Tropical themed props including pineapples and flamingos" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Tropical themed props" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBu6NysprS42E6rmDu3-mkmBsIAGJ5uNn56ivLQgC8JIC_5KznTI34_oPY09u07Gc02vIl6h6QpQv-kF1KwZSdiXl7CPceztEIkkF-8La5B9CTb_xzAvVK7cIC3WJOL-BuYVxvqd_r_LTF6bBIq7rBQI_TX77oPu6w9AeopxwIEIC4ielfp8iuJPRmjbAZ6K2k7APKEBqyEeEoSIDuifH3sD7pCvm8ZnT5jUse216N7Ryqu1sIypAX8bEw0RxnxbdyGzA2SxAGrQlk">
+<button class="absolute bottom-3 right-3 h-12 w-12 rounded-full bg-whatsapp text-white flex items-center justify-center shadow-lg translate-y-16 group-hover:translate-y-0 transition-transform duration-300 hover:bg-[#1ebd59]" onclick="window.location.href='https://wa.me/?text=Hi%20Panta!'">
+<span class="material-symbols-outlined">chat</span>
+</button>
+</div>
+<div>
+<h4 class="text-lg font-bold text-text-charcoal mb-1">Tropical Vibes</h4>
+<div class="flex items-center justify-between">
+<span class="text-primary font-bold text-xl font-display">$38.00</span>
+<div class="flex text-yellow-400 text-sm">
+<span class="material-symbols-outlined text-[16px] fill-current">star</span>
+<span class="material-symbols-outlined text-[16px] fill-current">star</span>
+<span class="material-symbols-outlined text-[16px] fill-current">star</span>
+<span class="material-symbols-outlined text-[16px] fill-current">star</span>
+<span class="material-symbols-outlined text-[16px] fill-current">star</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer Simple -->
+
+  <!-- Standard Global Footer -->
+  
+  <!-- Standard Global Footer -->
+  
+  <!-- Standard Global Footer -->
+  
+  <!-- Standard Global Footer -->
+  
+  <!-- Standard Global Footer -->
+  <footer class="bg-[#1f1619] py-16 px-8 mt-auto w-full border-t border-[#312226]">
+    <div class="max-w-[1200px] mx-auto flex flex-col md:flex-row justify-between gap-12 font-sans">
+      <div class="flex flex-col gap-6 md:w-1/2">
+        <!-- Logo -->
+        <a href="index.html" class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-[#e81e62] text-2xl">camera</span>
+          <div class="w-8 h-[2px] bg-[#e81e62]"></div>
+          <span class="material-symbols-outlined text-[#e81e62] text-2xl">photo_camera</span>
+          <span class="text-white font-bold text-3xl tracking-tight ml-2">Panta</span>
+        </a>
+        
+        <!-- Descriptions -->
+        <p class="text-[#a19598] text-lg max-w-md leading-relaxed mt-2">
+          Ditch the flop. Premium, durable photo booth props<br>
+          designed for events that demand better.
+        </p>
+
+        <!-- Social Icons -->
+        <div class="flex gap-4 mt-6">
+          <a href="https://www.instagram.com/pantaprops_/_/" class="w-12 h-12 rounded-full bg-[#312328] flex items-center justify-center text-white hover:bg-[#e81e62] transition-colors">
+            <span class="material-symbols-outlined text-[20px]">photo_camera</span>
+          </a>
+          <a href="https://youtube.com/@pantaprops" class="w-12 h-12 rounded-full bg-[#312328] flex items-center justify-center text-white hover:bg-[#e81e62] transition-colors">
+            <span class="material-symbols-outlined text-[22px]">play_arrow</span>
+          </a>
+          <a href="contact.html" class="w-12 h-12 rounded-full bg-[#312328] flex items-center justify-center text-white hover:bg-[#e81e62] transition-colors">
+            <span class="material-symbols-outlined text-[20px]">mail</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Right Side Columns -->
+      <div class="flex flex-col sm:flex-row gap-10 sm:gap-20 md:gap-32 w-full md:w-auto mt-2">
+        <div class="flex flex-col gap-5">
+          <h4 class="text-white font-bold text-xl mb-2">Shop</h4>
+          <a href="stocked_shop_collection.html" class="text-[#a19598] hover:text-white transition-colors">All Props</a>
+          <a href="stocked_shop_collection.html?category=wedding" class="text-[#a19598] hover:text-white transition-colors">Wedding Sets</a>
+          <a href="custom_services_landing.html" class="text-[#a19598] hover:text-white transition-colors">Corporate Events</a>
+          <a href="custom_services_landing.html" class="text-[#a19598] hover:text-white transition-colors">Custom Orders</a>
+        </div>
+        <div class="flex flex-col gap-5">
+          <h4 class="text-white font-bold text-xl mb-2">Company</h4>
+          <a href="brand_story.html" class="text-[#a19598] hover:text-white transition-colors">Our Story</a>
+          <a href="community_gallery.html" class="text-[#a19598] hover:text-white transition-colors">Community</a>
+          <a href="brand_story.html#faq" class="text-[#a19598] hover:text-white transition-colors">FAQ</a>
+          <a href="contact.html" class="text-[#a19598] hover:text-white transition-colors">Contact</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+
+
+
+
+<!-- AI Chat Widget -->
+<div id="ai-chat-widget" class="fixed bottom-6 right-6 z-50 font-display flex flex-col items-end">
+  <!-- Chat Window (Hidden by default) -->
+  <div id="ai-chat-window" class="hidden flex-col w-[350px] h-[500px] bg-white rounded-[2rem] shadow-2xl overflow-hidden border border-slate-100 mb-4 origin-bottom-right transition-all duration-300 transform scale-95 opacity-0">
+    <!-- Header -->
+    <div class="bg-gradient-to-r from-primary to-purple-600 p-4 flex justify-between items-center text-white">
+      <div class="flex items-center gap-2">
+        <span class="material-symbols-outlined">smart_toy</span>
+        <span class="font-bold">Panta AI</span>
+      </div>
+      <button id="close-ai-chat" class="hover:bg-white/20 rounded-full p-1 transition-colors flex items-center justify-center">
+        <span class="material-symbols-outlined text-sm">close</span>
+      </button>
+    </div>
+    <!-- Messages Body -->
+    <div id="ai-chat-messages" class="flex-1 p-4 bg-slate-50 overflow-y-auto flex flex-col gap-3">
+      <div class="self-start bg-white border border-slate-100 p-3 rounded-2xl rounded-tl-sm shadow-sm text-sm text-slate-700 max-w-[85%]">
+        Hi there! 👋 I'm Panta AI. I can help you find the perfect prop, process custom designs, or answer any questions. How can I help you today?
+      </div>
+    </div>
+    <!-- Input -->
+    <div class="p-3 bg-white border-t border-slate-100 flex items-center gap-2">
+      <input type="text" id="ai-chat-input" placeholder="Ask me anything..." class="flex-1 bg-slate-100 border-none rounded-full px-4 py-2 text-sm focus:ring-2 focus:ring-primary/50 outline-none">
+      <button id="send-ai-chat" class="bg-primary text-white size-9 rounded-full flex items-center justify-center hover:bg-pink-600 transition-colors shrink-0 shadow-md">
+        <span class="material-symbols-outlined text-[18px]">send</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Toggle Button -->
+  <button id="toggle-ai-chat" class="size-14 bg-gradient-to-r from-primary to-purple-600 rounded-full flex items-center justify-center text-white shadow-[0_8px_30px_rgb(225,45,117,0.3)] hover:scale-105 transition-transform flex group">
+    <span class="material-symbols-outlined text-2xl group-hover:hidden block">smart_toy</span>
+    <span class="material-symbols-outlined text-2xl hidden group-hover:block transition-all">chat</span>
+  </button>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Only bind if the elements exist to avoid errors
+    const toggleBtn = document.getElementById('toggle-ai-chat');
+    const closeBtn = document.getElementById('close-ai-chat');
+    const chatWindow = document.getElementById('ai-chat-window');
+    const chatMessages = document.getElementById('ai-chat-messages');
+    const chatInput = document.getElementById('ai-chat-input');
+    const sendBtn = document.getElementById('send-ai-chat');
+
+    if (!toggleBtn || !chatWindow) return;
+
+    function toggleChat() {
+      if (chatWindow.classList.contains('hidden')) {
+        chatWindow.classList.remove('hidden');
+        chatWindow.classList.add('flex');
+        
+        // small delay for transition
+        setTimeout(() => {
+          chatWindow.classList.remove('scale-95', 'opacity-0');
+          chatWindow.classList.add('scale-100', 'opacity-100');
+        }, 10);
+      } else {
+        chatWindow.classList.remove('scale-100', 'opacity-100');
+        chatWindow.classList.add('scale-95', 'opacity-0');
+        setTimeout(() => {
+          chatWindow.classList.add('hidden');
+          chatWindow.classList.remove('flex');
+        }, 300);
+      }
+    }
+
+    if(toggleBtn) toggleBtn.addEventListener('click', toggleChat);
+    if(closeBtn) closeBtn.addEventListener('click', toggleChat);
+
+    function addMessage(text, isUser = false) {
+      const msgDiv = document.createElement('div');
+      msgDiv.className = `p-3 rounded-2xl shadow-sm text-sm max-w-[85%] ${isUser ? 'self-end bg-gradient-to-r from-primary to-purple-600 text-white rounded-tr-sm' : 'self-start bg-white border border-slate-100 text-slate-700 rounded-tl-sm'}`;
+      msgDiv.textContent = text;
+      chatMessages.appendChild(msgDiv);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+      return msgDiv;
+    }
+
+    function showTyping() {
+       const typingDiv = document.createElement('div');
+       typingDiv.id = 'ai-typing';
+       typingDiv.className = 'self-start bg-white border border-slate-100 p-4 rounded-2xl rounded-tl-sm shadow-sm text-slate-500 max-w-[85%] flex items-center gap-1.5 h-10';
+       typingDiv.innerHTML = '<div class="size-1.5 bg-slate-400 rounded-full animate-bounce"></div><div class="size-1.5 bg-slate-400 rounded-full animate-bounce" style="animation-delay: 0.15s"></div><div class="size-1.5 bg-slate-400 rounded-full animate-bounce" style="animation-delay: 0.3s"></div>';
+       chatMessages.appendChild(typingDiv);
+       chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function removeTyping() {
+       const typingDiv = document.getElementById('ai-typing');
+       if (typingDiv) typingDiv.remove();
+    }
+
+    
+    function getBotResponse(text) {
+      const lower = text.toLowerCase();
+      
+      // Material & Thickness logic
+      if (lower.includes('material') || lower.includes('made of') || lower.includes('pvc') || lower.includes('thick') || lower.includes('mm')) {
+         return "Our stock props are made from durable, premium 5mm expanded PVC with a matte finish to prevent glare. If you place a Custom Order, we upgrade that to extra-durable 8mm PVC!";
+      }
+      
+      // Custom order logic
+      if (lower.includes('custom') || lower.includes('bespoke') || lower.includes('my own')) {
+         return "We absolutely do custom orders! We can design and laser-cut your custom props from 8mm PVC and ship them in just 3 days. Check out the 'Custom Orders' page for more info.";
+      }
+      
+      // Shipping / Location logic
+      if (lower.includes('ship') || lower.includes('long') || lower.includes('where')) {
+         return "We ship worldwide! Stock items usually process in 1-2 days, while custom orders take about 3 days to design and cut before shipping.";
+      }
+
+      // Default fallback
+      return "Thanks for your message! My AI brain is currently powering up 🔋 to answer that fully, but a totally real human will hop in and reply to your message in just a moment!";
+    }
+
+    function handleSend() {
+      const text = chatInput.value.trim();
+      if (!text) return;
+      
+      addMessage(text, true);
+      chatInput.value = '';
+      
+      showTyping();
+      setTimeout(() => {
+        removeTyping();
+        const response = getBotResponse(text);
+        addMessage(response);
+        
+        // Store common questions to pass to the human agent later
+      }, Math.random() * 1000 + 800); // Random delay between 0.8s and 1.8s for realism
+    }
+
+    if(sendBtn) sendBtn.addEventListener('click', handleSend);
+    if(chatInput) {
+        chatInput.addEventListener('keypress', (e) => {
+          if (e.key === 'Enter') handleSend();
+        });
+    }
+  });
+</script>
+
+</body></html>

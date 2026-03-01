@@ -1,0 +1,496 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Panta Props - Product Detail</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#e12d75",
+                        "primary-dark": "#b01e58",
+                        "secondary": "#0F82C4",
+                        "whatsapp": "#25D366",
+                        "background-light": "#f8f6f7",
+                        "background-dark": "#211117",
+                        "surface": "#FFFFFF",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"],
+                        "body": ["Manrope", "sans-serif"], // Using Manrope as requested, though PRD mentioned Nunito/Fredoka, keeping consistent with provided component.
+                    },
+                    borderRadius: {
+                        "DEFAULT": "1rem",
+                        "lg": "1.5rem",
+                        "xl": "2rem",
+                        "2xl": "3rem",
+                        "full": "9999px"
+                    },
+                    boxShadow: {
+                        "float": "0 12px 32px rgba(15, 130, 196, 0.08)",
+                        "glow": "0 0 20px rgba(225, 45, 117, 0.3)",
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom scrollbar for gallery thumbnails */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display antialiased text-slate-900 dark:text-slate-100 selection:bg-primary selection:text-white">
+<div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+<!-- Header -->
+<header class="sticky top-0 z-50 w-full bg-[#fbf8fa]/90 backdrop-blur-md border-b border-[#f3e8ec]">
+<div class="layout-container flex h-full grow flex-col max-w-[1200px] mx-auto">
+<div class="flex items-center justify-between px-6 py-4 lg:px-10">
+<div class="flex items-center gap-3 text-[#1b0e13]">
+<div class="size-8 text-primary flex items-center justify-center bg-primary/10 rounded-full">
+<span class="material-symbols-outlined text-2xl">celebration</span>
+</div>
+<h2 class="text-[#1b0e13] text-xl font-extrabold leading-tight tracking-tight">Panta Props</h2>
+</div>
+<div class="hidden md:flex flex-1 justify-end gap-8 items-center">
+                <a class="text-[#1b0e13] text-sm font-bold hover:text-primary transition-colors" href="stocked_shop_collection.html">Shop Props</a>
+                <a class="text-[#1b0e13] text-sm font-bold hover:text-primary transition-colors" href="custom_services_landing.html">Custom Orders</a>
+                <a class="text-[#1b0e13] text-sm font-bold hover:text-primary transition-colors" href="community_gallery.html">Community</a>
+                <a class="text-[#1b0e13] text-sm font-bold hover:text-primary transition-colors" href="brand_story.html">Our Story</a>
+            </div>
+<!-- Mobile Menu Icon -->
+<button class="md:hidden flex items-center text-[#1b0e13]">
+<span class="material-symbols-outlined text-3xl">menu</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-grow layout-container max-w-[1200px] mx-auto w-full px-4 md:px-10 py-8">
+<!-- Breadcrumbs -->
+<nav class="flex flex-wrap gap-2 mb-8 items-center text-sm font-medium">
+<a class="text-slate-500 hover:text-primary transition-colors" href="stocked_shop_collection.html">Shop</a>
+<span class="material-symbols-outlined text-slate-400 text-base">chevron_right</span>
+<a class="text-slate-500 hover:text-primary transition-colors" href="stocked_shop_collection.html">Wedding Collection</a>
+<span class="material-symbols-outlined text-slate-400 text-base">chevron_right</span>
+<span class="text-slate-900 font-bold">Neon Party Set</span>
+</nav>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+<!-- Left Column: Gallery -->
+<div class="lg:col-span-7 flex flex-col gap-6">
+<!-- Main Image -->
+<div class="group relative aspect-[4/3] w-full overflow-hidden rounded-2xl bg-white shadow-float ring-1 ring-slate-100">
+<div class="absolute top-4 left-4 z-10 flex gap-2">
+<span class="inline-flex items-center rounded-full bg-[#FFD166] px-3 py-1 text-xs font-bold text-slate-900 shadow-sm">
+<span class="material-symbols-outlined text-sm mr-1">local_fire_department</span>
+                                Best Seller
+                            </span>
+<span class="inline-flex items-center rounded-full bg-white/90 backdrop-blur px-3 py-1 text-xs font-bold text-secondary shadow-sm">
+<span class="material-symbols-outlined text-sm mr-1">water_drop</span>
+                                Waterproof
+                            </span>
+</div>
+<img alt="Bright pink neon sign prop saying 'Let's Party' held up at a wedding photo booth" class="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCja-lIkhqC8AtPsRUfcnHq-hIFq8J1aXYFgr63GnABkZV2bD4f9_650wxRmG4bcG9MpU6bCn20ZLpEHyz-GREL_xlqCvFlr8L2R1f5bNGY1ukKpoQ63GCGlZpAjwCdwGgxg_IvMtfeQorAy3DzYv6s7zuKcKgWmtPHLfbJHjgbYkJFf5kqhK0elDysVwrmGrA6cUsP1mECO69FaQJh0pUolCbNybzQivmSY8haV9Wogj5tp6SlJTpnQAu2lq6tPVv1nlweDJ1O4uM">
+<!-- Zoom Hint -->
+<div class="absolute bottom-4 right-4 flex size-10 items-center justify-center rounded-full bg-white/80 backdrop-blur text-slate-700 shadow-sm opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined">zoom_in</span>
+</div>
+</div>
+<!-- Thumbnails -->
+<div class="flex gap-4 overflow-x-auto hide-scrollbar pb-2">
+<button class="relative h-24 w-24 shrink-0 overflow-hidden rounded-xl ring-2 ring-primary ring-offset-2">
+<img alt="Front view of neon pink party prop" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAYOUTpeujQ5KQW8R8DE4z08FDM55urPAapQfAtSrMy4wmIDwXGvd2aZst3q3vfkDjuWRaS_hVdc41nJPDQkNmsHoJQ9eHDpQn3YUUGbCfm-UZ06MCbFOgYZ7PQF0daZYaZa1SiNXzbeVmr6Ig4OmPPANyAGNjEedKI0G2_D_Wf6M_SOpz3oyITa8YQAtQw6ywXSeErzsyoZ2FbyFIcMATLrsWSSam0M5whu4JQErLxCU_Mo4jRkYWW57uF2LduBPQMg0Rrcb_xs4">
+</button>
+<button class="relative h-24 w-24 shrink-0 overflow-hidden rounded-xl ring-1 ring-slate-200 hover:ring-primary hover:ring-offset-2 transition-all">
+<img alt="Side view showing 5mm thickness of the PVC material" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAuA32IEL3UuSNTv49sT9oglTtKIeNYCAqMwFce7Fj_92JoOfYLqAsRCNZQbVPzJsmH0Ylh9NqhdejJQLjMp-g6-imKsFii8Szi9M4QIL_9lXI3M71RZeq7gKx81uu7zKG9GDX9spNwNWFlN4zWcCspzZ2C2JrCiBC8qc8sF5pxtbwfz4wxXUhFtGKbed-z4sg5OhsPvOasVUHS4Xrb-YElPf1mEIyOajyakQAt802TfmrcMX6hfxqSaUZMu5lVwHdRY9-ZRV3O3XY">
+<div class="absolute inset-0 bg-black/10"></div>
+</button>
+<button class="relative h-24 w-24 shrink-0 overflow-hidden rounded-xl ring-1 ring-slate-200 hover:ring-primary hover:ring-offset-2 transition-all">
+<img alt="Group of people holding various props at a party" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDcjE1mKJ3YR4MCozeEnFF0zrcFh_sAlsQfb7lsBPmiZ9TPsE6UqWQgTWek5rjuKZfeTSJ9ZcUkfARLdAnjUTzw2RnE01D_DTXA5eT7kK8uaPYHjCfk0p0iFp6_-VnfjRyitn2tWhSNxmTTNdi59TPlHfduRGkveTptJ-UwZS_B2MZdmNQBpAbSRGtoSrqB7dxaAQTBlJfleevmIWkp-2nVpgPzYBgokGaDtsyhC8b_XMQDaogPXS8vHFJW8b3tfO-2FUA1ZWwfa8k">
+</button>
+<button class="relative h-24 w-24 shrink-0 flex flex-col items-center justify-center overflow-hidden rounded-xl bg-slate-50 ring-1 ring-slate-200 hover:ring-primary hover:ring-offset-2 transition-all">
+<span class="material-symbols-outlined text-3xl text-slate-400 mb-1">play_circle</span>
+<span class="text-[10px] font-bold text-slate-500 uppercase">Video</span>
+</button>
+</div>
+<!-- The Panta Difference Section (Desktop only location) -->
+<div class="hidden lg:block mt-8 p-8 rounded-2xl bg-white shadow-float border border-slate-100">
+<h3 class="text-xl font-extrabold mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">verified</span>
+                            The Panta Difference
+                        </h3>
+<div class="grid grid-cols-3 gap-6">
+<div class="flex flex-col items-center text-center gap-3">
+<div class="size-12 rounded-full bg-blue-50 text-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-2xl">water_drop</span>
+</div>
+<div>
+<h4 class="font-bold text-sm">100% Waterproof</h4>
+<p class="text-xs text-slate-500 mt-1">Spilled drinks? No problem. Wipe clean instantly.</p>
+</div>
+</div>
+<div class="flex flex-col items-center text-center gap-3">
+<div class="size-12 rounded-full bg-pink-50 text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-2xl">block</span>
+</div>
+<div>
+<h4 class="font-bold text-sm">Anti-Glare Matte</h4>
+<p class="text-xs text-slate-500 mt-1">Zero flash reflection. Perfect for pro photography.</p>
+</div>
+</div>
+<div class="flex flex-col items-center text-center gap-3">
+<div class="size-12 rounded-full bg-purple-50 text-purple-600 flex items-center justify-center">
+<span class="material-symbols-outlined text-2xl">diamond</span>
+</div>
+<div>
+<h4 class="font-bold text-sm">Shatterproof PVC</h4>
+<p class="text-xs text-slate-500 mt-1">Drop it, toss it, pack it. It survives the party.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Product Details (Sticky) -->
+<div class="lg:col-span-5 relative">
+<div class="sticky top-28 flex flex-col gap-6">
+<!-- Title & Review -->
+<div>
+<h1 class="text-3xl md:text-4xl font-extrabold text-[#1b0e13] leading-[1.1] mb-3">
+                                The "Neon Party" Prop Set
+                            </h1>
+<div class="flex items-center gap-4">
+<div class="flex text-[#FFD166]">
+<span class="material-symbols-outlined text-xl fill-current">star</span>
+<span class="material-symbols-outlined text-xl fill-current">star</span>
+<span class="material-symbols-outlined text-xl fill-current">star</span>
+<span class="material-symbols-outlined text-xl fill-current">star</span>
+<span class="material-symbols-outlined text-xl fill-current">star_half</span>
+</div>
+<span class="text-sm font-bold text-slate-600 underline cursor-pointer">4.9 (124 Reviews)</span>
+</div>
+</div>
+<!-- Price & Bundle Toggle -->
+<div class="p-5 rounded-2xl bg-white shadow-sm border border-slate-100 flex flex-col gap-5">
+<div class="flex items-baseline justify-between">
+<span class="text-3xl font-extrabold text-primary">$45.00</span>
+<span class="text-sm font-medium text-slate-400 line-through">$55.00</span>
+</div>
+<!-- Bundle Toggle Switch -->
+<div class="relative flex p-1 bg-slate-100 rounded-full cursor-pointer select-none">
+<div class="w-1/2 h-10 rounded-full bg-white shadow-sm flex items-center justify-center text-sm font-bold text-primary transition-all z-10">
+                                    Full Party Kit
+                                </div>
+<div class="w-1/2 h-10 flex items-center justify-center text-sm font-bold text-slate-500 transition-all z-10 hover:text-slate-700">
+                                    Single Prop ($12)
+                                </div>
+</div>
+<p class="text-xs text-slate-500 text-center">Includes 5 props: "Party", "Cheers", "Oh Baby", Glasses, Lips</p>
+</div>
+<!-- Thickness Visualizer -->
+<div class="flex items-center gap-4 p-4 rounded-xl bg-[#F0F7FA] border border-[#E1F0F7]">
+<div class="shrink-0 flex items-end gap-2 h-12">
+<div class="w-1.5 h-full bg-primary rounded-full shadow-md"></div>
+<div class="w-1.5 h-1/2 bg-slate-300 rounded-full opacity-50"></div>
+</div>
+<div>
+<h4 class="font-bold text-[#0F82C4] text-sm">Thicker than a Quarter</h4>
+<p class="text-xs text-slate-600 leading-relaxed">Solid 5mm PVC. No bending, no flopping.</p>
+</div>
+<div class="ml-auto">
+<span class="material-symbols-outlined text-[#0F82C4] text-3xl">layers</span>
+</div>
+</div>
+<!-- Description -->
+<div class="prose prose-sm prose-slate">
+<p class="text-slate-600 leading-relaxed">
+                                Ditch the flimsy paper props. The <strong>Neon Party Set</strong> is built from premium 5mm PVC that feels as good as it looks. Featuring vibrant UV-printed gradients that pop on camera without the glare.
+                            </p>
+<ul class="list-none pl-0 flex flex-col gap-2 mt-4">
+<li class="flex items-center gap-2 text-sm font-medium text-slate-700">
+<span class="material-symbols-outlined text-green-500 text-lg">check_circle</span>
+                                    Ready to ship in 24 hours
+                                </li>
+<li class="flex items-center gap-2 text-sm font-medium text-slate-700">
+<span class="material-symbols-outlined text-green-500 text-lg">check_circle</span>
+                                    Free shipping on orders over $100
+                                </li>
+</ul>
+</div>
+<!-- CTA Section -->
+<div class="flex flex-col gap-3 mt-2">
+<button class="flex items-center justify-center gap-3 w-full bg-whatsapp hover:bg-green-500 text-white font-extrabold text-lg py-4 rounded-full shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5" onclick="window.location.href='https://wa.me/?text=Hi%20Panta!'">
+<svg class="w-6 h-6 fill-current" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.5 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7 .9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"></path></svg>
+<span>Buy on WhatsApp</span>
+</button>
+<p class="text-[10px] text-center text-slate-400 font-medium uppercase tracking-wide">
+                                Direct Chat • Secure Payment Link • Fast Reply
+                            </p>
+</div>
+</div>
+</div>
+<!-- Mobile-only Material Specs (Below main content on small screens) -->
+<div class="col-span-1 lg:hidden mt-8 p-6 rounded-2xl bg-white shadow-sm border border-slate-100">
+<h3 class="text-lg font-extrabold mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">verified</span>
+                        The Panta Difference
+                    </h3>
+<div class="space-y-4">
+<div class="flex items-center gap-4">
+<div class="size-10 rounded-full bg-blue-50 text-secondary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-xl">water_drop</span>
+</div>
+<div>
+<h4 class="font-bold text-sm">100% Waterproof</h4>
+<p class="text-xs text-slate-500">Wipe clean instantly.</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="size-10 rounded-full bg-pink-50 text-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-xl">block</span>
+</div>
+<div>
+<h4 class="font-bold text-sm">Anti-Glare Matte</h4>
+<p class="text-xs text-slate-500">Zero flash reflection.</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="size-10 rounded-full bg-purple-50 text-purple-600 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-xl">diamond</span>
+</div>
+<div>
+<h4 class="font-bold text-sm">Shatterproof PVC</h4>
+<p class="text-xs text-slate-500">Survives the party.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Mobile Sticky CTA -->
+<div class="lg:hidden fixed bottom-0 left-0 w-full bg-white border-t border-slate-200 p-4 z-40 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]">
+<button class="flex items-center justify-center gap-2 w-full bg-whatsapp text-white font-extrabold text-base h-12 rounded-full shadow-lg" onclick="window.location.href='https://wa.me/?text=Hi%20Panta!'">
+<svg class="w-5 h-5 fill-current" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.5 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7 .9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"></path></svg>
+<span>Buy on WhatsApp - $45</span>
+</button>
+</div>
+</div>
+
+<!-- AI Chat Widget -->
+
+  <!-- Standard Global Footer -->
+  
+  <!-- Standard Global Footer -->
+  
+  <!-- Standard Global Footer -->
+  
+  <!-- Standard Global Footer -->
+  
+  <!-- Standard Global Footer -->
+  <footer class="bg-[#1f1619] py-16 px-8 mt-auto w-full border-t border-[#312226]">
+    <div class="max-w-[1200px] mx-auto flex flex-col md:flex-row justify-between gap-12 font-sans">
+      <div class="flex flex-col gap-6 md:w-1/2">
+        <!-- Logo -->
+        <a href="index.html" class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-[#e81e62] text-2xl">camera</span>
+          <div class="w-8 h-[2px] bg-[#e81e62]"></div>
+          <span class="material-symbols-outlined text-[#e81e62] text-2xl">photo_camera</span>
+          <span class="text-white font-bold text-3xl tracking-tight ml-2">Panta</span>
+        </a>
+        
+        <!-- Descriptions -->
+        <p class="text-[#a19598] text-lg max-w-md leading-relaxed mt-2">
+          Ditch the flop. Premium, durable photo booth props<br>
+          designed for events that demand better.
+        </p>
+
+        <!-- Social Icons -->
+        <div class="flex gap-4 mt-6">
+          <a href="https://www.instagram.com/pantaprops_/_/" class="w-12 h-12 rounded-full bg-[#312328] flex items-center justify-center text-white hover:bg-[#e81e62] transition-colors">
+            <span class="material-symbols-outlined text-[20px]">photo_camera</span>
+          </a>
+          <a href="https://youtube.com/@pantaprops" class="w-12 h-12 rounded-full bg-[#312328] flex items-center justify-center text-white hover:bg-[#e81e62] transition-colors">
+            <span class="material-symbols-outlined text-[22px]">play_arrow</span>
+          </a>
+          <a href="contact.html" class="w-12 h-12 rounded-full bg-[#312328] flex items-center justify-center text-white hover:bg-[#e81e62] transition-colors">
+            <span class="material-symbols-outlined text-[20px]">mail</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Right Side Columns -->
+      <div class="flex flex-col sm:flex-row gap-10 sm:gap-20 md:gap-32 w-full md:w-auto mt-2">
+        <div class="flex flex-col gap-5">
+          <h4 class="text-white font-bold text-xl mb-2">Shop</h4>
+          <a href="stocked_shop_collection.html" class="text-[#a19598] hover:text-white transition-colors">All Props</a>
+          <a href="stocked_shop_collection.html?category=wedding" class="text-[#a19598] hover:text-white transition-colors">Wedding Sets</a>
+          <a href="custom_services_landing.html" class="text-[#a19598] hover:text-white transition-colors">Corporate Events</a>
+          <a href="custom_services_landing.html" class="text-[#a19598] hover:text-white transition-colors">Custom Orders</a>
+        </div>
+        <div class="flex flex-col gap-5">
+          <h4 class="text-white font-bold text-xl mb-2">Company</h4>
+          <a href="brand_story.html" class="text-[#a19598] hover:text-white transition-colors">Our Story</a>
+          <a href="community_gallery.html" class="text-[#a19598] hover:text-white transition-colors">Community</a>
+          <a href="brand_story.html#faq" class="text-[#a19598] hover:text-white transition-colors">FAQ</a>
+          <a href="contact.html" class="text-[#a19598] hover:text-white transition-colors">Contact</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+
+
+<div id="ai-chat-widget" class="fixed bottom-6 right-6 z-50 font-display flex flex-col items-end">
+  <!-- Chat Window (Hidden by default) -->
+  <div id="ai-chat-window" class="hidden flex-col w-[350px] h-[500px] bg-white rounded-[2rem] shadow-2xl overflow-hidden border border-slate-100 mb-4 origin-bottom-right transition-all duration-300 transform scale-95 opacity-0">
+    <!-- Header -->
+    <div class="bg-gradient-to-r from-primary to-purple-600 p-4 flex justify-between items-center text-white">
+      <div class="flex items-center gap-2">
+        <span class="material-symbols-outlined">smart_toy</span>
+        <span class="font-bold">Panta AI</span>
+      </div>
+      <button id="close-ai-chat" class="hover:bg-white/20 rounded-full p-1 transition-colors flex items-center justify-center">
+        <span class="material-symbols-outlined text-sm">close</span>
+      </button>
+    </div>
+    <!-- Messages Body -->
+    <div id="ai-chat-messages" class="flex-1 p-4 bg-slate-50 overflow-y-auto flex flex-col gap-3">
+      <div class="self-start bg-white border border-slate-100 p-3 rounded-2xl rounded-tl-sm shadow-sm text-sm text-slate-700 max-w-[85%]">
+        Hi there! 👋 I'm Panta AI. I can help you find the perfect prop, process custom designs, or answer any questions. How can I help you today?
+      </div>
+    </div>
+    <!-- Input -->
+    <div class="p-3 bg-white border-t border-slate-100 flex items-center gap-2">
+      <input type="text" id="ai-chat-input" placeholder="Ask me anything..." class="flex-1 bg-slate-100 border-none rounded-full px-4 py-2 text-sm focus:ring-2 focus:ring-primary/50 outline-none">
+      <button id="send-ai-chat" class="bg-primary text-white size-9 rounded-full flex items-center justify-center hover:bg-pink-600 transition-colors shrink-0 shadow-md">
+        <span class="material-symbols-outlined text-[18px]">send</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Toggle Button -->
+  <button id="toggle-ai-chat" class="size-14 bg-gradient-to-r from-primary to-purple-600 rounded-full flex items-center justify-center text-white shadow-[0_8px_30px_rgb(225,45,117,0.3)] hover:scale-105 transition-transform flex group">
+    <span class="material-symbols-outlined text-2xl group-hover:hidden block">smart_toy</span>
+    <span class="material-symbols-outlined text-2xl hidden group-hover:block transition-all">chat</span>
+  </button>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Only bind if the elements exist to avoid errors
+    const toggleBtn = document.getElementById('toggle-ai-chat');
+    const closeBtn = document.getElementById('close-ai-chat');
+    const chatWindow = document.getElementById('ai-chat-window');
+    const chatMessages = document.getElementById('ai-chat-messages');
+    const chatInput = document.getElementById('ai-chat-input');
+    const sendBtn = document.getElementById('send-ai-chat');
+
+    if (!toggleBtn || !chatWindow) return;
+
+    function toggleChat() {
+      if (chatWindow.classList.contains('hidden')) {
+        chatWindow.classList.remove('hidden');
+        chatWindow.classList.add('flex');
+        
+        // small delay for transition
+        setTimeout(() => {
+          chatWindow.classList.remove('scale-95', 'opacity-0');
+          chatWindow.classList.add('scale-100', 'opacity-100');
+        }, 10);
+      } else {
+        chatWindow.classList.remove('scale-100', 'opacity-100');
+        chatWindow.classList.add('scale-95', 'opacity-0');
+        setTimeout(() => {
+          chatWindow.classList.add('hidden');
+          chatWindow.classList.remove('flex');
+        }, 300);
+      }
+    }
+
+    if(toggleBtn) toggleBtn.addEventListener('click', toggleChat);
+    if(closeBtn) closeBtn.addEventListener('click', toggleChat);
+
+    function addMessage(text, isUser = false) {
+      const msgDiv = document.createElement('div');
+      msgDiv.className = `p-3 rounded-2xl shadow-sm text-sm max-w-[85%] ${isUser ? 'self-end bg-gradient-to-r from-primary to-purple-600 text-white rounded-tr-sm' : 'self-start bg-white border border-slate-100 text-slate-700 rounded-tl-sm'}`;
+      msgDiv.textContent = text;
+      chatMessages.appendChild(msgDiv);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+      return msgDiv;
+    }
+
+    function showTyping() {
+       const typingDiv = document.createElement('div');
+       typingDiv.id = 'ai-typing';
+       typingDiv.className = 'self-start bg-white border border-slate-100 p-4 rounded-2xl rounded-tl-sm shadow-sm text-slate-500 max-w-[85%] flex items-center gap-1.5 h-10';
+       typingDiv.innerHTML = '<div class="size-1.5 bg-slate-400 rounded-full animate-bounce"></div><div class="size-1.5 bg-slate-400 rounded-full animate-bounce" style="animation-delay: 0.15s"></div><div class="size-1.5 bg-slate-400 rounded-full animate-bounce" style="animation-delay: 0.3s"></div>';
+       chatMessages.appendChild(typingDiv);
+       chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function removeTyping() {
+       const typingDiv = document.getElementById('ai-typing');
+       if (typingDiv) typingDiv.remove();
+    }
+
+    
+    function getBotResponse(text) {
+      const lower = text.toLowerCase();
+      
+      // Material & Thickness logic
+      if (lower.includes('material') || lower.includes('made of') || lower.includes('pvc') || lower.includes('thick') || lower.includes('mm')) {
+         return "Our stock props are made from durable, premium 5mm expanded PVC with a matte finish to prevent glare. If you place a Custom Order, we upgrade that to extra-durable 8mm PVC!";
+      }
+      
+      // Custom order logic
+      if (lower.includes('custom') || lower.includes('bespoke') || lower.includes('my own')) {
+         return "We absolutely do custom orders! We can design and laser-cut your custom props from 8mm PVC and ship them in just 3 days. Check out the 'Custom Orders' page for more info.";
+      }
+      
+      // Shipping / Location logic
+      if (lower.includes('ship') || lower.includes('long') || lower.includes('where')) {
+         return "We ship worldwide! Stock items usually process in 1-2 days, while custom orders take about 3 days to design and cut before shipping.";
+      }
+
+      // Default fallback
+      return "Thanks for your message! My AI brain is currently powering up 🔋 to answer that fully, but a totally real human will hop in and reply to your message in just a moment!";
+    }
+
+    function handleSend() {
+      const text = chatInput.value.trim();
+      if (!text) return;
+      
+      addMessage(text, true);
+      chatInput.value = '';
+      
+      showTyping();
+      setTimeout(() => {
+        removeTyping();
+        const response = getBotResponse(text);
+        addMessage(response);
+        
+        // Store common questions to pass to the human agent later
+      }, Math.random() * 1000 + 800); // Random delay between 0.8s and 1.8s for realism
+    }
+
+    if(sendBtn) sendBtn.addEventListener('click', handleSend);
+    if(chatInput) {
+        chatInput.addEventListener('keypress', (e) => {
+          if (e.key === 'Enter') handleSend();
+        });
+    }
+  });
+</script>
+
+</body></html>

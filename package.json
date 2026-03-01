@@ -1,0 +1,22 @@
+{
+  "name": "panta-prop",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "serve ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cheerio": "^1.2.0",
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "multer": "^2.1.0",
+    "nodemailer": "^8.0.1",
+    "serve": "^14.2.5",
+    "sqlite3": "^5.1.7"
+  }
+}

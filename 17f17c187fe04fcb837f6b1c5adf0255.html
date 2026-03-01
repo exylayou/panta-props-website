@@ -1,0 +1,447 @@
+<html><head></head><body>Here is the updated Product Requirements Document for "Panta Props - Playful Pop," incorporating the WhatsApp-first commerce model and service segmentation.
+
+## Current PRD
+
+# Panta Props - Playful Pop
+
+## Product Overview
+
+**The Pitch:** High-end photo booth props that ditch tacky cardboard for durable, camera-ready PVC and acrylic. Panta Props turns event photography into a tactile, premium experience with gear that survives the party.
+
+**For:** Event planners, professional photo booth operators, and couples who refuse to compromise on their wedding aesthetic.
+
+**Device:** Desktop &amp; Mobile (Optimized for WhatsApp-first conversion)
+
+**Design Direction:** "Playful Pop" — A tactile, high-energy aesthetic combining rounded geometries with vibrant gradients. It feels like a candy store for event gear: bright, squishy, and impossible not to touch.
+
+**Inspired by:** Headspace (rounded, friendly UI), Snapbar (playful corporate), Superplastic (premium vinyl toy aesthetic).
+
+---
+
+## Screens
+
+- **Home:** High-energy introduction with clear segmentation between "Stocked" and "Custom" paths.
+- **Stocked Shop / Collection:** Grid-based browsing experience for ready-to-ship items with chat-based purchasing.
+- **Product Detail:** Deep dive into material quality (thickness, matte finish) and bundle details.
+- **Custom Services Landing:** Informational page explaining the bespoke design process (Consultation -&gt; Design -&gt; Production).
+- **Brand Story:** Narrative page contrasting "floppy cardboard" with "Panta durability."
+- **Inquiry Success:** Reassurance modal/page after clicking WhatsApp links, explaining next steps.
+
+---
+
+## Key Flows
+
+**Flow: The "Wedding Hashtag" Inquiry**
+
+1. User lands on **Home** -&gt; selects "Custom Bespoke Design" path in hero.
+2. User lands on **Custom Services Landing** -&gt; reads about the design process.
+3. User clicks "Get Quote via WhatsApp" -&gt; WhatsApp opens with pre-filled message: *"Hi Panta! I'm interested in a custom wedding prop..."*
+
+**Flow: The Professional Restock**
+
+1. User lands on **Shop** -&gt; selects "Material: Acrylic" filter.
+2. User hovers over "Neon Party Set" -&gt; Image flips to show side-profile thickness.
+3. User clicks card -&gt; navigates to **Product Detail**.
+4. User clicks "Buy via WhatsApp".
+5. WhatsApp opens with specific item reference -&gt; User sends message to finalize payment/shipping.
+
+---
+
+<details>
+<summary>Design System</summary>
+
+## Color Palette
+
+- **Primary:** `#E02E76` - Vibrant Magenta (Primary Buttons, Price Tags, Hero Accents)
+- **Secondary:** `#0F82C4` - Electric Blue (Secondary Buttons, Links, Hover States)
+- **WhatsApp Green:** `#25D366` - Specific CTA background for conversion buttons.
+- **Background:** `#F5F5F7` - Cool Off-White (Main Page Background)
+- **Surface:** `#FFFFFF` - Product Cards, Navbar, Modals
+- **Text:** `#2E3134` - Charcoal Grey (Headings, Body)
+- **Muted:** `#8D9399` - Subtitles, Footer Text, Borders
+- **Accent:** `#FFD166` - "New" Badges, Star Ratings, Highlights
+
+## Typography
+
+Fonts chosen for rounded terminals and high x-heights to match the "friendly" vibe.
+
+- **Headings:** **Fredoka**, 700/600. Round, bouncy, geometric.
+  - H1: 64px (Tight tracking `-0.02em`)
+  - H2: 48px
+  - H3: 32px
+- **Body:** **Nunito**, 500/700. Rounded sans-serif, highly legible but characterful.
+  - Body Large: 18px
+  - Body Regular: 16px
+- **UI:** **Quicksand**, 600. For buttons, badges, and small labels.
+  - Button Text: 16px (All caps, wide tracking `0.05em`)
+
+**Style notes:**
+- **Buttons:** 40px radius (Full pill shape).
+- **Cards:** 24px border radius. Deep, soft shadows to simulate "floating": `box-shadow: 0 12px 32px rgba(15, 130, 196, 0.08)`.
+- **Texture:** Subtle confetti pattern SVG overlay on the `#F5F5F7` background at 3% opacity.
+
+## Design Tokens
+
+```css
+:root {
+  --color-primary: #E02E76;
+  --color-secondary: #0F82C4;
+  --color-whatsapp: #25D366;
+  --color-bg: #F5F5F7;
+  --color-surface: #FFFFFF;
+  --color-text: #2E3134;
+  --font-display: 'Fredoka', sans-serif;
+  --font-body: 'Nunito', sans-serif;
+  --radius-pill: 9999px;
+  --radius-card: 24px;
+  --shadow-float: 0 12px 32px rgba(15, 130, 196, 0.08);
+  --gradient-primary: linear-gradient(135deg, #E02E76 0%, #B01E58 100%);
+  --gradient-secondary: linear-gradient(135deg, #0F82C4 0%, #095C8D 100%);
+}
+```
+
+</details>
+
+---
+
+<details>
+<summary>Screen Specifications</summary>
+
+### 1. Home Page
+
+**Purpose:** clear routing between Ready-to-Ship inventory and Custom Services.
+
+**Layout:**
+1.  **Sticky Navbar:** White pill-shaped container floating 24px from top. Logo left, Nav center, WhatsApp Contact right.
+2.  **Split Hero:** Two distinct card-like columns taking up the main view.
+    *   *Left (Stock):* "Shop The Drop." Image of stacked, colorful props. CTA: "Browse Stock".
+    *   *Right (Custom):* "Make it Yours." Image of a designer sketching a prop. CTA: "Start Custom Order".
+3.  **Marquee:** Infinite scroll banner: "NO MORE FLOPPY CARDBOARD • 5MM THICK PVC • ANTI-GLARE •".
+4.  **Category Grid:** "Shop by Vibe" (Wedding, Corporate, Holiday).
+5.  **Featured Products:** Horizontal scroll of trending items.
+
+**Key Elements:**
+-   **Hero Split Cards:** 32px border radius. On hover, the hovered side expands slightly (flex-grow) while the other dims.
+-   **Prop Floaters:** Parallax effect on scroll. 3 distinct PNG layers of props blurring at different depths.
+-   **Category Cards:** Square, 300px. Full bleed image with heavy rounded corners (32px). Text overlay in bottom left: White text, thick black outline.
+
+**States:**
+-   **Loading:** Skeleton loaders for hero image and product carousel.
+-   **Hover (Cards):** Scale up 1.05x, shadow intensifies and shifts color to Magenta tint.
+
+**Components:**
+-   **NavPill:** Height 64px, Width 90%, Surface White, Shadow Float.
+
+---
+
+### 2. Stocked Shop / Collection Page
+
+**Purpose:** Browsing ready-to-ship inventory with direct chat purchasing.
+
+**Layout:**
+1.  **Header:** "All Props" title centered. Gradient text fill (Magenta to Blue).
+2.  **Sidebar (Left):** Filters (Event, Material, Price). Accordion style with rounded checkboxes.
+3.  **Grid (Right):** 3-column product grid.
+
+**Key Elements:**
+-   **Product Card:**
+    -   **Image:** 4:5 aspect ratio. Light grey background `#F0F0F2`.
+    -   **Badge:** "Best Seller" pill in top left (`#FFD166` bg).
+    -   **Details:** Title (Nunito, 700, 18px). Price (Fredoka, 600, 20px, Magenta).
+    -   **Buy Button:** Circle button with `WhatsApp` icon (Green #25D366) floating on image bottom-right.
+-   **Filters:** "Squircle" checkboxes. When checked, fill is `#0F82C4` with white check.
+
+**Interactions:**
+-   **Hover Product Image:** Image swaps to "Side Profile" view to demonstrate 5mm thickness.
+-   **Click Buy Button:** Opens WhatsApp web/app with pre-filled message: "Hi! I want to buy [Product Name]..."
+
+---
+
+### 3. Product Detail Page (PDP)
+
+**Purpose:** Convincing user of premium material quality and facilitating chat conversion.
+
+**Layout:**
+1.  **Gallery (Left):** Main image + 3 thumbnails below.
+2.  **Info (Right):** Sticky column. Title, Rating, Price, "Buy via WhatsApp".
+3.  **Material Deep Dive (Below):** Full-width section focusing on "The Panta Difference" (Anti-glare, Waterproof).
+
+**Key Elements:**
+-   **Thickness Visualizer:** A specific graphic showing a coin next to the prop edge to denote 5mm thickness.
+-   **Bundle Selector:** "Make it a Set?" toggle switch. Toggles between "Single Prop ($12)" and "Full Kit ($45)".
+-   **Material Badge:** Icon + Text row: "Waterproof", "Matte Finish", "Shatterproof".
+-   **Primary CTA:** Large Green Button (`#25D366`) with WhatsApp Icon. Text: "Buy on WhatsApp".
+
+**Interactions:**
+-   **Click CTA:** Opens WhatsApp with specific message including SKU/Bundle info.
+
+---
+
+### 4. Custom Services Landing (Formerly Builder)
+
+**Purpose:** Explain the bespoke service model and generate leads via chat.
+
+**Layout:**
+1.  **Hero:** "Your Brand, Our Props." Large visual of a custom logo prop being held.
+2.  **Process Steps (Horizontal Row):**
+    *   Step 1: "Idea" (Icon: Lightbulb) - "Send us your text, logo, or napkin sketch."
+    *   Step 2: "Design" (Icon: Pencil) - "We send a digital proof in 24 hours."
+    *   Step 3: "Production" (Icon: Factory) - "Laser cut and shipped in 3 days."
+3.  **Gallery:** Grid of past custom work (Wedding hashtags, Corporate logos).
+4.  **Inquiry Section:** Large CTA card.
+
+**Key Elements:**
+-   **Process Icons:** Large, bubbly 3D-style icons.
+-   **Inquiry CTA:** "Chat with a Designer". Button opens WhatsApp with message: "Hi, I have a custom design idea..."
+-   **Price Guide:** Simple table showing base pricing for custom sizes (Small: $25, Medium: $45, Large: $75).
+
+**States:**
+-   **Hover (Gallery):** Images zoom slightly; overlay appears with the client's name.
+
+---
+
+### 5. Brand Story
+
+**Purpose:** Emotional connection + justification of higher price point.
+
+**Layout:**
+1.  **Hero:** Split screen. Left: "Sad Cardboard" (Greyscale, bent). Right: "Happy Panta" (Vibrant, sturdy). Slider handle in middle to compare.
+2.  **Timeline:** Vertical line with nodes showing company history.
+3.  **Team Grid:** Circular photos of the team holding props over their faces.
+
+**Key Elements:**
+-   **Comparison Slider:** Interactive dragging element. Reveals the "Panta" image over the "Generic" image.
+-   **Stats Row:** 3 large numbers: "50k+ Props Sold", "0 Bent Corners", "100% Recyclable".
+
+---
+
+### 6. Cart / Checkout (Removed)
+
+*Note: Traditional cart and checkout screens have been removed in favor of the direct WhatsApp service model.*
+
+</details>
+
+---
+
+<details>
+<summary>Build Guide</summary>
+
+**Stack:** HTML5 + Tailwind CSS v3 + Vanilla JS (or Alpine.js for interactions)
+
+**Build Order:**
+
+1.  **Design System / Global CSS:** Set up `Fredoka` and `Nunito` fonts. Configure Tailwind `tailwind.config.js` with specific colors (`#E02E76`, `#25D366`, etc.) and border radius tokens.
+2.  **Components Library:** Build the `NavPill`, `ProductCard` (with WhatsApp CTA), and `ProcessStep` first.
+3.  **Home Page:** Build the split-screen hero logic (CSS Flexbox/Grid) to handle the two distinct user paths.
+4.  **Shop Page:** Focus on grid responsiveness and the WhatsApp URL generation for the "Buy" buttons.
+5.  **Product Detail:** Implement the sticky sidebar logic and gallery switcher. Ensure WhatsApp links grab the specific product title dynamically.
+6.  **Custom Services Page:** Layout the 3-step process clearly and integrate the "Get Quote" WhatsApp link.
+
+</details>\n
+<!-- AI Chat Widget -->
+
+  <!-- Standard Global Footer -->
+  
+  <!-- Standard Global Footer -->
+  
+  <!-- Standard Global Footer -->
+  
+  <!-- Standard Global Footer -->
+  
+  <!-- Standard Global Footer -->
+  <footer class="bg-[#1f1619] py-16 px-8 mt-auto w-full border-t border-[#312226]">
+    <div class="max-w-[1200px] mx-auto flex flex-col md:flex-row justify-between gap-12 font-sans">
+      <div class="flex flex-col gap-6 md:w-1/2">
+        <!-- Logo -->
+        <a href="index.html" class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-[#e81e62] text-2xl">camera</span>
+          <div class="w-8 h-[2px] bg-[#e81e62]"></div>
+          <span class="material-symbols-outlined text-[#e81e62] text-2xl">photo_camera</span>
+          <span class="text-white font-bold text-3xl tracking-tight ml-2">Panta</span>
+        </a>
+        
+        <!-- Descriptions -->
+        <p class="text-[#a19598] text-lg max-w-md leading-relaxed mt-2">
+          Ditch the flop. Premium, durable photo booth props<br>
+          designed for events that demand better.
+        </p>
+
+        <!-- Social Icons -->
+        <div class="flex gap-4 mt-6">
+          <a href="https://www.instagram.com/pantaprops_/_/" class="w-12 h-12 rounded-full bg-[#312328] flex items-center justify-center text-white hover:bg-[#e81e62] transition-colors">
+            <span class="material-symbols-outlined text-[20px]">photo_camera</span>
+          </a>
+          <a href="https://youtube.com/@pantaprops" class="w-12 h-12 rounded-full bg-[#312328] flex items-center justify-center text-white hover:bg-[#e81e62] transition-colors">
+            <span class="material-symbols-outlined text-[22px]">play_arrow</span>
+          </a>
+          <a href="contact.html" class="w-12 h-12 rounded-full bg-[#312328] flex items-center justify-center text-white hover:bg-[#e81e62] transition-colors">
+            <span class="material-symbols-outlined text-[20px]">mail</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Right Side Columns -->
+      <div class="flex flex-col sm:flex-row gap-10 sm:gap-20 md:gap-32 w-full md:w-auto mt-2">
+        <div class="flex flex-col gap-5">
+          <h4 class="text-white font-bold text-xl mb-2">Shop</h4>
+          <a href="stocked_shop_collection.html" class="text-[#a19598] hover:text-white transition-colors">All Props</a>
+          <a href="stocked_shop_collection.html?category=wedding" class="text-[#a19598] hover:text-white transition-colors">Wedding Sets</a>
+          <a href="custom_services_landing.html" class="text-[#a19598] hover:text-white transition-colors">Corporate Events</a>
+          <a href="custom_services_landing.html" class="text-[#a19598] hover:text-white transition-colors">Custom Orders</a>
+        </div>
+        <div class="flex flex-col gap-5">
+          <h4 class="text-white font-bold text-xl mb-2">Company</h4>
+          <a href="brand_story.html" class="text-[#a19598] hover:text-white transition-colors">Our Story</a>
+          <a href="community_gallery.html" class="text-[#a19598] hover:text-white transition-colors">Community</a>
+          <a href="brand_story.html#faq" class="text-[#a19598] hover:text-white transition-colors">FAQ</a>
+          <a href="contact.html" class="text-[#a19598] hover:text-white transition-colors">Contact</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+
+
+<div id="ai-chat-widget" class="fixed bottom-6 right-6 z-50 font-display flex flex-col items-end">
+  <!-- Chat Window (Hidden by default) -->
+  <div id="ai-chat-window" class="hidden flex-col w-[350px] h-[500px] bg-white rounded-[2rem] shadow-2xl overflow-hidden border border-slate-100 mb-4 origin-bottom-right transition-all duration-300 transform scale-95 opacity-0">
+    <!-- Header -->
+    <div class="bg-gradient-to-r from-primary to-purple-600 p-4 flex justify-between items-center text-white">
+      <div class="flex items-center gap-2">
+        <span class="material-symbols-outlined">smart_toy</span>
+        <span class="font-bold">Panta AI</span>
+      </div>
+      <button id="close-ai-chat" class="hover:bg-white/20 rounded-full p-1 transition-colors flex items-center justify-center">
+        <span class="material-symbols-outlined text-sm">close</span>
+      </button>
+    </div>
+    <!-- Messages Body -->
+    <div id="ai-chat-messages" class="flex-1 p-4 bg-slate-50 overflow-y-auto flex flex-col gap-3">
+      <div class="self-start bg-white border border-slate-100 p-3 rounded-2xl rounded-tl-sm shadow-sm text-sm text-slate-700 max-w-[85%]">
+        Hi there! 👋 I'm Panta AI. I can help you find the perfect prop, process custom designs, or answer any questions. How can I help you today?
+      </div>
+    </div>
+    <!-- Input -->
+    <div class="p-3 bg-white border-t border-slate-100 flex items-center gap-2">
+      <input type="text" id="ai-chat-input" placeholder="Ask me anything..." class="flex-1 bg-slate-100 border-none rounded-full px-4 py-2 text-sm focus:ring-2 focus:ring-primary/50 outline-none">
+      <button id="send-ai-chat" class="bg-primary text-white size-9 rounded-full flex items-center justify-center hover:bg-pink-600 transition-colors shrink-0 shadow-md">
+        <span class="material-symbols-outlined text-[18px]">send</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Toggle Button -->
+  <button id="toggle-ai-chat" class="size-14 bg-gradient-to-r from-primary to-purple-600 rounded-full flex items-center justify-center text-white shadow-[0_8px_30px_rgb(225,45,117,0.3)] hover:scale-105 transition-transform flex group">
+    <span class="material-symbols-outlined text-2xl group-hover:hidden block">smart_toy</span>
+    <span class="material-symbols-outlined text-2xl hidden group-hover:block transition-all">chat</span>
+  </button>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Only bind if the elements exist to avoid errors
+    const toggleBtn = document.getElementById('toggle-ai-chat');
+    const closeBtn = document.getElementById('close-ai-chat');
+    const chatWindow = document.getElementById('ai-chat-window');
+    const chatMessages = document.getElementById('ai-chat-messages');
+    const chatInput = document.getElementById('ai-chat-input');
+    const sendBtn = document.getElementById('send-ai-chat');
+
+    if (!toggleBtn || !chatWindow) return;
+
+    function toggleChat() {
+      if (chatWindow.classList.contains('hidden')) {
+        chatWindow.classList.remove('hidden');
+        chatWindow.classList.add('flex');
+        
+        // small delay for transition
+        setTimeout(() => {
+          chatWindow.classList.remove('scale-95', 'opacity-0');
+          chatWindow.classList.add('scale-100', 'opacity-100');
+        }, 10);
+      } else {
+        chatWindow.classList.remove('scale-100', 'opacity-100');
+        chatWindow.classList.add('scale-95', 'opacity-0');
+        setTimeout(() => {
+          chatWindow.classList.add('hidden');
+          chatWindow.classList.remove('flex');
+        }, 300);
+      }
+    }
+
+    if(toggleBtn) toggleBtn.addEventListener('click', toggleChat);
+    if(closeBtn) closeBtn.addEventListener('click', toggleChat);
+
+    function addMessage(text, isUser = false) {
+      const msgDiv = document.createElement('div');
+      msgDiv.className = `p-3 rounded-2xl shadow-sm text-sm max-w-[85%] ${isUser ? 'self-end bg-gradient-to-r from-primary to-purple-600 text-white rounded-tr-sm' : 'self-start bg-white border border-slate-100 text-slate-700 rounded-tl-sm'}`;
+      msgDiv.textContent = text;
+      chatMessages.appendChild(msgDiv);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+      return msgDiv;
+    }
+
+    function showTyping() {
+       const typingDiv = document.createElement('div');
+       typingDiv.id = 'ai-typing';
+       typingDiv.className = 'self-start bg-white border border-slate-100 p-4 rounded-2xl rounded-tl-sm shadow-sm text-slate-500 max-w-[85%] flex items-center gap-1.5 h-10';
+       typingDiv.innerHTML = '<div class="size-1.5 bg-slate-400 rounded-full animate-bounce"></div><div class="size-1.5 bg-slate-400 rounded-full animate-bounce" style="animation-delay: 0.15s"></div><div class="size-1.5 bg-slate-400 rounded-full animate-bounce" style="animation-delay: 0.3s"></div>';
+       chatMessages.appendChild(typingDiv);
+       chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function removeTyping() {
+       const typingDiv = document.getElementById('ai-typing');
+       if (typingDiv) typingDiv.remove();
+    }
+
+    
+    function getBotResponse(text) {
+      const lower = text.toLowerCase();
+      
+      // Material & Thickness logic
+      if (lower.includes('material') || lower.includes('made of') || lower.includes('pvc') || lower.includes('thick') || lower.includes('mm')) {
+         return "Our stock props are made from durable, premium 5mm expanded PVC with a matte finish to prevent glare. If you place a Custom Order, we upgrade that to extra-durable 8mm PVC!";
+      }
+      
+      // Custom order logic
+      if (lower.includes('custom') || lower.includes('bespoke') || lower.includes('my own')) {
+         return "We absolutely do custom orders! We can design and laser-cut your custom props from 8mm PVC and ship them in just 3 days. Check out the 'Custom Orders' page for more info.";
+      }
+      
+      // Shipping / Location logic
+      if (lower.includes('ship') || lower.includes('long') || lower.includes('where')) {
+         return "We ship worldwide! Stock items usually process in 1-2 days, while custom orders take about 3 days to design and cut before shipping.";
+      }
+
+      // Default fallback
+      return "Thanks for your message! My AI brain is currently powering up 🔋 to answer that fully, but a totally real human will hop in and reply to your message in just a moment!";
+    }
+
+    function handleSend() {
+      const text = chatInput.value.trim();
+      if (!text) return;
+      
+      addMessage(text, true);
+      chatInput.value = '';
+      
+      showTyping();
+      setTimeout(() => {
+        removeTyping();
+        const response = getBotResponse(text);
+        addMessage(response);
+        
+        // Store common questions to pass to the human agent later
+      }, Math.random() * 1000 + 800); // Random delay between 0.8s and 1.8s for realism
+    }
+
+    if(sendBtn) sendBtn.addEventListener('click', handleSend);
+    if(chatInput) {
+        chatInput.addEventListener('keypress', (e) => {
+          if (e.key === 'Enter') handleSend();
+        });
+    }
+  });
+</script>
+</body></html>
