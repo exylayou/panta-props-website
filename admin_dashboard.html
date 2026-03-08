@@ -1,16 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
+<!DOCTYPE html><html lang="en"><head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>Panta Props - Admin Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap"
-        rel="stylesheet">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             darkMode: "class",
@@ -31,8 +25,7 @@
     <meta name="robots" content="noindex, nofollow">
 </head>
 
-<body
-    class="bg-background-light font-display text-slate-900 min-h-screen flex flex-col selection:bg-primary selection:text-white pb-20">
+<body class="bg-background-light font-display text-slate-900 min-h-screen flex flex-col selection:bg-primary selection:text-white pb-20">
 
     <!-- Header -->
     <header class="bg-white shadow-[0_8px_30px_rgb(0,0,0,0.04)] sticky top-0 z-40 border-b border-slate-100">
@@ -43,8 +36,7 @@
                 </div>
                 <h1 class="font-extrabold text-2xl tracking-tight text-slate-900">Admin Dashboard</h1>
             </div>
-            <button id="logoutBtn"
-                class="hidden text-sm font-bold text-slate-500 hover:text-primary transition-colors flex items-center gap-1">
+            <button id="logoutBtn" class="hidden text-sm font-bold text-slate-500 hover:text-primary transition-colors flex items-center gap-1">
                 <span class="material-symbols-outlined text-sm">logout</span> Logout
             </button>
         </div>
@@ -53,20 +45,16 @@
     <main class="flex-grow max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pt-10">
 
         <!-- Login Section -->
-        <div id="loginSection"
-            class="max-w-md mx-auto mt-20 bg-white rounded-3xl p-8 shadow-xl border border-slate-100 text-center">
-            <div
-                class="w-16 h-16 rounded-full bg-primary/10 text-primary flex items-center justify-center mx-auto mb-6">
+        <div id="loginSection" class="max-w-md mx-auto mt-20 bg-white rounded-3xl p-8 shadow-xl border border-slate-100 text-center">
+            <div class="w-16 h-16 rounded-full bg-primary/10 text-primary flex items-center justify-center mx-auto mb-6">
                 <span class="material-symbols-outlined text-3xl">lock</span>
             </div>
             <h2 class="text-2xl font-bold mb-2">Admin Access Required</h2>
             <p class="text-slate-500 mb-8 text-sm">Please enter your secure access token to view custom orders.</p>
 
             <form id="loginForm" class="space-y-4">
-                <input type="password" id="adminToken" placeholder="Enter Token (panta_admin_123)" required=""
-                    class="w-full bg-slate-50 text-slate-900 rounded-xl px-4 py-3 border border-slate-200 focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-colors text-center">
-                <button type="submit"
-                    class="w-full bg-slate-900 hover:bg-primary text-white font-bold py-3 rounded-xl shadow-lg transition-colors">
+                <input type="password" id="adminToken" placeholder="Enter Token (panta_admin_123)" required="" class="w-full bg-slate-50 text-slate-900 rounded-xl px-4 py-3 border border-slate-200 focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-colors text-center">
+                <button type="submit" class="w-full bg-slate-900 hover:bg-primary text-white font-bold py-3 rounded-xl shadow-lg transition-colors">
                     Unlock Dashboard
                 </button>
             </form>
@@ -80,71 +68,145 @@
             <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
                 <div class="flex-1">
                     <h2 class="text-3xl font-extrabold flex items-center gap-2">
-                        Lead Management <span
-                            class="bg-green-100 text-green-700 text-sm py-1 px-3 rounded-full font-bold"
-                            id="leadCount">0 Total</span>
+                        Lead Management <span class="text-sm py-1 px-3 rounded-full font-bold bg-primary/10 text-primary" id="leadCount">0 Total</span>
                     </h2>
-                    <p class="text-slate-500 mt-1">Review and update custom prop order requests.</p>
-                </div>
+                    
+                
+<div class="flex items-center gap-3 mt-2">
+    <p class="text-slate-500">Review and update custom prop order requests.</p>
+    <button id="newLeadBtn" class="bg-slate-900 hover:bg-primary text-white text-xs font-bold py-1.5 px-3 rounded-lg shadow-sm transition-colors flex items-center gap-1">
+        <span class="material-symbols-outlined text-[16px]">add</span> Add Lead
+    </button>
+</div>
+</div>
 
                 <div class="w-full text-left md:w-auto flex flex-col sm:flex-row gap-3 items-center">
                     <!-- Search & Filter Controls -->
                     <div class="relative w-full sm:w-64">
-                        <span
-                            class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm">search</span>
-                        <input type="text" id="searchInput" placeholder="Search leads..."
-                            class="w-full bg-white text-slate-900 rounded-xl pl-10 pr-4 py-2 border border-slate-200 focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-colors text-sm font-medium">
+                        <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm">search</span>
+                        <input type="text" id="searchInput" placeholder="Search leads..." class="w-full bg-white text-slate-900 rounded-xl pl-10 pr-4 py-2 border border-slate-200 focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-colors text-sm font-medium">
                     </div>
-                    <select id="filterSelect"
-                        class="w-full sm:w-auto bg-white border border-slate-200 text-slate-700 font-bold text-sm rounded-xl px-4 py-2 outline-none focus:ring-1 focus:ring-primary appearance-none cursor-pointer">
+                    <select id="filterSelect" class="w-full sm:w-auto bg-white border border-slate-200 text-slate-700 font-bold text-sm rounded-xl px-4 py-2 outline-none focus:ring-1 focus:ring-primary appearance-none cursor-pointer">
                         <option value="All">All Types</option>
                         <option value="Custom Order">Custom Order</option>
                         <option value="General Inquiry">General Inquiry</option>
                     </select>
 
-                    <button id="refreshBtn"
-                        class="bg-white border w-full sm:w-auto border-slate-200 hover:bg-slate-50 text-slate-700 px-4 py-2 rounded-xl font-bold text-sm flex items-center justify-center gap-2 shadow-sm transition-colors whitespace-nowrap">
+                    <button id="refreshBtn" class="bg-white border w-full sm:w-auto border-slate-200 hover:bg-slate-50 text-slate-700 px-4 py-2 rounded-xl font-bold text-sm flex items-center justify-center gap-2 shadow-sm transition-colors whitespace-nowrap">
                         <span class="material-symbols-outlined text-sm">refresh</span> Refresh
                     </button>
                 </div>
             </div>
 
             <!-- Leads Table Container -->
-            <div
-                class="bg-white rounded-[2rem] shadow-[0_20px_40px_-12px_rgba(0,0,0,0.05)] border border-slate-100 overflow-hidden">
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left border-collapse">
-                        <thead>
-                            <tr
-                                class="bg-slate-50 border-b border-slate-100 text-slate-500 text-sm font-bold tracking-wide">
-                                <th class="p-5 pl-8 uppercase">Date</th>
-                                <th class="p-5 uppercase">Client Details</th>
-                                <th class="p-5 uppercase">Request</th>
-                                <th class="p-5 uppercase">Status</th>
-                            </tr>
-                        </thead>
-                        <tbody id="leadsTableBody" class="divide-y divide-slate-100 align-top">
-                            <!-- JS will populate rows here -->
-                        </tbody>
-                    </table>
-                </div>
+            
+<!-- Kanban Container -->
+<div id="kanbanBoard" class="grid grid-cols-1 md:grid-cols-4 gap-6 items-start mt-6 w-full pb-8">
+    <!-- Columns will be injected by JS -->
+</div>
+<!-- Empty State -->
+<div id="emptyState" class="hidden flex-col items-center justify-center py-20 px-4 text-center bg-white rounded-3xl border border-slate-100 w-full mt-6">
+    <div class="w-20 h-20 bg-slate-50 rounded-full flex items-center justify-center text-slate-400 mb-4">
+        <span class="material-symbols-outlined text-4xl">inbox</span>
+    </div>
+    <h3 class="text-xl font-bold text-slate-900 mb-1">No leads yet!</h3>
+    <p class="text-slate-500 max-w-sm">Lead requests, DMs, and outreach targets will appear here.</p>
+</div>
 
-                <!-- Empty State -->
-                <div id="emptyState" class="hidden flex-col items-center justify-center py-20 px-4 text-center">
-                    <div
-                        class="w-20 h-20 bg-slate-50 rounded-full flex items-center justify-center text-slate-400 mb-4">
-                        <span class="material-symbols-outlined text-4xl">inbox</span>
-                    </div>
-                    <h3 class="text-xl font-bold text-slate-900 mb-1">No leads yet!</h3>
-                    <p class="text-slate-500 max-w-sm">When customers submit the custom order form, their requests will
-                        appear here.</p>
-                </div>
-            </div>
         </div>
 
         <!-- Gallery Moderation Section -->
-        <div id="gallerySection"
-            class="hidden flex flex-col gap-8 mt-12 bg-white rounded-[2rem] shadow-[0_20px_40px_-12px_rgba(0,0,0,0.05)] border border-slate-100 p-8">
+        
+<!-- New Lead Modal -->
+<div id="newLeadModal" class="hidden fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+    <div class="bg-white rounded-[2rem] shadow-2xl w-full max-w-lg overflow-hidden flex flex-col max-h-[90vh]">
+        <div class="p-6 border-b border-slate-100 flex justify-between items-center bg-slate-50">
+            <h3 class="text-xl font-bold">Add Manual Lead</h3>
+            <button id="closeLeadModalBtn" class="text-slate-400 hover:text-red-500 transition-colors">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+        </div>
+        <div class="p-6 overflow-y-auto">
+            <form id="newLeadForm" class="space-y-4">
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-1">First Name</label>
+                        <input type="text" id="nlFirst" required="" class="w-full bg-white border border-slate-200 rounded-xl px-4 py-2 focus:border-primary focus:ring-1 focus:ring-primary outline-none text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-1">Last Name</label>
+                        <input type="text" id="nlLast" class="w-full bg-white border border-slate-200 rounded-xl px-4 py-2 focus:border-primary focus:ring-1 focus:ring-primary outline-none text-sm">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-1">Email / Handle</label>
+                    <input type="text" id="nlEmail" class="w-full bg-white border border-slate-200 rounded-xl px-4 py-2 focus:border-primary focus:ring-1 focus:ring-primary outline-none text-sm">
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-1">Source</label>
+                        <select id="nlSource" class="w-full bg-white border border-slate-200 rounded-xl px-4 py-2 focus:border-primary focus:ring-1 focus:ring-primary outline-none text-sm appearance-none">
+                            <option>Instagram DM</option>
+                            <option>Outreach</option>
+                            <option>Email</option>
+                            <option>Website</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-1">Status</label>
+                        <select id="nlStatus" class="w-full bg-white border border-slate-200 rounded-xl px-4 py-2 focus:border-primary focus:ring-1 focus:ring-primary outline-none text-sm appearance-none">
+                            <option>New</option>
+                            <option>Contacted</option>
+                            <option>In Progress</option>
+                            <option>Closed</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-1">Description / Needs</label>
+                    <textarea id="nlDesc" rows="3" class="w-full bg-white border border-slate-200 rounded-xl px-4 py-2 focus:border-primary focus:ring-1 focus:ring-primary outline-none text-sm"></textarea>
+                </div>
+                <button type="submit" id="saveNewLeadBtn" class="w-full bg-slate-900 hover:bg-primary text-white font-bold py-3 rounded-xl shadow-md transition-colors mt-2">
+                    Save Lead
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Lead Details Modal -->
+<div id="leadDetailsModal" class="hidden fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+    <div class="bg-white rounded-[2rem] shadow-2xl w-full max-w-lg overflow-hidden flex flex-col max-h-[90vh]">
+        <div class="p-6 border-b border-slate-100 flex justify-between items-center bg-slate-50">
+            <h3 class="text-xl font-bold">Lead Details</h3>
+            <button id="closeLeadDetailsBtn" class="text-slate-400 hover:text-red-500 transition-colors">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+        </div>
+        <div class="p-6 overflow-y-auto space-y-4">
+            <div id="ldHeader" class="font-bold text-2xl text-slate-900 leading-tight">Name</div>
+            <div class="flex gap-4 text-sm text-slate-500 pb-2 border-b border-slate-100 flex-wrap" id="ldSub">Contact</div>
+            <div class="text-sm text-slate-700 whitespace-pre-wrap bg-slate-50 p-4 rounded-xl shadow-inner border border-slate-100" id="ldDesc">Desc</div>
+            
+            <div class="pt-4 space-y-3">
+                <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-1">Update Pipeline Stage</label>
+                <select id="ldStatus" class="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 focus:border-primary focus:ring-1 focus:ring-primary outline-none font-bold appearance-none bg-[url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23131313%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.4-12.8z%22%2F%3E%3C%2Fsvg%3E')] bg-[length:12px_12px] bg-no-repeat bg-[position:calc(100%-1rem)_center]">
+                    <option value="New">🔵 New</option>
+                    <option value="Contacted">🟡 Contacted</option>
+                    <option value="In Progress">🟣 In Progress</option>
+                    <option value="Closed">⚪ Closed</option>
+                </select>
+                
+                <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-1 mt-4">CRM Notes</label>
+                <textarea id="ldNotes" rows="4" class="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 focus:border-primary focus:ring-1 focus:ring-primary outline-none text-sm placeholder-slate-300" placeholder="E.g., Sent DM on Tuesday, waiting for reply..."></textarea>
+            </div>
+            <button id="saveLeadUpdatesBtn" data-id="" class="w-full bg-slate-900 hover:bg-primary text-white font-bold py-3 rounded-xl shadow-md transition-colors mt-4">
+                Save Updates
+            </button>
+        </div>
+    </div>
+</div>
+<div id="gallerySection" class="hidden flex flex-col gap-8 mt-12 bg-white rounded-[2rem] shadow-[0_20px_40px_-12px_rgba(0,0,0,0.05)] border border-slate-100 p-8">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mb-4">
                 <div>
                     <h2 class="text-2xl font-extrabold flex items-center gap-2">
@@ -152,8 +214,7 @@
                     </h2>
                     <p class="text-slate-500 mt-1">Review, approve, or delete community photo submissions.</p>
                 </div>
-                <button id="refreshGalleryBtn"
-                    class="bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 px-4 py-2 rounded-xl font-bold text-sm flex items-center gap-2 shadow-sm transition-colors">
+                <button id="refreshGalleryBtn" class="bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 px-4 py-2 rounded-xl font-bold text-sm flex items-center gap-2 shadow-sm transition-colors">
                     <span class="material-symbols-outlined text-sm">refresh</span> Refresh Gallery
                 </button>
             </div>
@@ -287,120 +348,171 @@
             renderLeads(filteredLeads);
         }
 
+        
         function renderLeads(leads) {
-            leadsTableBody.innerHTML = '';
+            const board = document.getElementById('kanbanBoard');
+            if(board) board.innerHTML = '';
+            
             leadCount.textContent = `${leads.length} Total`;
 
             if (leads.length === 0) {
                 emptyState.classList.remove('hidden');
-                leadsTableBody.closest('table').classList.add('hidden');
+                if(board) board.classList.add('hidden');
                 return;
             }
 
             emptyState.classList.add('hidden');
-            leadsTableBody.closest('table').classList.remove('hidden');
+            if(board) board.classList.remove('hidden');
 
-            leads.forEach(lead => {
-                const tr = document.createElement('tr');
-                tr.className = 'hover:bg-slate-50/50 transition-colors group';
+            const columns = [
+                { id: 'New', title: '🔵 New', bg: 'bg-blue-50/50', border: 'border-blue-100' },
+                { id: 'Contacted', title: '🟡 Contacted', bg: 'bg-yellow-50/50', border: 'border-yellow-100' },
+                { id: 'In Progress', title: '🟣 In Progress', bg: 'bg-purple-50/50', border: 'border-purple-100' },
+                { id: 'Closed', title: '⚪ Closed', bg: 'bg-slate-50', border: 'border-slate-200' }
+            ];
 
-                const date = new Date(lead.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+            columns.forEach(col => {
+                const colLeads = leads.filter(l => l.status === col.id || (!l.status && col.id === 'New'));
+                
+                let cardsHtml = colLeads.map(lead => {
+                    const date = new Date(lead.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+                    const sourceText = lead.source || 'Website';
+                    const sourceBadge = `<span class="bg-white border text-slate-500 text-[9px] px-2 py-0.5 rounded-full font-bold uppercase">${sourceText}</span>`;
+                    
+                    return `
+                    <div class="bg-white p-4 rounded-[1.25rem] shadow-sm border border-slate-100 hover:border-primary/50 hover:shadow-md transition-all flex flex-col gap-3 group relative cursor-pointer" onclick="openLeadDetails(${lead.id})">
+                        <div class="flex justify-between items-start">
+                            <div class="font-extrabold text-slate-900 leading-tight">${lead.first_name} ${lead.last_name}</div>
+                            <div class="text-[10px] text-slate-400 font-bold">#${lead.id}</div>
+                        </div>
+                        <div class="flex gap-1.5 flex-wrap">
+                            ${sourceBadge}
+                            <span class="bg-slate-100 text-slate-600 text-[9px] px-2 py-0.5 rounded-full font-bold uppercase truncate max-w-[100px]">${lead.event_type}</span>
+                        </div>
+                        <p class="text-xs text-slate-500 line-clamp-2 leading-relaxed">${lead.description || 'No description provided.'}</p>
+                         ${lead.notes ? `<div class="text-[10px] bg-yellow-50/50 text-yellow-800 p-1.5 rounded-md border border-yellow-100 line-clamp-1"><span class="font-bold">📝</span> ${lead.notes}</div>` : ''}
+                        <div class="flex justify-between items-center mt-auto pt-2 border-t border-slate-50">
+                            <span class="text-[10px] text-slate-400 font-medium">${date}</span>
+                            <div class="text-[10px] font-bold text-primary flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                                View <span class="material-symbols-outlined text-[12px]">arrow_forward</span>
+                            </div>
+                        </div>
+                    </div>`;
+                }).join('');
 
-                // Parse images if available
-                let imagesHtml = '';
-                if (lead.reference_images) {
-                    try {
-                        const paths = JSON.parse(lead.reference_images);
-                        if (paths.length > 0) {
-                            imagesHtml = `<div class="mt-4 flex flex-wrap gap-2">` +
-                                paths.map(p => `
-                  <a href="${p}" target="_blank" class="block w-16 h-16 rounded-lg overflow-hidden border border-slate-200 hover:border-primary transition-colors flex-shrink-0">
-                    <img src="${p}" class="w-full h-full object-cover" alt="Reference">
-                  </a>
-                `).join('') + `</div>`;
-                        }
-                    } catch (e) { }
-                }
-
-                const statusColors = {
-                    'New': 'bg-blue-100 text-blue-800 border-blue-200',
-                    'Contacted': 'bg-yellow-100 text-yellow-800 border-yellow-200',
-                    'In Progress': 'bg-purple-100 text-purple-800 border-purple-200',
-                    'Closed': 'bg-slate-100 text-slate-800 border-slate-200'
-                };
-
-                const currentStatusColor = statusColors[lead.status] || statusColors['New'];
-
-                tr.innerHTML = `
-          <td class="p-5 pl-8 align-top py-8 w-40">
-            <span class="text-slate-500 font-medium whitespace-nowrap">${date}</span>
-            <div class="text-xs text-slate-400 mt-1 uppercase tracking-wider font-bold">#${lead.id}</div>
-          </td>
-          <td class="p-5 align-top py-8 w-64">
-            <div class="font-bold text-slate-900">${lead.first_name} ${lead.last_name}</div>
-            <a href="mailto:${lead.email}" class="text-primary hover:underline text-sm mt-1 inline-flex items-center gap-1">
-              <span class="material-symbols-outlined text-[14px]">mail</span> ${lead.email}
-            </a>
-            <div class="mt-3 inline-block bg-slate-100 text-slate-600 text-xs font-bold px-2.5 py-1 rounded-full border border-slate-200">
-              ${lead.event_type}
-            </div>
-          </td>
-          <td class="p-5 align-top py-8 max-w-md">
-            <p class="text-slate-700 whitespace-pre-wrap leading-relaxed">${lead.description}</p>
-            ${imagesHtml}
-          </td>
-          <td class="p-5 align-top py-8 w-48">
-            <select class="status-select w-full ${currentStatusColor} font-bold text-sm rounded-xl border px-3 py-2 outline-none focus:ring-2 focus:ring-primary/20 appearance-none cursor-pointer transition-colors" data-id="${lead.id}">
-                <option value="New" ${lead.status === 'New' ? 'selected' : ''}>🔵 New</option>
-                <option value="Contacted" ${lead.status === 'Contacted' ? 'selected' : ''}>🟡 Contacted</option>
-                <option value="In Progress" ${lead.status === 'In Progress' ? 'selected' : ''}>🟣 In Progress</option>
-                <option value="Closed" ${lead.status === 'Closed' ? 'selected' : ''}>⚪ Closed</option>
-            </select>
-          </td>
-        `;
-
-                leadsTableBody.appendChild(tr);
-            });
-
-            // Bind status updates
-            document.querySelectorAll('.status-select').forEach(select => {
-                select.addEventListener('change', async (e) => {
-                    const id = e.target.getAttribute('data-id');
-                    const newStatus = e.target.value;
-                    e.target.disabled = true;
-                    try {
-                        const response = await fetch(`/api/admin/leads/${id}/status`, {
-                            method: 'PUT',
-                            headers: {
-                                'Content-Type': 'application/json',
-                                'Authorization': authToken
-                            },
-                            body: JSON.stringify({ status: newStatus })
-                        });
-
-                        if (response.ok) {
-                            // Update global state without refetching
-                            const leadIndex = allLeads.findIndex(l => l.id == id);
-                            if (leadIndex !== -1) {
-                                allLeads[leadIndex].status = newStatus;
-                            }
-
-                            // Let the background transition handle it instead of full re-render
-                            Object.values(statusColors).forEach(c => {
-                                e.target.classList.remove(...c.split(' '));
-                            });
-                            e.target.classList.add(...(statusColors[newStatus] || statusColors['New']).split(' '));
-                        }
-                    } catch (err) {
-                        console.error("Failed to update status", err);
-                    } finally {
-                        e.target.disabled = false;
-                    }
-                });
+                const colDiv = document.createElement('div');
+                colDiv.className = `flex flex-col gap-3 ${col.bg} p-3 rounded-[2rem] border ${col.border} min-h-[300px]`;
+                colDiv.innerHTML = `
+                    <div class="flex justify-between items-center px-2 mb-2">
+                        <h3 class="font-extrabold text-slate-700 text-sm tracking-wide">${col.title}</h3>
+                        <span class="bg-white text-slate-500 text-xs font-bold px-2.5 py-1 rounded-full shadow-sm border border-slate-100">${colLeads.length}</span>
+                    </div>
+                    <div class="flex flex-col gap-3 flex-1 overflow-y-auto max-h-[60vh] pb-4 px-1 custom-scrollbar">
+                        ${cardsHtml}
+                    </div>
+                `;
+                if(board) board.appendChild(colDiv);
             });
         }
 
-        async function fetchAdminGallery() {
+        // --- Modal Logic ---
+        const newLeadModal = document.getElementById('newLeadModal');
+        const newLeadBtn = document.getElementById('newLeadBtn');
+        const closeLeadModalBtn = document.getElementById('closeLeadModalBtn');
+        const newLeadForm = document.getElementById('newLeadForm');
+        const saveNewLeadBtn = document.getElementById('saveNewLeadBtn');
+
+        if(newLeadBtn) newLeadBtn.addEventListener('click', () => newLeadModal.classList.remove('hidden'));
+        if(closeLeadModalBtn) closeLeadModalBtn.addEventListener('click', () => newLeadModal.classList.add('hidden'));
+
+        if(newLeadForm) {
+            newLeadForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                saveNewLeadBtn.textContent = 'Saving...';
+                saveNewLeadBtn.disabled = true;
+                
+                const body = {
+                    firstName: document.getElementById('nlFirst').value,
+                    lastName: document.getElementById('nlLast').value,
+                    email: document.getElementById('nlEmail').value,
+                    source: document.getElementById('nlSource').value,
+                    status: document.getElementById('nlStatus').value,
+                    description: document.getElementById('nlDesc').value,
+                    eventType: 'Direct Outreach/DM',
+                    notes: ''
+                };
+
+                try {
+                    const res = await fetch('/api/admin/leads', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json', 'Authorization': authToken },
+                        body: JSON.stringify(body)
+                    });
+                    if (res.ok) {
+                        newLeadForm.reset();
+                        newLeadModal.classList.add('hidden');
+                        fetchLeads();
+                    }
+                } catch(e) { console.error(e); } finally {
+                    saveNewLeadBtn.textContent = 'Save Lead';
+                    saveNewLeadBtn.disabled = false;
+                }
+            });
+        }
+
+        const leadDetailsModal = document.getElementById('leadDetailsModal');
+        const closeLeadDetailsBtn = document.getElementById('closeLeadDetailsBtn');
+        const saveLeadUpdatesBtn = document.getElementById('saveLeadUpdatesBtn');
+
+        if(closeLeadDetailsBtn) closeLeadDetailsBtn.addEventListener('click', () => leadDetailsModal.classList.add('hidden'));
+
+        window.openLeadDetails = function(id) {
+            const lead = allLeads.find(l => l.id === id);
+            if(!lead) return;
+
+            document.getElementById('ldHeader').textContent = `${lead.first_name} ${lead.last_name}`;
+            
+            // Build sub header
+            let sub = `<div class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">mail</span> ${lead.email}</div>`;
+            sub += `<div class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">source</span> ${lead.source || 'Website'}</div>`;
+            document.getElementById('ldSub').innerHTML = sub;
+            
+            document.getElementById('ldDesc').textContent = lead.description || 'No description provided.';
+            document.getElementById('ldStatus').value = lead.status || 'New';
+            document.getElementById('ldNotes').value = lead.notes || '';
+            document.getElementById('saveLeadUpdatesBtn').setAttribute('data-id', id);
+
+            leadDetailsModal.classList.remove('hidden');
+        };
+
+        if(saveLeadUpdatesBtn) {
+            saveLeadUpdatesBtn.addEventListener('click', async (e) => {
+                const id = e.target.getAttribute('data-id');
+                const status = document.getElementById('ldStatus').value;
+                const notes = document.getElementById('ldNotes').value;
+                const btn = e.target;
+                
+                btn.textContent = 'Updating...';
+                btn.disabled = true;
+
+                try {
+                    const res = await fetch(`/api/admin/leads/${id}`, {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json', 'Authorization': authToken },
+                        body: JSON.stringify({ status, notes })
+                    });
+                    
+                    if(res.ok) {
+                        leadDetailsModal.classList.add('hidden');
+                        fetchLeads(); // Refresh board
+                    }
+                } catch(err) { console.error(err); } finally {
+                    btn.textContent = 'Save Updates';
+                    btn.disabled = false;
+                }
+            });
+        }
+\n        async function fetchAdminGallery() {
             if (refreshGalleryBtn) refreshGalleryBtn.innerHTML = '<span class="material-symbols-outlined text-sm animate-spin">progress_activity</span> Updating...';
             try {
                 // For the admin view, we use the public endpoint to get all posts
@@ -486,65 +598,122 @@
     <!-- Standard Global Footer -->
 
     <!-- Standard Global Footer -->
-    <footer class="bg-[#1f1619] py-16 px-8 mt-auto w-full border-t border-[#312226]">
-        <div class="max-w-[1200px] mx-auto flex flex-col md:flex-row justify-between gap-12 font-sans">
-            <div class="flex flex-col gap-6 md:w-1/2">
-                <!-- Logo -->
-                <a href="index.html" class="flex items-center gap-2">
-                    <span class="material-symbols-outlined text-[#e81e62] text-2xl">camera</span>
-                    <div class="w-8 h-[2px] bg-[#e81e62]"></div>
-                    <span class="material-symbols-outlined text-[#e81e62] text-2xl">photo_camera</span>
-                    <span class="text-white font-bold text-3xl tracking-tight ml-2">Panta</span>
-                </a>
+    
+  <!-- Standard Global Footer -->
+  
+  <!-- Standard Global Footer -->
+  <footer class="bg-[#1f1619] py-16 px-8 mt-auto w-full border-t border-[#312226]">
+    <div class="max-w-[1200px] mx-auto flex flex-col md:flex-row justify-between gap-12 font-sans">
+      <div class="flex flex-col gap-6 md:w-1/2">
+        <!-- Logo -->
+        <a href="index.html" class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-[#e81e62] text-2xl">camera</span>
+          <div class="w-8 h-[2px] bg-[#e81e62]"></div>
+          <span class="material-symbols-outlined text-[#e81e62] text-2xl">photo_camera</span>
+          <span class="text-white font-bold text-3xl tracking-tight ml-2">Panta</span>
+        </a>
+        
+        <!-- Descriptions -->
+        <p class="text-[#a19598] text-lg max-w-md leading-relaxed mt-2">
+          Ditch the flop. Premium, durable photo booth props<br>
+          designed for events that demand better.
+        </p>
 
-                <!-- Descriptions -->
-                <p class="text-[#a19598] text-lg max-w-md leading-relaxed mt-2">
-                    Ditch the flop. Premium, durable photo booth props<br>
-                    designed for events that demand better.
-                </p>
-
-                <!-- Social Icons -->
-                <div class="flex gap-4 mt-6">
-                    <a href="https://www.instagram.com/pantaprops_/_/"
-                        class="w-12 h-12 rounded-full bg-[#312328] flex items-center justify-center text-white hover:bg-[#e81e62] transition-colors">
-                        <span class="material-symbols-outlined text-[20px]">photo_camera</span>
-                    </a>
-                    <a href="https://youtube.com/@pantaprops"
-                        class="w-12 h-12 rounded-full bg-[#312328] flex items-center justify-center text-white hover:bg-[#e81e62] transition-colors">
-                        <span class="material-symbols-outlined text-[22px]">play_arrow</span>
-                    </a>
-                    <a href="contact.html"
-                        class="w-12 h-12 rounded-full bg-[#312328] flex items-center justify-center text-white hover:bg-[#e81e62] transition-colors">
-                        <span class="material-symbols-outlined text-[20px]">mail</span>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Right Side Columns -->
-            <div class="flex flex-col sm:flex-row gap-10 sm:gap-20 md:gap-32 w-full md:w-auto mt-2">
-                <div class="flex flex-col gap-5">
-                    <h4 class="text-white font-bold text-xl mb-2">Shop</h4>
-                    <a href="stocked_shop_collection.html" class="text-[#a19598] hover:text-white transition-colors">All
-                        Props</a>
-                    <a href="stocked_shop_collection.html?category=wedding"
-                        class="text-[#a19598] hover:text-white transition-colors">Wedding Sets</a>
-                    <a href="custom_services_landing.html"
-                        class="text-[#a19598] hover:text-white transition-colors">Corporate Events</a>
-                    <a href="custom_services_landing.html"
-                        class="text-[#a19598] hover:text-white transition-colors">Custom Orders</a>
-                </div>
-                <div class="flex flex-col gap-5">
-                    <h4 class="text-white font-bold text-xl mb-2">Company</h4>
-                    <a href="brand_story.html" class="text-[#a19598] hover:text-white transition-colors">Our Story</a>
-                    <a href="community_gallery.html"
-                        class="text-[#a19598] hover:text-white transition-colors">Community</a>
-                    <a href="brand_story.html#faq" class="text-[#a19598] hover:text-white transition-colors">FAQ</a>
-                    <a href="contact.html" class="text-[#a19598] hover:text-white transition-colors">Contact</a>
-                </div>
-            </div>
+        <!-- Social Icons -->
+        <div class="flex gap-4 mt-6">
+          <a href="https://www.instagram.com/pantaprops_/_/" class="w-12 h-12 rounded-full bg-[#312328] flex items-center justify-center text-white hover:bg-[#e81e62] transition-colors">
+            <span class="material-symbols-outlined text-[20px]">photo_camera</span>
+          </a>
+          <a href="https://youtube.com/@pantaprops" class="w-12 h-12 rounded-full bg-[#312328] flex items-center justify-center text-white hover:bg-[#e81e62] transition-colors">
+            <span class="material-symbols-outlined text-[22px]">play_arrow</span>
+          </a>
+          <a href="contact.html" class="w-12 h-12 rounded-full bg-[#312328] flex items-center justify-center text-white hover:bg-[#e81e62] transition-colors">
+            <span class="material-symbols-outlined text-[20px]">mail</span>
+          </a>
         </div>
-    </footer>
+      </div>
 
-</body>
+      <!-- Right Side Columns -->
+      <div class="flex flex-col sm:flex-row gap-10 sm:gap-20 md:gap-32 w-full md:w-auto mt-2">
+        <div class="flex flex-col gap-5">
+          <h4 class="text-white font-bold text-xl mb-2">Shop</h4>
+          <a href="stocked_shop_collection.html" class="text-[#a19598] hover:text-white transition-colors">All Props</a>
+          <a href="stocked_shop_collection.html?category=wedding" class="text-[#a19598] hover:text-white transition-colors">Wedding Sets</a>
+          <a href="custom_services_landing.html" class="text-[#a19598] hover:text-white transition-colors">Corporate Events</a>
+          <a href="custom_services_landing.html" class="text-[#a19598] hover:text-white transition-colors">Custom Orders</a>
+        </div>
+        <div class="flex flex-col gap-5">
+          <h4 class="text-white font-bold text-xl mb-2">Company</h4>
+          <a href="brand_story.html" class="text-[#a19598] hover:text-white transition-colors">Our Story</a>
+          <a href="community_gallery.html" class="text-[#a19598] hover:text-white transition-colors">Community</a>
+          <a href="brand_story.html#faq" class="text-[#a19598] hover:text-white transition-colors">FAQ</a>
+          <a href="contact.html" class="text-[#a19598] hover:text-white transition-colors">Contact</a>
+        </div>
+      </div>
+      </div>
+    
+  </footer>
 
-</html>
+  <!-- App-Style Sticky Bottom Nav Bar for Mobile -->
+  <div class="md:hidden fixed bottom-0 left-0 right-0 z-[60] bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border-t border-slate-200 dark:border-slate-800 pb-safe pt-2 px-6 flex justify-between items-center shadow-[0_-8px_30px_rgb(0,0,0,0.06)]">
+    <!-- Home -->
+    <a href="index.html" class="flex flex-col items-center gap-1 min-w-[64px] group">
+      <span class="material-symbols-outlined text-[26px] text-slate-500 dark:text-slate-400 group-hover:text-primary transition-colors">home</span>
+      <span class="text-[10px] font-bold text-slate-500 dark:text-slate-400 group-hover:text-primary">Home</span>
+    </a>
+    
+    <!-- AI Chat -->
+    <a href="#" onclick="document.getElementById('toggle-ai-chat')?.click(); return false;" class="flex flex-col items-center gap-1 min-w-[64px] group">
+      <span class="material-symbols-outlined text-[26px] text-slate-500 dark:text-slate-400 group-hover:text-primary transition-colors">smart_toy</span>
+      <span class="text-[10px] font-bold text-slate-500 dark:text-slate-400 group-hover:text-primary">AI Chat</span>
+    </a>
+
+    <!-- WhatsApp (Primary CTA) -->
+    <a href="https://wa.me/?text=Hi%20Panta!" class="flex flex-col items-center gap-1 min-w-[64px] group relative -top-4">
+      <div class="w-14 h-14 bg-whatsapp flex items-center justify-center rounded-full text-white shadow-lg shadow-green-500/30 group-hover:scale-105 transition-transform mb-1">
+        <span class="material-symbols-outlined text-[28px]">chat</span>
+      </div>
+      <span class="text-[10px] font-bold text-whatsapp">Chat</span>
+    </a>
+
+    <!-- Email -->
+    <a href="contact.html" class="flex flex-col items-center gap-1 min-w-[64px] group">
+      <span class="material-symbols-outlined text-[26px] text-slate-500 dark:text-slate-400 group-hover:text-primary transition-colors">mail</span>
+      <span class="text-[10px] font-bold text-slate-500 dark:text-slate-400 group-hover:text-primary">Email</span>
+    </a>
+  </div>
+
+
+  <!-- App-Style Sticky Bottom Nav Bar for Mobile -->
+  <div class="md:hidden fixed bottom-0 left-0 right-0 z-[60] bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border-t border-slate-200 dark:border-slate-800 pb-safe pt-2 px-6 flex justify-between items-center shadow-[0_-8px_30px_rgb(0,0,0,0.06)]">
+    <!-- Home -->
+    <a href="index.html" class="flex flex-col items-center gap-1 min-w-[64px] group">
+      <span class="material-symbols-outlined text-[26px] text-slate-500 dark:text-slate-400 group-hover:text-primary transition-colors">home</span>
+      <span class="text-[10px] font-bold text-slate-500 dark:text-slate-400 group-hover:text-primary">Home</span>
+    </a>
+    
+    <!-- AI Chat -->
+    <a href="#" onclick="document.getElementById('toggle-ai-chat')?.click(); return false;" class="flex flex-col items-center gap-1 min-w-[64px] group">
+      <span class="material-symbols-outlined text-[26px] text-slate-500 dark:text-slate-400 group-hover:text-primary transition-colors">smart_toy</span>
+      <span class="text-[10px] font-bold text-slate-500 dark:text-slate-400 group-hover:text-primary">AI Chat</span>
+    </a>
+
+    <!-- WhatsApp (Primary CTA) -->
+    <a href="https://wa.me/?text=Hi%20Panta!" class="flex flex-col items-center gap-1 min-w-[64px] group relative -top-4">
+      <div class="w-14 h-14 bg-whatsapp flex items-center justify-center rounded-full text-white shadow-lg shadow-green-500/30 group-hover:scale-105 transition-transform mb-1">
+        <span class="material-symbols-outlined text-[28px]">chat</span>
+      </div>
+      <span class="text-[10px] font-bold text-whatsapp">Chat</span>
+    </a>
+
+    <!-- Email -->
+    <a href="contact.html" class="flex flex-col items-center gap-1 min-w-[64px] group">
+      <span class="material-symbols-outlined text-[26px] text-slate-500 dark:text-slate-400 group-hover:text-primary transition-colors">mail</span>
+      <span class="text-[10px] font-bold text-slate-500 dark:text-slate-400 group-hover:text-primary">Email</span>
+    </a>
+  </div>
+
+
+
+
+</body></html>

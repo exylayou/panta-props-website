@@ -11,7 +11,7 @@ let transporter;
 nodemailer.createTestAccount((err, account) => {
     if (err) {
         console.error('Failed to create a testing account. ' + err.message);
-        return process.exit(1);
+        return;
     }
     // Create a SMTP transporter object
     transporter = nodemailer.createTransport({
@@ -94,10 +94,14 @@ const db = new sqlite3.Database(dbPath, (err) => {
             description TEXT NOT NULL,
             reference_images TEXT,
             status TEXT DEFAULT 'New',
+            source TEXT DEFAULT 'Website',
+            notes TEXT,
             created_at DATETIME DEFAULT CURRENT_TIMESTAMP
         )`, () => {
             // Silently try to alter table for existing users (migration step)
             db.run(`ALTER TABLE custom_orders ADD COLUMN status TEXT DEFAULT 'New'`, () => { });
+            db.run(`ALTER TABLE custom_orders ADD COLUMN source TEXT DEFAULT 'Website'`, () => { });
+            db.run(`ALTER TABLE custom_orders ADD COLUMN notes TEXT`, () => { });
         });
     }
 });
@@ -161,8 +165,10 @@ app.post('/api/custom-order', upload.array('referenceImages', 5), (req, res) => 
         ? JSON.stringify(req.files.map(f => '/uploads/' + f.filename))
         : null;
 
-    const query = `INSERT INTO custom_orders (first_name, last_name, email, event_type, description, reference_images) VALUES (?, ?, ?, ?, ?, ?)`;
-    db.run(query, [firstName, lastName, email, eventType, description, referenceImages], function (err) {
+    const source = req.body.source || 'Website';
+
+    const query = `INSERT INTO custom_orders (first_name, last_name, email, event_type, description, reference_images, source) VALUES (?, ?, ?, ?, ?, ?, ?)`;
+    db.run(query, [firstName, lastName, email, eventType, description, referenceImages, source], function (err) {
         if (err) {
             console.error('Database insert error:', err);
             return res.status(500).json({ error: 'Database error storing custom order' });
@@ -244,20 +250,39 @@ app.get('/api/admin/leads', checkAdminAuth, (req, res) => {
     });
 });
 
-// Update lead status
-app.put('/api/admin/leads/:id/status', checkAdminAuth, (req, res) => {
+// Update lead status and details (notes)
+app.put('/api/admin/leads/:id', checkAdminAuth, (req, res) => {
     const { id } = req.params;
-    const { status } = req.body;
+    const { status, notes } = req.body;
 
-    if (!status) return res.status(400).json({ error: 'Status is required' });
-
-    const query = `UPDATE custom_orders SET status = ? WHERE id = ?`;
-    db.run(query, [status, id], function (err) {
+    const query = `UPDATE custom_orders SET status = COALESCE(?, status), notes = COALESCE(?, notes) WHERE id = ?`;
+    db.run(query, [status, notes, id], function (err) {
         if (err) {
             console.error('Database update error:', err);
             return res.status(500).json({ error: 'Database error updating lead' });
         }
-        res.json({ message: 'Status updated successfully', changes: this.changes });
+        res.json({ message: 'Lead updated successfully', changes: this.changes });
+    });
+});
+
+// Manual entry for new leads (IG DMs, Outreach, etc.)
+app.post('/api/admin/leads', checkAdminAuth, (req, res) => {
+    let { firstName, lastName, email, eventType, description, source, status, notes } = req.body;
+    firstName = firstName || 'Unknown';
+    lastName = lastName || '-';
+    email = email || 'N/A';
+    eventType = eventType || 'General Inquiry';
+    description = description || '';
+    source = source || 'Manual Entry';
+    status = status || 'New';
+
+    const query = `INSERT INTO custom_orders (first_name, last_name, email, event_type, description, source, status, notes) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
+    db.run(query, [firstName, lastName, email, eventType, description, source, status, notes], function (err) {
+        if (err) {
+            console.error('Database insert error:', err);
+            return res.status(500).json({ error: 'Database error storing manual lead' });
+        }
+        res.status(201).json({ message: 'Lead added successfully', id: this.lastID });
     });
 });
 

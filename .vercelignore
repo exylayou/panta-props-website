@@ -1,0 +1,11 @@
+google-chrome-stable_current_amd64.deb
+cloudflared-linux-amd64
+cloudflare.log
+.cloudflared_output.txt
+pinggy.log
+serveo.log
+localrun.log
+server.log
+node_modules/
+venv/
+*.db

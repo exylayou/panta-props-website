@@ -53,8 +53,38 @@ const newFooterHtml = `
           <a href="contact.html" class="text-[#a19598] hover:text-white transition-colors">Contact</a>
         </div>
       </div>
+      </div>
     </div>
   </footer>
+
+  <!-- App-Style Sticky Bottom Nav Bar for Mobile -->
+  <div class="md:hidden fixed bottom-0 left-0 right-0 z-[60] bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border-t border-slate-200 dark:border-slate-800 pb-safe pt-2 px-6 flex justify-between items-center shadow-[0_-8px_30px_rgb(0,0,0,0.06)]">
+    <!-- Home -->
+    <a href="index.html" class="flex flex-col items-center gap-1 min-w-[64px] group">
+      <span class="material-symbols-outlined text-[26px] text-slate-500 dark:text-slate-400 group-hover:text-primary transition-colors">home</span>
+      <span class="text-[10px] font-bold text-slate-500 dark:text-slate-400 group-hover:text-primary">Home</span>
+    </a>
+    
+    <!-- Shop -->
+    <a href="stocked_shop_collection.html" class="flex flex-col items-center gap-1 min-w-[64px] group">
+      <span class="material-symbols-outlined text-[26px] text-slate-500 dark:text-slate-400 group-hover:text-primary transition-colors">shopping_bag</span>
+      <span class="text-[10px] font-bold text-slate-500 dark:text-slate-400 group-hover:text-primary">Shop</span>
+    </a>
+
+    <!-- WhatsApp (Primary CTA) -->
+    <a href="https://wa.me/?text=Hi%20Panta!" class="flex flex-col items-center gap-1 min-w-[64px] group relative -top-4">
+      <div class="w-14 h-14 bg-whatsapp flex items-center justify-center rounded-full text-white shadow-lg shadow-green-500/30 group-hover:scale-105 transition-transform mb-1">
+        <span class="material-symbols-outlined text-[28px]">chat</span>
+      </div>
+      <span class="text-[10px] font-bold text-whatsapp">Chat</span>
+    </a>
+
+    <!-- Email -->
+    <a href="contact.html" class="flex flex-col items-center gap-1 min-w-[64px] group">
+      <span class="material-symbols-outlined text-[26px] text-slate-500 dark:text-slate-400 group-hover:text-primary transition-colors">mail</span>
+      <span class="text-[10px] font-bold text-slate-500 dark:text-slate-400 group-hover:text-primary">Email</span>
+    </a>
+  </div>
 `;
 
 fs.readdirSync(directory).forEach(file => {
