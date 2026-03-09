@@ -5,5 +5,4 @@ venv/
 *.deb
 .cloudflared_output.txt
 cloudflared-linux-amd64
-uploads/
 .vercel
