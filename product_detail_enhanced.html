@@ -75,7 +75,7 @@
 </div>
 </header>
 <!-- Main Content -->
-<main id="main-product-content" style="opacity: 0; transition: opacity 0.2s ease-in-out;" class="flex-grow layout-container max-w-[1200px] mx-auto w-full px-4 md:px-10 py-8">
+<main id="main-product-content" class="flex-grow layout-container max-w-[1200px] mx-auto w-full px-4 md:px-10 py-8">
 <!-- Breadcrumbs -->
 <nav class="flex flex-wrap gap-2 mb-8 items-center text-sm font-medium">
 <a class="text-slate-500 hover:text-primary transition-colors" href="stocked_shop_collection.html">Shop</a>
@@ -755,16 +755,10 @@
         }
       }
     }
-    
-    // Show the content smoothly after populating
-    const mainContent = document.getElementById("main-product-content");
-    if (mainContent) {
-        mainContent.style.opacity = '1';
-    }
   }
 
-  // Hook into DOMContentLoaded after the base logic
-  window.addEventListener('DOMContentLoaded', updateProductDetails);
+    // Run immediately since the script is at the bottom of the body
+    updateProductDetails();
 </script>
 
 </body></html>
