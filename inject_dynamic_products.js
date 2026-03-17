@@ -1,8 +1,11 @@
 const fs = require('fs');
 let html = fs.readFileSync('product_detail_enhanced.html', 'utf8');
 
+// Hide main content initially to prevent flashing
+html = html.replace('<main class="flex-grow layout-container max-w-[1200px] mx-auto w-full px-4 md:px-10 py-8">', '<main id="main-product-content" style="opacity: 0; transition: opacity 0.2s ease-in-out;" class="flex-grow layout-container max-w-[1200px] mx-auto w-full px-4 md:px-10 py-8">');
+
 const dynamicScript = `
-<script>
+<script id="dynamic-product-script">
   const products = {
     'funny_age_set': {
       title: 'Funny Age Set (10 Props)',
@@ -110,9 +113,10 @@ const dynamicScript = `
     const params = new URLSearchParams(window.location.search);
     const id = params.get("id");
     
-    if (id && products[id]) {
-      const product = products[id];
-      
+    // Default to the first prop if no ID so it doesn't stay blank
+    const product = id && products[id] ? products[id] : products['neon_party_set'];
+    
+    if (product) {
       const titles = document.querySelectorAll("h1");
       titles.forEach(t => {
         if (t.textContent.includes("Neon Party")) t.textContent = product.title;
@@ -139,7 +143,6 @@ const dynamicScript = `
       const mainImages = document.querySelectorAll("img.h-full.w-full.object-cover.object-center");
       mainImages.forEach(img => {
         img.src = product.images[0];
-        // Change object-cover to object-contain for the birthday sets specifically if desired, but we can just use contain to be safe
         img.classList.remove("object-cover");
         img.classList.add("object-contain", "bg-[#F0F0F2]");
       });
@@ -169,7 +172,7 @@ const dynamicScript = `
       
       const waButtons = document.querySelectorAll("button span");
       waButtons.forEach(s => {
-        if (s.textContent.includes("Buy via WhatsApp")) {
+        if (s.textContent.includes("Buy via WhatsApp") || s.textContent.includes("Buy on WhatsApp")) {
           s.textContent = "Buy via WhatsApp - " + product.price;
         }
       });
@@ -185,6 +188,12 @@ const dynamicScript = `
         }
       }
     }
+    
+    // Show the content smoothly after populating
+    const mainContent = document.getElementById("main-product-content");
+    if (mainContent) {
+        mainContent.style.opacity = '1';
+    }
   }
 
   // Hook into DOMContentLoaded after the base logic
@@ -195,4 +204,7 @@ const dynamicScript = `
 if (!html.includes('id="dynamic-product-script"')) {
   html = html.replace('</body>', dynamicScript + '\n</body>');
   fs.writeFileSync('product_detail_enhanced.html', html);
+  console.log("Script injected with opacity logic.");
+} else {
+  console.log("Script already injected.");
 }
