@@ -173,6 +173,7 @@
                             <tr class="border-b border-slate-100 bg-slate-50/50">
                                 <th class="p-4 text-xs font-bold text-slate-500 uppercase tracking-widest rounded-tl-3xl">Product</th>
                                 <th class="p-4 text-xs font-bold text-slate-500 uppercase tracking-widest">Price</th>
+                                <th class="p-4 text-xs font-bold text-slate-500 uppercase tracking-widest">Category</th>
                                 <th class="p-4 text-xs font-bold text-slate-500 uppercase tracking-widest">Badge</th>
                                 <th class="p-4 text-xs font-bold text-slate-500 uppercase tracking-widest text-right px-6 rounded-tr-3xl">Actions</th>
                             </tr>
@@ -240,14 +241,53 @@
                         </div>
 
                         <div>
+                            
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-1">Category</label>
+                            <select id="pmCategory" class="w-full bg-white border border-slate-200 rounded-xl px-4 py-2 focus:border-primary focus:ring-1 focus:ring-primary outline-none text-sm appearance-none">
+                                <option value="General">General</option>
+                                <option value="Weddings">Weddings</option>
+                                <option value="Birthdays">Birthdays</option>
+                                <option value="Baby Shower">Baby Shower</option>
+                                <option value="Corporate">Corporate</option>
+                                <option value="Christmas">Christmas</option>
+                                <option value="New Year">New Year</option>
+                                <option value="Gender Reveal">Gender Reveal</option>
+                                <option value="Graduations">Graduations</option>
+                                <option value="Sweet 16">Sweet 16</option>
+                                <option value="Quinceanera">Quinceanera</option>
+                            </select>
+                        </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-1">Category</label>
+                                <select id="pmCategory" class="w-full bg-white border border-slate-200 rounded-xl px-4 py-2 focus:border-primary focus:ring-1 focus:ring-primary outline-none text-sm appearance-none">
+                                    <option value="General">General</option>
+                                    <option value="Weddings">Weddings</option>
+                                    <option value="Birthdays">Birthdays</option>
+                                    <option value="Baby Shower">Baby Shower</option>
+                                    <option value="Corporate">Corporate</option>
+                                    <option value="Christmas">Christmas</option>
+                                    <option value="New Year">New Year</option>
+                                    <option value="Gender Reveal">Gender Reveal</option>
+                                    <option value="Graduations">Graduations</option>
+                                    <option value="Sweet 16">Sweet 16</option>
+                                    <option value="Quinceanera">Quinceanera</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-1">Bundle Details</label>
+                                <input type="text" id="pmBundle" class="w-full bg-white border border-slate-200 rounded-xl px-4 py-2 focus:border-primary focus:ring-1 focus:ring-primary outline-none text-sm placeholder-slate-300" placeholder='Includes 5 props: "Party", "Cheers"...'>
+                            </div>
+                        </div>
+
+                        <div>
                             <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-1">Main Description</label>
                             <textarea id="pmDesc" rows="3" class="w-full bg-white border border-slate-200 rounded-xl px-4 py-2 focus:border-primary focus:ring-1 focus:ring-primary outline-none text-sm placeholder-slate-300" placeholder="Main paragraph about the prop..."></textarea>
                         </div>
                         
-                        <div>
-                            <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-1">Bundle Details</label>
-                            <input type="text" id="pmBundle" class="w-full bg-white border border-slate-200 rounded-xl px-4 py-2 focus:border-primary focus:ring-1 focus:ring-primary outline-none text-sm placeholder-slate-300" placeholder='Includes 5 props: "Party", "Cheers"...'>
-                        </div>
 
                         <div>
                             <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-1 flex justify-between items-center">
@@ -478,6 +518,10 @@
         if(navLeadsBtn) navLeadsBtn.addEventListener('click', () => switchTab(navLeadsBtn, leadsContent));
         if(navProductsBtn) navProductsBtn.addEventListener('click', () => { switchTab(navProductsBtn, productsContent); fetchProducts(); });
         if(navGalleryBtn) navGalleryBtn.addEventListener('click', () => switchTab(navGalleryBtn, gallerySection));
+
+        // Filters Event Listeners
+        if (searchInput) searchInput.addEventListener('input', applyFilters);
+        if (filterSelect) filterSelect.addEventListener('change', applyFilters);
 
         // Init state
         if (authToken) {
@@ -873,6 +917,9 @@
                         ${product.old_price ? `<div class="text-[10px] text-slate-400 line-through">${product.old_price}</div>` : ''}
                     </td>
                     <td class="p-4">
+                        <span class="bg-slate-100 text-slate-600 text-[10px] px-2 py-1 rounded-full font-bold">${product.category || 'General'}</span>
+                    </td>
+                    <td class="p-4">
                         ${badgeHtml}
                     </td>
                     <td class="p-4 text-right pr-6">
@@ -935,6 +982,9 @@
             document.getElementById('pmBadge').value = product.badge || '';
             document.getElementById('pmDesc').value = product.description || '';
             document.getElementById('pmBundle').value = product.bundle_desc || '';
+            if (document.getElementById('pmCategory')) {
+                document.getElementById('pmCategory').value = product.category || 'General';
+            }
             
             imageRowsContainer.innerHTML = '';
             if (product.images && product.images.length > 0) {
@@ -992,6 +1042,7 @@
                 const body = {
                     slug: document.getElementById('pmSlug').value.trim(),
                     title: document.getElementById('pmTitle').value.trim(),
+                    category: document.getElementById('pmCategory') ? document.getElementById('pmCategory').value : 'General',
                     price: document.getElementById('pmPrice').value.trim(),
                     oldPrice: document.getElementById('pmOldPrice').value.trim(),
                     badge: document.getElementById('pmBadge').value,

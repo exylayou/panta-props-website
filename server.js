@@ -89,6 +89,7 @@ const db = new sqlite3.Database(dbPath, (err) => {
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             slug TEXT UNIQUE NOT NULL,
             title TEXT NOT NULL,
+            category TEXT DEFAULT 'General',
             price TEXT NOT NULL,
             old_price TEXT,
             description TEXT,
@@ -280,14 +281,14 @@ app.get('/api/products/:slug', (req, res) => {
 
 // Create a new product (Admin)
 app.post('/api/admin/products', checkAdminAuth, (req, res) => {
-    const { slug, title, price, oldPrice, description, bundleDesc, badge, images } = req.body;
+    const { slug, title, category, price, oldPrice, description, bundleDesc, badge, images } = req.body;
     
     // Convert array of image URLs to string for SQLite
     const imagesJson = images ? JSON.stringify(images) : '[]';
 
-    const query = `INSERT INTO products (slug, title, price, old_price, description, bundle_desc, badge, images) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
+    const query = `INSERT INTO products (slug, title, category, price, old_price, description, bundle_desc, badge, images) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
     
-    db.run(query, [slug, title, price, oldPrice, description, bundleDesc, badge, imagesJson], function(err) {
+    db.run(query, [slug, title, category, price, oldPrice, description, bundleDesc, badge, imagesJson], function(err) {
         if (err) {
             if (err.message.includes('UNIQUE constraint failed')) {
                 return res.status(400).json({ error: 'A product with this slug already exists' });
@@ -301,12 +302,13 @@ app.post('/api/admin/products', checkAdminAuth, (req, res) => {
 
 // Update a product (Admin)
 app.put('/api/admin/products/:id', checkAdminAuth, (req, res) => {
-    const { slug, title, price, oldPrice, description, bundleDesc, badge, images } = req.body;
+    const { slug, title, category, price, oldPrice, description, bundleDesc, badge, images } = req.body;
     const imagesJson = images ? JSON.stringify(images) : null;
     
     const query = `UPDATE products SET 
         slug = COALESCE(?, slug),
         title = COALESCE(?, title),
+        category = COALESCE(?, category),
         price = COALESCE(?, price),
         old_price = COALESCE(?, old_price),
         description = COALESCE(?, description),
@@ -315,7 +317,7 @@ app.put('/api/admin/products/:id', checkAdminAuth, (req, res) => {
         images = COALESCE(?, images)
         WHERE id = ?`;
         
-    db.run(query, [slug, title, price, oldPrice, description, bundleDesc, badge, imagesJson, req.params.id], function(err) {
+    db.run(query, [slug, title, category, price, oldPrice, description, bundleDesc, badge, imagesJson, req.params.id], function(err) {
         if (err) {
              if (err.message.includes('UNIQUE constraint failed')) {
                 return res.status(400).json({ error: 'A product with this slug already exists' });
