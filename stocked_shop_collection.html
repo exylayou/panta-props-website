@@ -241,215 +241,12 @@
       </aside>
       <!-- Product Grid -->
       <div class="flex-1">
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          <!-- Product Card: Funny Age Set -->
-          <div class="group relative bg-surface rounded-2xl shadow-float hover:shadow-float-hover hover:-translate-y-1 transition-all duration-300 flex flex-col overflow-hidden cursor-pointer" onclick="window.location.href='product_detail_enhanced.html?id=funny_age_set'">
-            <div class="relative w-full aspect-[16/9] bg-[#F0F0F2] overflow-hidden group/image">
-              <div class="absolute top-4 left-4 z-20 bg-accent-yellow text-text-main text-xs font-extrabold uppercase tracking-wide px-3 py-1.5 rounded-full shadow-sm">
-                New
-              </div>
-              <img alt="Funny Age Set Front" class="w-full h-full object-cover transition-opacity duration-500 group-hover/image:opacity-0 absolute inset-0 z-10" data-alt="Funny Age Set" src="images/funny_age_set.jpg" onerror="this.src='https://lh3.googleusercontent.com/aida-public/AB6AXuAVqUWHy7YTXEi8sg44S-GO6juq0txmFLWjBdae32RyPggPb1lBleusJQmuJt1P_a9mdNYTeQ2bY98lMtcEmvHaE02z6jwETplgM3Q5Rb8ONSUt4kBILmoAuQAz93I79wV-HoF14CuCzfvg8oHTF_n3MuiDa3a6pt8tyOcSck6hj-uJRiY_NKJvn9Pyjcm8R16vXKV4C9wFHeQ1XYD4cbzOSv6dRaRvTk3-zsCN6f0a9S4DAHuaBFP_UJrAK1AtP6sRkhLkyjQx6YE'">
-              <img alt="Funny Age Set Back" class="w-full h-full object-cover absolute inset-0 z-0" data-alt="Back of props" src="images/funny_age_set.jpg" onerror="this.src='https://lh3.googleusercontent.com/aida-public/AB6AXuASdrpSmFEJwb1FK1D2jneWlkYtMnSwbjZwCHM8qavLtVM1GtVI8aUwQLkRdUTkbSkZ6YN3GpcmHf0_AuDEXzcSnBDcdr5OaVDYrlObyv9UotUfdUEEp4sA8usV-gZfRmeATs65SMSoAPD_BFovPGfoXSWBbWaN2bZQQTMsjzjnQgMRkP6F69XMXyJO0-8wQTlG3Z-utqQPUcdkAkyRtE4TtANhTQHVSb3X_I2abcxos10CyEb-fMu83-r5fALYhYAUaq-Ee6lgU2U'">
-              <button class="absolute bottom-4 right-4 z-30 w-12 h-12 bg-whatsapp hover:bg-[#1DA851] text-white rounded-full shadow-lg flex items-center justify-center transition-transform hover:scale-110 active:scale-95 group-hover/image:translate-y-0 translate-y-2 opacity-0 group-hover/image:opacity-100 duration-300" onclick="event.stopPropagation(); window.location.href='https://wa.me/?text=Hi%20Panta!'">
-                <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"></path></svg>
-              </button>
-            </div>
-            <div class="p-6 flex flex-col gap-2">
-              <h3 class="text-xl font-bold text-text-main leading-snug">Funny Age Set (10 Props)</h3>
-              <div class="flex items-center justify-between mt-1">
-                <span class="text-2xl font-extrabold text-primary">$45.00</span>
-                <span class="text-xs font-semibold text-text-muted uppercase tracking-wider">In Stock</span>
-              </div>
-            </div>
+        <div id="shop-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Products loaded dynamically from database -->
+          <div class="col-span-full text-center py-20 text-slate-500 flex flex-col items-center gap-4" id="shop-loading">
+            <span class="material-symbols-outlined text-4xl text-primary" style="animation: spin 1s linear infinite;">progress_activity</span>
+            <span class="font-semibold">Loading products...</span>
           </div>
-          <!-- Product Card: Birthday King Set -->
-          <div class="group relative bg-surface rounded-2xl shadow-float hover:shadow-float-hover hover:-translate-y-1 transition-all duration-300 flex flex-col overflow-hidden cursor-pointer" onclick="window.location.href='product_detail_enhanced.html?id=birthday_king_set'">
-            <div class="relative w-full aspect-[16/9] bg-[#F0F0F2] overflow-hidden group/image">
-              <div class="absolute top-4 left-4 z-20 bg-accent-yellow text-text-main text-xs font-extrabold uppercase tracking-wide px-3 py-1.5 rounded-full shadow-sm">
-                New
-              </div>
-              <img alt="Birthday King Set Front" class="w-full h-full object-cover transition-opacity duration-500 group-hover/image:opacity-0 absolute inset-0 z-10" data-alt="Birthday King Set" src="images/birthday_king.jpg" onerror="this.src='https://lh3.googleusercontent.com/aida-public/AB6AXuAVqUWHy7YTXEi8sg44S-GO6juq0txmFLWjBdae32RyPggPb1lBleusJQmuJt1P_a9mdNYTeQ2bY98lMtcEmvHaE02z6jwETplgM3Q5Rb8ONSUt4kBILmoAuQAz93I79wV-HoF14CuCzfvg8oHTF_n3MuiDa3a6pt8tyOcSck6hj-uJRiY_NKJvn9Pyjcm8R16vXKV4C9wFHeQ1XYD4cbzOSv6dRaRvTk3-zsCN6f0a9S4DAHuaBFP_UJrAK1AtP6sRkhLkyjQx6YE'">
-              <img alt="Birthday King Set Back" class="w-full h-full object-cover absolute inset-0 z-0" data-alt="Back of props" src="images/birthday_king.jpg" onerror="this.src='https://lh3.googleusercontent.com/aida-public/AB6AXuASdrpSmFEJwb1FK1D2jneWlkYtMnSwbjZwCHM8qavLtVM1GtVI8aUwQLkRdUTkbSkZ6YN3GpcmHf0_AuDEXzcSnBDcdr5OaVDYrlObyv9UotUfdUEEp4sA8usV-gZfRmeATs65SMSoAPD_BFovPGfoXSWBbWaN2bZQQTMsjzjnQgMRkP6F69XMXyJO0-8wQTlG3Z-utqQPUcdkAkyRtE4TtANhTQHVSb3X_I2abcxos10CyEb-fMu83-r5fALYhYAUaq-Ee6lgU2U'">
-              <button class="absolute bottom-4 right-4 z-30 w-12 h-12 bg-whatsapp hover:bg-[#1DA851] text-white rounded-full shadow-lg flex items-center justify-center transition-transform hover:scale-110 active:scale-95 group-hover/image:translate-y-0 translate-y-2 opacity-0 group-hover/image:opacity-100 duration-300" onclick="event.stopPropagation(); window.location.href='https://wa.me/?text=Hi%20Panta!'">
-                <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"></path></svg>
-              </button>
-            </div>
-            <div class="p-6 flex flex-col gap-2">
-              <h3 class="text-xl font-bold text-text-main leading-snug">Birthday King Set (10 Props)</h3>
-              <div class="flex items-center justify-between mt-1">
-                <span class="text-2xl font-extrabold text-primary">$45.00</span>
-                <span class="text-xs font-semibold text-text-muted uppercase tracking-wider">In Stock</span>
-              </div>
-            </div>
-          </div>
-          <!-- Product Card: Birthday Queen Set -->
-          <div class="group relative bg-surface rounded-2xl shadow-float hover:shadow-float-hover hover:-translate-y-1 transition-all duration-300 flex flex-col overflow-hidden cursor-pointer" onclick="window.location.href='product_detail_enhanced.html?id=birthday_queen_set'">
-            <div class="relative w-full aspect-[16/9] bg-[#F0F0F2] overflow-hidden group/image">
-              <div class="absolute top-4 left-4 z-20 bg-accent-yellow text-text-main text-xs font-extrabold uppercase tracking-wide px-3 py-1.5 rounded-full shadow-sm">
-                New
-              </div>
-              <img alt="Birthday Queen Set Front" class="w-full h-full object-cover transition-opacity duration-500 group-hover/image:opacity-0 absolute inset-0 z-10" data-alt="Birthday Queen Set" src="images/birthday_queen.jpg" onerror="this.src='https://lh3.googleusercontent.com/aida-public/AB6AXuAVqUWHy7YTXEi8sg44S-GO6juq0txmFLWjBdae32RyPggPb1lBleusJQmuJt1P_a9mdNYTeQ2bY98lMtcEmvHaE02z6jwETplgM3Q5Rb8ONSUt4kBILmoAuQAz93I79wV-HoF14CuCzfvg8oHTF_n3MuiDa3a6pt8tyOcSck6hj-uJRiY_NKJvn9Pyjcm8R16vXKV4C9wFHeQ1XYD4cbzOSv6dRaRvTk3-zsCN6f0a9S4DAHuaBFP_UJrAK1AtP6sRkhLkyjQx6YE'">
-              <img alt="Birthday Queen Set Back" class="w-full h-full object-cover absolute inset-0 z-0" data-alt="Back of props" src="images/birthday_queen.jpg" onerror="this.src='https://lh3.googleusercontent.com/aida-public/AB6AXuASdrpSmFEJwb1FK1D2jneWlkYtMnSwbjZwCHM8qavLtVM1GtVI8aUwQLkRdUTkbSkZ6YN3GpcmHf0_AuDEXzcSnBDcdr5OaVDYrlObyv9UotUfdUEEp4sA8usV-gZfRmeATs65SMSoAPD_BFovPGfoXSWBbWaN2bZQQTMsjzjnQgMRkP6F69XMXyJO0-8wQTlG3Z-utqQPUcdkAkyRtE4TtANhTQHVSb3X_I2abcxos10CyEb-fMu83-r5fALYhYAUaq-Ee6lgU2U'">
-              <button class="absolute bottom-4 right-4 z-30 w-12 h-12 bg-whatsapp hover:bg-[#1DA851] text-white rounded-full shadow-lg flex items-center justify-center transition-transform hover:scale-110 active:scale-95 group-hover/image:translate-y-0 translate-y-2 opacity-0 group-hover/image:opacity-100 duration-300" onclick="event.stopPropagation(); window.location.href='https://wa.me/?text=Hi%20Panta!'">
-                <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"></path></svg>
-              </button>
-            </div>
-            <div class="p-6 flex flex-col gap-2">
-              <h3 class="text-xl font-bold text-text-main leading-snug">Birthday Queen Set (10 Props)</h3>
-              <div class="flex items-center justify-between mt-1">
-                <span class="text-2xl font-extrabold text-primary">$45.00</span>
-                <span class="text-xs font-semibold text-text-muted uppercase tracking-wider">In Stock</span>
-              </div>
-            </div>
-          </div>
-          <!-- Product Card 1 -->
-          <div class="group relative bg-surface rounded-2xl shadow-float hover:shadow-float-hover hover:-translate-y-1 transition-all duration-300 flex flex-col overflow-hidden cursor-pointer" onclick="window.location.href='product_detail_enhanced.html?id=neon_party_set'">
-            <!-- Image Container -->
-            <div class="relative w-full aspect-[16/9] bg-[#F0F0F2] overflow-hidden group/image">
-              <!-- Badge -->
-              <div class="absolute top-4 left-4 z-20 bg-accent-yellow text-text-main text-xs font-extrabold uppercase tracking-wide px-3 py-1.5 rounded-full shadow-sm">
-                Best Seller
-              </div>
-              <!-- Main Image -->
-              <img alt="Neon Party Set Front View" class="w-full h-full object-cover transition-opacity duration-500 group-hover/image:opacity-0 absolute inset-0 z-10" data-alt="Bright neon pink party sign on a wall" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAVqUWHy7YTXEi8sg44S-GO6juq0txmFLWjBdae32RyPggPb1lBleusJQmuJt1P_a9mdNYTeQ2bY98lMtcEmvHaE02z6jwETplgM3Q5Rb8ONSUt4kBILmoAuQAz93I79wV-HoF14CuCzfvg8oHTF_n3MuiDa3a6pt8tyOcSck6hj-uJRiY_NKJvn9Pyjcm8R16vXKV4C9wFHeQ1XYD4cbzOSv6dRaRvTk3-zsCN6f0a9S4DAHuaBFP_UJrAK1AtP6sRkhLkyjQx6YE">
-              <!-- Hover Image (Side Profile / Thickness) -->
-              <img alt="Neon Party Set Side Profile" class="w-full h-full object-cover absolute inset-0 z-0" data-alt="Close up of thick acrylic material edge" src="https://lh3.googleusercontent.com/aida-public/AB6AXuASdrpSmFEJwb1FK1D2jneWlkYtMnSwbjZwCHM8qavLtVM1GtVI8aUwQLkRdUTkbSkZ6YN3GpcmHf0_AuDEXzcSnBDcdr5OaVDYrlObyv9UotUfdUEEp4sA8usV-gZfRmeATs65SMSoAPD_BFovPGfoXSWBbWaN2bZQQTMsjzjnQgMRkP6F69XMXyJO0-8wQTlG3Z-utqQPUcdkAkyRtE4TtANhTQHVSb3X_I2abcxos10CyEb-fMu83-r5fALYhYAUaq-Ee6lgU2U">
-              <!-- Floating WhatsApp Button -->
-              <button class="absolute bottom-4 right-4 z-30 w-12 h-12 bg-whatsapp hover:bg-[#1DA851] text-white rounded-full shadow-lg flex items-center justify-center transition-transform hover:scale-110 active:scale-95 group-hover/image:translate-y-0 translate-y-2 opacity-0 group-hover/image:opacity-100 duration-300" onclick="event.stopPropagation(); window.location.href='https://wa.me/?text=Hi%20Panta!'">
-                <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z">
-                  </path>
-                </svg>
-              </button>
-            </div>
-            <!-- Card Body -->
-            <div class="p-6 flex flex-col gap-2">
-              <h3 class="text-xl font-bold text-text-main leading-snug">Neon Party Set</h3>
-              <div class="flex items-center justify-between mt-1">
-                <span class="text-2xl font-extrabold text-primary">$45.00</span>
-                <span class="text-xs font-semibold text-text-muted uppercase tracking-wider">In Stock</span>
-              </div>
-            </div>
-          </div>
-          <!-- Product Card 2 -->
-          <div class="group relative bg-surface rounded-2xl shadow-float hover:shadow-float-hover hover:-translate-y-1 transition-all duration-300 flex flex-col overflow-hidden cursor-pointer" onclick="window.location.href='product_detail_enhanced.html?id=speech_bubble_pack'">
-            <div class="relative w-full aspect-[16/9] bg-[#F0F0F2] overflow-hidden group/image">
-              <!-- Main Image -->
-              <img alt="Speech Bubble Pack Front" class="w-full h-full object-cover transition-opacity duration-500 group-hover/image:opacity-0 absolute inset-0 z-10" data-alt="Colorful abstract shapes floating" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBWN3CkA7IKKjFCebgQnOzhMDl9GQzJB4kPw-cNhc5xleAb44JSJ_bd11ApGNfIftc0xlarvzrBEBef11wtwtqbsGw463cI-3oyD5xf849Odev3vXOFeLaEHAfIZhIgGlxIRKDUl4lnzzLqb2Q1BGSlm7b8zVvT_p3UHyEYIwD9aOl97LJksVrVidReNJpGgRRK3i6GiTXvS6knubvTM3BHzUCFyiuIbJShBXZGoFoh1xBz5dDpzcDTqyXM1QXMOo_ZxVmeFZrSk-4">
-              <!-- Hover Image -->
-              <img alt="Speech Bubble Pack Side" class="w-full h-full object-cover absolute inset-0 z-0" data-alt="Side angle of stacked colorful props" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJDE5idqEATYqWAFwuzylbtgOpdzQPcIqpDIeMYjN040hXXbbYcdlvL0VunG71dms7cehOMdUv4ghQJHi80gV1qUntyjoZP6MYHTp3Zu5ArReq1KqrJnExoE4AldlnejIZoa6GId2JyxA6GE_JE9ht8Vq73HGsfesQqzoNwrZANyF8sMlufyAkZVTLU5emUpAkSeE9-SrB8rvZftJcj24NnzydpjKmROretji5n0K2uJa4kAj16VUQ_yWoP2vySuyCwFL1NV3N99E">
-              <button class="absolute bottom-4 right-4 z-30 w-12 h-12 bg-whatsapp hover:bg-[#1DA851] text-white rounded-full shadow-lg flex items-center justify-center transition-transform hover:scale-110 active:scale-95 group-hover/image:translate-y-0 translate-y-2 opacity-0 group-hover/image:opacity-100 duration-300" onclick="event.stopPropagation(); window.location.href='https://wa.me/?text=Hi%20Panta!'">
-                <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z">
-                  </path>
-                </svg>
-              </button>
-            </div>
-            <div class="p-6 flex flex-col gap-2">
-              <h3 class="text-xl font-bold text-text-main leading-snug">Speech Bubble Pack</h3>
-              <div class="flex items-center justify-between mt-1">
-                <span class="text-2xl font-extrabold text-primary">$25.00</span>
-                <span class="text-xs font-semibold text-text-muted uppercase tracking-wider">In Stock</span>
-              </div>
-            </div>
-          </div>
-          <!-- Product Card 3 -->
-          <div class="group relative bg-surface rounded-2xl shadow-float hover:shadow-float-hover hover:-translate-y-1 transition-all duration-300 flex flex-col overflow-hidden cursor-pointer" onclick="window.location.href='product_detail_enhanced.html?id=team_bride_groom'">
-            <div class="relative w-full aspect-[16/9] bg-[#F0F0F2] overflow-hidden group/image">
-              <!-- Badge -->
-              <div class="absolute top-4 left-4 z-20 bg-accent-yellow text-text-main text-xs font-extrabold uppercase tracking-wide px-3 py-1.5 rounded-full shadow-sm">
-                Best Seller
-              </div>
-              <!-- Main Image -->
-              <img alt="Team Bride/Groom Front" class="w-full h-full object-cover transition-opacity duration-500 group-hover/image:opacity-0 absolute inset-0 z-10" data-alt="Person holding giant fun sunglasses" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDXOzTBREJmzxdlKfWaVj_ImEvxYHwk-qGyW8eAvOikaTQrg25809WBYt0ERGIHulIczOhAy4wV9nQSeUlPA2VU9Gzrrl5fppST8vvDkk3ZMjk11Fu6ZNdHlU6UXhaPK_-f7_0TZz_llMwTYUsv1cS45FEO9LPbHwB-xmNKKBqPTFZFS2CTehh7V42oYB9sJJsCp4HudImwou09SXBmpIj05lHtYtOv0umqJBehMWad2wWg-5e7l8WAYKj7Bc7XHcLuS4sZbnVPx94">
-              <!-- Hover Image -->
-              <img alt="Team Bride/Groom Side" class="w-full h-full object-cover absolute inset-0 z-0" data-alt="Detail of sunglasses material thickness" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5BZRH3ecN1TEMruv0wERI3_FGM2ssyLY_A9deE-stWYKKxs9tmnpOMY1Ov_q4tow8LvzmnrvJoNt6gXlYflrikNkt_fuzGKtALql0GstmDmQ7lmoK5mzRXXz4vFg9jc25BMIMc0aCKjCVw6OgUF0PS3nqvAz6jutVWHWHOUfV9CBVBFAOmobVMA65-EzFwtPi5yAlD1DF4pUfhZex-BGwqs5doE959rATbV9JfY8HMHqiZCF2Ftf_BCP6_VND5mVZQs-hGhBT8EY">
-              <button class="absolute bottom-4 right-4 z-30 w-12 h-12 bg-whatsapp hover:bg-[#1DA851] text-white rounded-full shadow-lg flex items-center justify-center transition-transform hover:scale-110 active:scale-95 group-hover/image:translate-y-0 translate-y-2 opacity-0 group-hover/image:opacity-100 duration-300" onclick="event.stopPropagation(); window.location.href='https://wa.me/?text=Hi%20Panta!'">
-                <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z">
-                  </path>
-                </svg>
-              </button>
-            </div>
-            <div class="p-6 flex flex-col gap-2">
-              <h3 class="text-xl font-bold text-text-main leading-snug">Team Bride/Groom</h3>
-              <div class="flex items-center justify-between mt-1">
-                <span class="text-2xl font-extrabold text-primary">$30.00</span>
-                <span class="text-xs font-semibold text-text-muted uppercase tracking-wider">In Stock</span>
-              </div>
-            </div>
-          </div>
-          <!-- Product Card 4 -->
-          <div class="group relative bg-surface rounded-2xl shadow-float hover:shadow-float-hover hover:-translate-y-1 transition-all duration-300 flex flex-col overflow-hidden cursor-pointer" onclick="window.location.href='product_detail_enhanced.html?id=retro_sunglasses'">
-            <div class="relative w-full aspect-[16/9] bg-[#F0F0F2] overflow-hidden group/image">
-              <!-- Main Image -->
-              <img alt="Retro Sunglasses Front" class="w-full h-full object-cover transition-opacity duration-500 group-hover/image:opacity-0 absolute inset-0 z-10" data-alt="Retro colorful sunglasses" src="https://lh3.googleusercontent.com/aida-public/AB6AXuChjdDKo0Gbq84FaiIxUbbeHTYnajqUCFqPXYy_3r4wL9EM5WsRyogNg05nYAkq1biSyupqxjnfMEERz1byfHVvkRKEKBKqig6DRDSUQytcU-xUXwv9pVJjwl6zTsGe_4g6EY5UFwBTZt_GpIsC1OqgPdUT97i_cOLNoxXaz0ZpjqOMgs6JzvGbBE4I-Lh9gLDH-u2YcM_IDLwcdrPvPRRptwfWkhgFhK-nkJgfVov3kSOv4TRkUKX8eUbH5FyO0RVgv26Hy5SNIFI">
-              <!-- Hover Image -->
-              <img alt="Retro Sunglasses Side" class="w-full h-full object-cover absolute inset-0 z-0" data-alt="Close up of sunglass rims" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDLQt_MRXDdbPWKj97Z-3P-WvXWZfwpT7RZZhvaAHjhjQm3pZBRh3B7jdMkDr-YI56FtrBSPIE9nmKpEe-oVbJpzeMA3kvf8hdNQ57g2Qr_0i8QfLcnReHp-9xQtF3qDXki0Vp1zYfbx2fDK37uNX_G3CzJ3EJjEumxBIPvaQVKjxPaph8mzoP86PNAYxlBy9TjwfS7yfO-sgR64cMKBVQ5noT7TY02aCAE_ljQdUS8FFi4mlmFUVoWWWLHqjEVyA5BhLzzW5lrxkE">
-              <button class="absolute bottom-4 right-4 z-30 w-12 h-12 bg-whatsapp hover:bg-[#1DA851] text-white rounded-full shadow-lg flex items-center justify-center transition-transform hover:scale-110 active:scale-95 group-hover/image:translate-y-0 translate-y-2 opacity-0 group-hover/image:opacity-100 duration-300" onclick="event.stopPropagation(); window.location.href='https://wa.me/?text=Hi%20Panta!'">
-                <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z">
-                  </path>
-                </svg>
-              </button>
-            </div>
-            <div class="p-6 flex flex-col gap-2">
-              <h3 class="text-xl font-bold text-text-main leading-snug">Retro Sunglasses</h3>
-              <div class="flex items-center justify-between mt-1">
-                <span class="text-2xl font-extrabold text-primary">$18.00</span>
-                <span class="text-xs font-semibold text-text-muted uppercase tracking-wider">In Stock</span>
-              </div>
-            </div>
-          </div>
-          <!-- Product Card 5 -->
-          <div class="group relative bg-surface rounded-2xl shadow-float hover:shadow-float-hover hover:-translate-y-1 transition-all duration-300 flex flex-col overflow-hidden cursor-pointer" onclick="window.location.href='product_detail_enhanced.html?id=mustache_on_stick'">
-            <div class="relative w-full aspect-[16/9] bg-[#F0F0F2] overflow-hidden group/image">
-              <!-- Main Image -->
-              <img alt="Mustache on Stick Front" class="w-full h-full object-cover transition-opacity duration-500 group-hover/image:opacity-0 absolute inset-0 z-10" data-alt="Fake mustache prop on a stick" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCGIxDL9ijTXaRP1bc5hrznK4qJPXP_B7ThLoLHJZmaMKZMUxzQoNh7_m3rXFCs3i5fLpDOntyzQXkeM_C8sQIPObTtCka14FtH2gYRVykY68G0mGaHgMH_Fhw96sB7RLfcNJfsv4MiXWSxDvdrfJe9muAbuOtHCKCwRNEJlviDW_uADkJfvIDbeRPdlhxU9yBPEaRTMlL1SVzQLlnY9C2PqljxnXRcAJjsHL0Pq-KhpYV_5l7IYJFZI2SHWFBOJDpmnn9d70T2YzQ">
-              <!-- Hover Image -->
-              <img alt="Mustache on Stick Side" class="w-full h-full object-cover absolute inset-0 z-0" data-alt="Side view of mustache prop" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5kwxbYLlVkFhxgMtnJp-gPlpwsTteodfHhb2dIriWiE_qaR2OlVGttbXqlXkcZREpmmj5fEdWR_T2SALfi7mYpK_p3t7-7n9raI7MW5aYJQ6d3fvNSRkXOOfZ-tA6-mlB2e3dKPBg7XCJZYm7QWKpis5_bk_v2dh_QFAjub3b_mpYY-f2U4x6jQLUPbz2pDDUXMJsjVtEvLCotOFzXY9sh3K8tHTeOsBnCDnYRXOYEIFvTcJYRISwXxla9CQgIwRaKOC9-zould8">
-              <button class="absolute bottom-4 right-4 z-30 w-12 h-12 bg-whatsapp hover:bg-[#1DA851] text-white rounded-full shadow-lg flex items-center justify-center transition-transform hover:scale-110 active:scale-95 group-hover/image:translate-y-0 translate-y-2 opacity-0 group-hover/image:opacity-100 duration-300" onclick="event.stopPropagation(); window.location.href='https://wa.me/?text=Hi%20Panta!'">
-                <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z">
-                  </path>
-                </svg>
-              </button>
-            </div>
-            <div class="p-6 flex flex-col gap-2">
-              <h3 class="text-xl font-bold text-text-main leading-snug">Mustache on Stick</h3>
-              <div class="flex items-center justify-between mt-1">
-                <span class="text-2xl font-extrabold text-primary">$12.00</span>
-                <span class="text-xs font-semibold text-text-muted uppercase tracking-wider">In Stock</span>
-              </div>
-            </div>
-          </div>
-          <!-- Product Card 6 -->
-          <div class="group relative bg-surface rounded-2xl shadow-float hover:shadow-float-hover hover:-translate-y-1 transition-all duration-300 flex flex-col overflow-hidden cursor-pointer" onclick="window.location.href='product_detail_enhanced.html?id=level_up_sign'">
-            <div class="relative w-full aspect-[16/9] bg-[#F0F0F2] overflow-hidden group/image">
-              <!-- Badge -->
-              <div class="absolute top-4 left-4 z-20 bg-accent-yellow text-text-main text-xs font-extrabold uppercase tracking-wide px-3 py-1.5 rounded-full shadow-sm">
-                Best Seller
-              </div>
-              <!-- Main Image -->
-              <img alt="Level Up Sign Front" class="w-full h-full object-cover transition-opacity duration-500 group-hover/image:opacity-0 absolute inset-0 z-10" data-alt="Neon level up video game sign" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBSBllcwo-yQtfMwatx0nktu8O08ZCNKwQQh3uZNERmvuLMkngN-e_8ET4f7ddqcUDRn69-Ipt83zULNwF2C-1ZUcUjxZI1t9Tb6F-A8FtJrWDs1ykS1NmO2r3vqFBYwHJteEvgdxuhU7DoXxNFG_KbL01h1O3EtCJ_8EUB34epo1DMCPbOV6ibFzPTBxwiwPHCHwISfkicg1pMMN3YcwD7EeVvo-12rijL-Y0h0UGmW6ZYsb-ehel9kvKmvVC3hPkkgQnD_XGa28g">
-              <!-- Hover Image -->
-              <img alt="Level Up Sign Side" class="w-full h-full object-cover absolute inset-0 z-0" data-alt="Close up of neon tubing and backing" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD68DaxVJCBIkckGh4fjW-AQ_ki1eAu3hKWFUCoMeI9rtxKygYs_f8IJ9J8MCsfObiNI9DwpCrkZ0kvA63JsOqAwDMIkYUUWIRh_e4Y4E2EaqE9C3nt9rcnCTceKpGmMARsZw9Qwd0i1xVULPo6rpodeC89ZxWNF0SX5k7OopDeOtqVWGx9G72zsMWzOZUEkxMg8NR7aFQbAST8In8hRFIwRXm1RzisNWgHbiEMQv5r7VfER5tMwhRBUgC-uzHBLI51RlAV2DPBQos">
-              <button class="absolute bottom-4 right-4 z-30 w-12 h-12 bg-whatsapp hover:bg-[#1DA851] text-white rounded-full shadow-lg flex items-center justify-center transition-transform hover:scale-110 active:scale-95 group-hover/image:translate-y-0 translate-y-2 opacity-0 group-hover/image:opacity-100 duration-300" onclick="event.stopPropagation(); window.location.href='https://wa.me/?text=Hi%20Panta!'">
-                <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z">
-                  </path>
-                </svg>
-              </button>
-            </div>
-            <div class="p-6 flex flex-col gap-2">
-              <h3 class="text-xl font-bold text-text-main leading-snug">Level Up Sign</h3>
-              <div class="flex items-center justify-between mt-1">
-                <span class="text-2xl font-extrabold text-primary">$50.00</span>
-                <span class="text-xs font-semibold text-text-muted uppercase tracking-wider">In Stock</span>
-              </div>
-            </div>
-          </div>
-        </div>
         <!-- Pagination (Optional decoration) -->
         <div class="mt-16 flex justify-center gap-2">
           <button class="w-10 h-10 rounded-full bg-primary text-white font-bold shadow-lg shadow-primary/30 flex items-center justify-center">1</button>
@@ -634,7 +431,7 @@
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     // --- Event Filtering Logic ---
-    const allCards = document.querySelectorAll('.grid > div.group');
+    const allCards = document.querySelectorAll('#shop-grid > div.group');
     
     // Quick auto-categorization based on title logic
     allCards.forEach(card => {
@@ -820,5 +617,94 @@
     }
   });
 </script>
+
+
+    <script>
+        // Load products from database API
+        const API_BASE = window.location.origin;
+        
+        const CATEGORY_MAP = {
+            'weddings': 'wedding', 'wedding': 'wedding',
+            'birthdays': 'birthday', 'birthday': 'birthday',
+            'baby shower': 'birthday', 'gender reveal': 'birthday',
+            'sweet 16': 'birthday', 'quinceanera': 'birthday',
+            'graduations': 'birthday',
+            'corporate': 'corporate',
+            'christmas': 'holiday', 'new year': 'holiday',
+            'general': 'birthday'
+        };
+        
+        async function loadShopProducts() {
+            const grid = document.getElementById('shop-grid');
+            const loader = document.getElementById('shop-loading');
+            
+            try {
+                const res = await fetch(API_BASE + '/api/products');
+                if (!res.ok) throw new Error('API error');
+                const products = await res.json();
+                
+                if (loader) loader.remove();
+                
+                if (products.length === 0) {
+                    grid.innerHTML = `<div class="col-span-full text-center py-20 flex flex-col items-center gap-4 text-slate-500">
+                        <span class="material-symbols-outlined text-5xl">inventory_2</span>
+                        <p class="font-semibold text-lg">No products available yet.</p>
+                    </div>`;
+                    return;
+                }
+                
+                products.forEach(product => {
+                    const thumb = product.images && product.images.length > 0 ? product.images[0] : '';
+                    const thumb2 = product.images && product.images.length > 1 ? product.images[1] : thumb;
+                    const catKey = CATEGORY_MAP[(product.category || 'general').toLowerCase()] || 'birthday';
+                    
+                    const badgeHtml = product.badge
+                        ? `<div class="absolute top-3 left-3 z-10 bg-[#FFD166] text-slate-900 text-xs font-bold px-3 py-1 rounded-full shadow-sm">${product.badge}</div>`
+                        : '';
+                    const oldPriceHtml = product.old_price
+                        ? `<span class="text-sm text-slate-400 line-through font-medium">${product.old_price}</span>`
+                        : '';
+                    
+                    const card = document.createElement('div');
+                    card.className = 'group relative bg-surface rounded-2xl shadow-float hover:shadow-float-hover hover:-translate-y-1 transition-all duration-300 flex flex-col overflow-hidden cursor-pointer';
+                    card.setAttribute('data-category', catKey);
+                    card.onclick = () => window.location.href = 'product_detail_enhanced.html?id=' + product.slug;
+                    
+                    card.innerHTML = `
+                        ${badgeHtml}
+                        <div class="relative overflow-hidden aspect-[4/3] bg-slate-100">
+                            <img src="${thumb}" alt="${product.title.replace(/"/g,'&quot;')}"
+                                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                onerror="this.src='https://placehold.co/400x300/f1f5f9/94a3b8?text=Image'">
+                            ${thumb2 !== thumb ? `<img src="${thumb2}" alt="${product.title.replace(/"/g,'&quot;')} alt view"
+                                class="w-full h-full object-cover absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">` : ''}
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            <div class="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-all duration-300">
+                                <span class="bg-white/90 backdrop-blur-sm text-slate-900 text-xs font-bold px-3 py-1.5 rounded-full shadow-lg flex items-center gap-1">
+                                    <span class="material-symbols-outlined text-sm text-primary">visibility</span> View
+                                </span>
+                            </div>
+                        </div>
+                        <div class="p-5 flex flex-col gap-1 flex-1">
+                            <h3 class="text-base font-bold text-text-main leading-snug">${product.title}</h3>
+                            <p class="text-xs text-slate-400 mt-0.5">${product.category || 'General'}</p>
+                            <div class="flex items-center gap-2 mt-auto pt-2">
+                                <span class="text-xl font-extrabold text-primary">${product.price}</span>
+                                ${oldPriceHtml}
+                            </div>
+                        </div>
+                    `;
+                    
+                    grid.appendChild(card);
+                });
+                
+            } catch (err) {
+                console.error('Failed to load products:', err);
+                if (loader) loader.innerHTML = `<span class="material-symbols-outlined text-4xl text-slate-300">error</span><p class="font-semibold text-slate-500 mt-2">Could not load products. Please refresh.</p>`;
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', loadShopProducts);
+    </script>
 
 </body></html>
