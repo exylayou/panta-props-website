@@ -85,6 +85,19 @@ const db = new sqlite3.Database(dbPath, (err) => {
             created_at DATETIME DEFAULT CURRENT_TIMESTAMP
         )`);
 
+                db.run(`CREATE TABLE IF NOT EXISTS products (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            slug TEXT UNIQUE NOT NULL,
+            title TEXT NOT NULL,
+            price TEXT NOT NULL,
+            old_price TEXT,
+            description TEXT,
+            bundle_desc TEXT,
+            badge TEXT,
+            images TEXT,
+            created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+        )`);
+
         db.run(`CREATE TABLE IF NOT EXISTS custom_orders (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             first_name TEXT NOT NULL,
@@ -224,9 +237,7 @@ app.post('/api/custom-order', upload.array('referenceImages', 5), (req, res) => 
     });
 });
 
-// ============================================
-// ADMIN DASHBOARD API ROUTES
-// ============================================
+
 
 // Basic middleware to check for a hardcoded admin token
 const checkAdminAuth = (req, res, next) => {
@@ -237,6 +248,99 @@ const checkAdminAuth = (req, res, next) => {
         res.status(403).json({ error: 'Unauthorized access to admin APIs' });
     }
 };
+
+// ============================================
+// PRODUCT API ROUTES
+// ============================================
+
+// Get all products (Public)
+app.get('/api/products', (req, res) => {
+    db.all(`SELECT * FROM products ORDER BY created_at DESC`, [], (err, rows) => {
+        if (err) return res.status(500).json({ error: 'Database error fetching products' });
+        
+        // Parse the JSON images string back to an array for the frontend
+        const products = rows.map(p => ({
+            ...p,
+            images: p.images ? JSON.parse(p.images) : []
+        }));
+        res.json(products);
+    });
+});
+
+// Get a single product by slug (Public)
+app.get('/api/products/:slug', (req, res) => {
+    db.get(`SELECT * FROM products WHERE slug = ?`, [req.params.slug], (err, row) => {
+        if (err) return res.status(500).json({ error: 'Database error fetching product' });
+        if (!row) return res.status(404).json({ error: 'Product not found' });
+        
+        row.images = row.images ? JSON.parse(row.images) : [];
+        res.json(row);
+    });
+});
+
+// Create a new product (Admin)
+app.post('/api/admin/products', checkAdminAuth, (req, res) => {
+    const { slug, title, price, oldPrice, description, bundleDesc, badge, images } = req.body;
+    
+    // Convert array of image URLs to string for SQLite
+    const imagesJson = images ? JSON.stringify(images) : '[]';
+
+    const query = `INSERT INTO products (slug, title, price, old_price, description, bundle_desc, badge, images) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
+    
+    db.run(query, [slug, title, price, oldPrice, description, bundleDesc, badge, imagesJson], function(err) {
+        if (err) {
+            if (err.message.includes('UNIQUE constraint failed')) {
+                return res.status(400).json({ error: 'A product with this slug already exists' });
+            }
+            console.error('Database insert error:', err);
+            return res.status(500).json({ error: 'Database error storing product' });
+        }
+        res.status(201).json({ message: 'Product created successfully', id: this.lastID });
+    });
+});
+
+// Update a product (Admin)
+app.put('/api/admin/products/:id', checkAdminAuth, (req, res) => {
+    const { slug, title, price, oldPrice, description, bundleDesc, badge, images } = req.body;
+    const imagesJson = images ? JSON.stringify(images) : null;
+    
+    const query = `UPDATE products SET 
+        slug = COALESCE(?, slug),
+        title = COALESCE(?, title),
+        price = COALESCE(?, price),
+        old_price = COALESCE(?, old_price),
+        description = COALESCE(?, description),
+        bundle_desc = COALESCE(?, bundle_desc),
+        badge = COALESCE(?, badge),
+        images = COALESCE(?, images)
+        WHERE id = ?`;
+        
+    db.run(query, [slug, title, price, oldPrice, description, bundleDesc, badge, imagesJson, req.params.id], function(err) {
+        if (err) {
+             if (err.message.includes('UNIQUE constraint failed')) {
+                return res.status(400).json({ error: 'A product with this slug already exists' });
+            }
+            console.error('Database update error:', err);
+            return res.status(500).json({ error: 'Database error updating product' });
+        }
+        if (this.changes === 0) return res.status(404).json({ error: "Product not found" });
+        res.json({ message: 'Product updated successfully' });
+    });
+});
+
+// Delete a product (Admin)
+app.delete('/api/admin/products/:id', checkAdminAuth, (req, res) => {
+    db.run(`DELETE FROM products WHERE id = ?`, [req.params.id], function(err) {
+        if (err) return res.status(500).json({ error: 'Database error deleting product' });
+        if (this.changes === 0) return res.status(404).json({ error: "Product not found" });
+        res.json({ message: 'Product deleted successfully' });
+    });
+});
+
+
+// ============================================
+// ADMIN DASHBOARD API ROUTES
+// ============================================
 
 // Get all leads
 app.get('/api/admin/leads', checkAdminAuth, (req, res) => {

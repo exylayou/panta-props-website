@@ -78,6 +78,14 @@
         <!-- Dashboard Section -->
         <div id="dashboardSection" class="hidden flex flex-col gap-8">
 
+        <div class="flex gap-4 border-b border-slate-200 mt-6 pb-2">
+            <button id="navLeadsBtn" class="font-bold text-primary border-b-2 border-primary pb-2 px-2 transition-colors">Leads</button>
+            <button id="navProductsBtn" class="font-bold text-slate-500 border-b-2 border-transparent hover:text-slate-800 pb-2 px-2 transition-colors">Products</button>
+            <button id="navGalleryBtn" class="font-bold text-slate-500 border-b-2 border-transparent hover:text-slate-800 pb-2 px-2 transition-colors">Gallery</button>
+        </div>
+
+
+            <div id="leadsContent">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
                 <div class="flex-1">
                     <h2 class="text-3xl font-extrabold flex items-center gap-2">
@@ -133,10 +141,134 @@
                 <h3 class="text-xl font-bold text-slate-900 mb-1">No leads yet!</h3>
                 <p class="text-slate-500 max-w-sm">Lead requests, DMs, and outreach targets will appear here.</p>
             </div>
+        </div> <!-- End leadsContent -->
 
         </div>
 
+        
+        <!-- Products Section -->
+        <div id="productsContent" class="hidden flex-col gap-6 w-full">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mt-2">
+                <div class="flex-1">
+                    <h2 class="text-3xl font-extrabold flex items-center gap-2">
+                        Product Management
+                    </h2>
+                    <p class="text-slate-500 mt-2">Add, edit, or remove props from the store.</p>
+                </div>
+                <div class="w-full md:w-auto flex gap-3">
+                    <button id="refreshProductsBtn" class="bg-white border w-full sm:w-auto border-slate-200 hover:bg-slate-50 text-slate-700 px-4 py-2 rounded-xl font-bold text-sm flex items-center justify-center gap-2 shadow-sm transition-colors whitespace-nowrap">
+                        <span class="material-symbols-outlined text-sm">refresh</span> Refresh
+                    </button>
+                    <button id="newProductBtn" class="bg-primary hover:bg-primary-dark w-full sm:w-auto text-white px-4 py-2 rounded-xl font-bold text-sm flex items-center justify-center gap-2 shadow-sm transition-colors whitespace-nowrap">
+                        <span class="material-symbols-outlined text-sm">add</span> Add Product
+                    </button>
+                </div>
+            </div>
+
+            <!-- Products List -->
+            <div class="bg-white rounded-3xl border border-slate-100 shadow-sm overflow-hidden">
+                <div class="overflow-x-auto p-1">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="border-b border-slate-100 bg-slate-50/50">
+                                <th class="p-4 text-xs font-bold text-slate-500 uppercase tracking-widest rounded-tl-3xl">Product</th>
+                                <th class="p-4 text-xs font-bold text-slate-500 uppercase tracking-widest">Price</th>
+                                <th class="p-4 text-xs font-bold text-slate-500 uppercase tracking-widest">Badge</th>
+                                <th class="p-4 text-xs font-bold text-slate-500 uppercase tracking-widest text-right px-6 rounded-tr-3xl">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="productsTableBody" class="divide-y divide-slate-100">
+                            <!-- JS injected rows -->
+                        </tbody>
+                    </table>
+                </div>
+                <div id="emptyProducts" class="hidden flex-col items-center justify-center py-20 px-4 text-center">
+                    <div class="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center text-slate-400 mb-4">
+                        <span class="material-symbols-outlined text-3xl">inventory_2</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-1">No products found</h3>
+                    <p class="text-slate-500 text-sm">Add your first prop to get started.</p>
+                </div>
+            </div>
+        </div>
+
         <!-- Gallery Moderation Section -->
+
+        
+        <!-- Product Add/Edit Modal -->
+        <div id="productModal" class="hidden fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-[60] flex items-center justify-center p-4">
+            <div class="bg-white rounded-[2rem] shadow-2xl w-full max-w-2xl overflow-hidden flex flex-col max-h-[90vh]">
+                <div class="p-6 border-b border-slate-100 flex justify-between items-center bg-slate-50">
+                    <h3 id="productModalTitle" class="text-xl font-bold">Add New Product</h3>
+                    <button id="closeProductModalBtn" class="text-slate-400 hover:text-red-500 transition-colors">
+                        <span class="material-symbols-outlined">close</span>
+                    </button>
+                </div>
+                <div class="p-6 overflow-y-auto">
+                    <form id="productForm" class="space-y-5">
+                        <input type="hidden" id="pmId">
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-1">Product Title*</label>
+                                <input type="text" id="pmTitle" required class="w-full bg-white border border-slate-200 rounded-xl px-4 py-2 focus:border-primary focus:ring-1 focus:ring-primary outline-none text-sm placeholder-slate-300" placeholder='e.g., The "Neon Party" Prop Set'>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-1">Unique Slug / ID*</label>
+                                <input type="text" id="pmSlug" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2 focus:border-primary focus:ring-1 focus:ring-primary outline-none text-sm font-mono text-slate-600" placeholder="e.g., neon_party_set">
+                                <p class="text-[10px] text-slate-400 mt-1">Used in the URL: ?id=slug. No spaces.</p>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-3 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-1">Price*</label>
+                                <input type="text" id="pmPrice" required class="w-full bg-white border border-slate-200 rounded-xl px-4 py-2 focus:border-primary focus:ring-1 focus:ring-primary outline-none text-sm" placeholder="$45.00">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-1">Old Price (Strike)</label>
+                                <input type="text" id="pmOldPrice" class="w-full bg-white border border-slate-200 rounded-xl px-4 py-2 focus:border-primary focus:ring-1 focus:ring-primary outline-none text-sm" placeholder="$55.00">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-1">Badge</label>
+                                <select id="pmBadge" class="w-full bg-white border border-slate-200 rounded-xl px-4 py-2 focus:border-primary focus:ring-1 focus:ring-primary outline-none text-sm appearance-none">
+                                    <option value="">None</option>
+                                    <option value="Best Seller">Best Seller</option>
+                                    <option value="New">New</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-1">Main Description</label>
+                            <textarea id="pmDesc" rows="3" class="w-full bg-white border border-slate-200 rounded-xl px-4 py-2 focus:border-primary focus:ring-1 focus:ring-primary outline-none text-sm placeholder-slate-300" placeholder="Main paragraph about the prop..."></textarea>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-1">Bundle Details</label>
+                            <input type="text" id="pmBundle" class="w-full bg-white border border-slate-200 rounded-xl px-4 py-2 focus:border-primary focus:ring-1 focus:ring-primary outline-none text-sm placeholder-slate-300" placeholder='Includes 5 props: "Party", "Cheers"...'>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-1 flex justify-between items-center">
+                                <span>Image URLs (One per block)</span>
+                                <button type="button" id="addImgRowBtn" class="text-primary hover:underline lowercase font-medium">add image</button>
+                            </label>
+                            <div id="imageRowsContainer" class="space-y-2 mt-2">
+                                <input type="text" class="pmk-image-row w-full bg-white border border-slate-200 rounded-xl px-4 py-2 focus:border-primary focus:ring-1 focus:ring-primary outline-none text-sm placeholder-slate-300" placeholder="https://lh3.googleusercontent.com/aida-public/...">
+                            </div>
+                        </div>
+
+                        <div class="pt-2 border-t border-slate-100 flex gap-3">
+                             <button type="submit" id="saveProductBtn" class="flex-1 bg-slate-900 hover:bg-primary text-white font-bold py-3 rounded-xl shadow-md transition-colors flex items-center justify-center gap-2">
+                                <span class="material-symbols-outlined text-sm">save</span> <span id="saveBtnText">Save Product</span>
+                            </button>
+                            <div id="productError" class="hidden text-red-500 text-xs font-bold flex-1 flex items-center justify-end text-right leading-tight"></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
 
         <!-- New Lead Modal -->
         <div id="newLeadModal"
@@ -290,17 +422,62 @@
         const filterSelect = document.getElementById('filterSelect');
         const refreshBtn = document.getElementById('refreshBtn');
         const logoutBtn = document.getElementById('logoutBtn');
+        
+        // Navigation & Section Elements
+        const navLeadsBtn = document.getElementById('navLeadsBtn');
+        const navProductsBtn = document.getElementById('navProductsBtn');
+        const navGalleryBtn = document.getElementById('navGalleryBtn');
+        const leadsContent = document.getElementById('leadsContent');
+        const productsContent = document.getElementById('productsContent');
         const gallerySection = document.getElementById('gallerySection');
+        
+        // Products Elements
+        const productsTableBody = document.getElementById('productsTableBody');
+        const emptyProducts = document.getElementById('emptyProducts');
+        const refreshProductsBtn = document.getElementById('refreshProductsBtn');
+        const newProductBtn = document.getElementById('newProductBtn');
+        const productModal = document.getElementById('productModal');
+        const closeProductModalBtn = document.getElementById('closeProductModalBtn');
+        const addImgRowBtn = document.getElementById('addImgRowBtn');
+        const imageRowsContainer = document.getElementById('imageRowsContainer');
+        const productForm = document.getElementById('productForm');
+        const productError = document.getElementById('productError');
+        
         const adminGalleryGrid = document.getElementById('adminGalleryGrid');
         const refreshGalleryBtn = document.getElementById('refreshGalleryBtn');
 
         let allLeads = []; // Global store for leads
+        let allProducts = []; // Global store for products
 
         if (refreshGalleryBtn) refreshGalleryBtn.addEventListener('click', fetchAdminGallery);
+        if (refreshProductsBtn) refreshProductsBtn.addEventListener('click', fetchProducts);
 
-        // Filters Event Listeners
-        if (searchInput) searchInput.addEventListener('input', applyFilters);
-        if (filterSelect) filterSelect.addEventListener('change', applyFilters);
+        // Tab Switching Logic
+        function switchTab(activeBtn, activeContent) {
+            // Reset buttons
+            [navLeadsBtn, navProductsBtn, navGalleryBtn].forEach(btn => {
+                if(btn) {
+                    btn.className = "font-bold text-slate-500 border-b-2 border-transparent hover:text-slate-800 pb-2 px-2 transition-colors";
+                }
+            });
+            // Reset contents
+            [leadsContent, productsContent, gallerySection].forEach(content => {
+                if(content) content.classList.add('hidden');
+            });
+            
+            // Set active
+            if(activeBtn) {
+                activeBtn.className = "font-bold text-primary border-b-2 border-primary pb-2 px-2 transition-colors";
+            }
+            if(activeContent) {
+                activeContent.classList.remove('hidden');
+                activeContent.classList.add('flex'); // Need flex for layout
+            }
+        }
+
+        if(navLeadsBtn) navLeadsBtn.addEventListener('click', () => switchTab(navLeadsBtn, leadsContent));
+        if(navProductsBtn) navProductsBtn.addEventListener('click', () => { switchTab(navProductsBtn, productsContent); fetchProducts(); });
+        if(navGalleryBtn) navGalleryBtn.addEventListener('click', () => switchTab(navGalleryBtn, gallerySection));
 
         // Init state
         if (authToken) {
@@ -309,7 +486,6 @@
             fetchAdminGallery();
         }
 
-        // Login Form Handler
         loginForm.addEventListener('submit', (e) => {
             e.preventDefault();
             authToken = 'Bearer ' + tokenInput.value;
@@ -322,6 +498,7 @@
                     localStorage.setItem('pantaAdminToken', authToken);
                     showDashboard();
                     fetchLeads();
+                    fetchProducts();
                     fetchAdminGallery();
                 } else {
                     loginError.classList.remove('hidden');
@@ -638,8 +815,8 @@
                 }
             } catch (e) { console.error(e); card.style.opacity = '1'; }
         }
-
-    </script>
+        
+        
 
 
 
@@ -793,3 +970,218 @@
 </body>
 
 </html>
+
+        // ==========================================
+        // PRODUCT MANAGEMENT LOGIC
+        // ==========================================
+
+        async function fetchProducts() {
+            if (refreshProductsBtn) refreshProductsBtn.innerHTML = '<span class="material-symbols-outlined text-sm animate-spin">progress_activity</span> Updating...';
+            try {
+                const response = await fetch('/api/products');
+                const products = await response.json();
+                allProducts = products;
+                renderProducts(products);
+            } catch (err) {
+                console.error("Failed to fetch products", err);
+            } finally {
+                if (refreshProductsBtn) refreshProductsBtn.innerHTML = '<span class="material-symbols-outlined text-sm">refresh</span> Refresh';
+            }
+        }
+
+        function renderProducts(products) {
+            if (!productsTableBody) return;
+            productsTableBody.innerHTML = '';
+            
+            if (products.length === 0) {
+                emptyProducts.classList.remove('hidden');
+                emptyProducts.classList.add('flex');
+                productsTableBody.parentElement.parentElement.classList.add('hidden');
+                return;
+            }
+            
+            emptyProducts.classList.add('hidden');
+            emptyProducts.classList.remove('flex');
+            productsTableBody.parentElement.parentElement.classList.remove('hidden');
+            
+            products.forEach(product => {
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-slate-50 border-b border-slate-100 last:border-0";
+                
+                const thumb = product.images && product.images.length > 0 ? product.images[0] : '';
+                const badgeHtml = product.badge ? `<span class="bg-[#FFD166] text-slate-900 text-[10px] font-bold px-2 py-1 rounded-full whitespace-nowrap">${product.badge}</span>` : '<span class="text-slate-300">-</span>';
+                
+                tr.innerHTML = `
+                    <td class="p-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 bg-slate-100 rounded-lg overflow-hidden shrink-0">
+                                ${thumb ? `<img src="${thumb}" class="w-full h-full object-cover">` : `<div class="w-full h-full flex items-center justify-center text-slate-300"><span class="material-symbols-outlined text-xl">image</span></div>`}
+                            </div>
+                            <div>
+                                <div class="font-extrabold text-slate-900 text-sm leading-tight">${product.title}</div>
+                                <div class="text-[10px] font-mono text-slate-500 mt-0.5">${product.slug}</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="p-4">
+                        <div class="font-bold text-slate-700 text-sm">${product.price}</div>
+                        ${product.old_price ? `<div class="text-[10px] text-slate-400 line-through">${product.old_price}</div>` : ''}
+                    </td>
+                    <td class="p-4">
+                        ${badgeHtml}
+                    </td>
+                    <td class="p-4 text-right pr-6">
+                        <button onclick='editProduct(${JSON.stringify(product).replace(/'/g, "&#39;")})' class="text-secondary hover:text-blue-700 bg-secondary/10 hover:bg-secondary/20 p-2 rounded-lg transition-colors mr-2">
+                            <span class="material-symbols-outlined text-[16px]">edit</span>
+                        </button>
+                        <button onclick="deleteProduct('${product.id}', '${product.title.replace(/'/g, "\\'")}')" class="text-red-500 hover:text-red-600 bg-red-50 hover:bg-red-100 p-2 rounded-lg transition-colors">
+                            <span class="material-symbols-outlined text-[16px]">delete</span>
+                        </button>
+                    </td>
+                `;
+                productsTableBody.appendChild(tr);
+            });
+        }
+        
+        if (newProductBtn) {
+            newProductBtn.addEventListener('click', () => {
+                document.getElementById('productModalTitle').textContent = 'Add New Product';
+                document.getElementById('saveBtnText').textContent = 'Save Product';
+                productForm.reset();
+                document.getElementById('pmId').value = '';
+                document.getElementById('pmSlug').readOnly = false;
+                document.getElementById('pmSlug').classList.remove('bg-slate-100', 'text-slate-500');
+                
+                imageRowsContainer.innerHTML = '<input type="text" class="pmk-image-row w-full bg-white border border-slate-200 rounded-xl px-4 py-2 focus:border-primary focus:ring-1 focus:ring-primary outline-none text-sm placeholder-slate-300" placeholder="https://lh3.googleusercontent.com/aida-public/...">';
+                productError.classList.add('hidden');
+                productModal.classList.remove('hidden');
+            });
+        }
+        
+        if (closeProductModalBtn) {
+            closeProductModalBtn.addEventListener('click', () => productModal.classList.add('hidden'));
+        }
+        
+        if (addImgRowBtn) {
+            addImgRowBtn.addEventListener('click', () => {
+                const input = document.createElement('input');
+                input.type = 'text';
+                input.className = 'pmk-image-row w-full bg-white border border-slate-200 rounded-xl px-4 py-2 focus:border-primary focus:ring-1 focus:ring-primary outline-none text-sm placeholder-slate-300 mt-2';
+                input.placeholder = "Additional image URL...";
+                imageRowsContainer.appendChild(input);
+            });
+        }
+        
+        window.editProduct = function(product) {
+            document.getElementById('productModalTitle').textContent = 'Edit Product';
+            document.getElementById('saveBtnText').textContent = 'Update Product';
+            productError.classList.add('hidden');
+            
+            document.getElementById('pmId').value = product.id;
+            document.getElementById('pmTitle').value = product.title;
+            
+            const slugInput = document.getElementById('pmSlug');
+            slugInput.value = product.slug;
+            slugInput.readOnly = true;
+            slugInput.classList.add('bg-slate-100', 'text-slate-500');
+            
+            document.getElementById('pmPrice').value = product.price;
+            document.getElementById('pmOldPrice').value = product.old_price || '';
+            document.getElementById('pmBadge').value = product.badge || '';
+            document.getElementById('pmDesc').value = product.description || '';
+            document.getElementById('pmBundle').value = product.bundle_desc || '';
+            
+            imageRowsContainer.innerHTML = '';
+            if (product.images && product.images.length > 0) {
+                product.images.forEach(img => {
+                    const input = document.createElement('input');
+                    input.type = 'text';
+                    input.value = img;
+                    input.className = 'pmk-image-row w-full bg-white border border-slate-200 rounded-xl px-4 py-2 focus:border-primary focus:ring-1 focus:ring-primary outline-none text-sm mt-2';
+                    imageRowsContainer.appendChild(input);
+                });
+            } else {
+                imageRowsContainer.innerHTML = '<input type="text" class="pmk-image-row w-full bg-white border border-slate-200 rounded-xl px-4 py-2 focus:border-primary focus:ring-1 focus:ring-primary outline-none text-sm placeholder-slate-300 mt-2" placeholder="https://lh3.googleusercontent.com/aida-public/...">';
+            }
+            
+            if (imageRowsContainer.firstElementChild) imageRowsContainer.firstElementChild.classList.remove('mt-2');
+            
+            productModal.classList.remove('hidden');
+        };
+        
+        window.deleteProduct = async function(id, title) {
+            if (!confirm(`Are you sure you want to permanently delete "${title}"?`)) return;
+            
+            try {
+                const res = await fetch(`/api/admin/products/${id}`, {
+                    method: 'DELETE',
+                    headers: { 'Authorization': authToken }
+                });
+                
+                if (res.ok) {
+                    fetchProducts();
+                } else {
+                    const data = await res.json();
+                    alert("Error: " + (data.error || "Failed to delete product"));
+                }
+            } catch (e) {
+                console.error(e);
+                alert("An error occurred while deleting.");
+            }
+        };
+        
+        if (productForm) {
+            productForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                productError.classList.add('hidden');
+                
+                const id = document.getElementById('pmId').value;
+                const saveBtn = document.getElementById('saveProductBtn');
+                saveBtn.disabled = true;
+                const originalText = saveBtn.innerHTML;
+                saveBtn.innerHTML = '<span class="material-symbols-outlined text-sm animate-spin">progress_activity</span> Saving...';
+                
+                const imageInputs = document.querySelectorAll('.pmk-image-row');
+                const images = Array.from(imageInputs).map(inp => inp.value.trim()).filter(val => val !== '');
+                
+                const body = {
+                    slug: document.getElementById('pmSlug').value.trim(),
+                    title: document.getElementById('pmTitle').value.trim(),
+                    price: document.getElementById('pmPrice').value.trim(),
+                    oldPrice: document.getElementById('pmOldPrice').value.trim(),
+                    badge: document.getElementById('pmBadge').value,
+                    description: document.getElementById('pmDesc').value.trim(),
+                    bundleDesc: document.getElementById('pmBundle').value.trim(),
+                    images: images
+                };
+                
+                const url = id ? `/api/admin/products/${id}` : '/api/admin/products';
+                const method = id ? 'PUT' : 'POST';
+                
+                try {
+                    const res = await fetch(url, {
+                        method: method,
+                        headers: { 'Content-Type': 'application/json', 'Authorization': authToken },
+                        body: JSON.stringify(body)
+                    });
+                    
+                    const data = await res.json();
+                    
+                    if (res.ok) {
+                        productModal.classList.add('hidden');
+                        fetchProducts();
+                    } else {
+                        productError.textContent = data.error || 'Failed to save product.';
+                        productError.classList.remove('hidden');
+                    }
+                } catch (err) {
+                    console.error(err);
+                    productError.textContent = 'A network error occurred.';
+                    productError.classList.remove('hidden');
+                } finally {
+                    saveBtn.disabled = false;
+                    saveBtn.innerHTML = originalText;
+                }
+            });
+        }
+</script>
