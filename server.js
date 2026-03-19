@@ -240,6 +240,29 @@ app.post('/api/custom-order', upload.array('referenceImages', 5), (req, res) => 
 
 
 
+// Ensure product images subfolder exists
+const productUploadsDir = path.join(__dirname, 'uploads', 'products');
+if (!fs.existsSync(productUploadsDir)) {
+    fs.mkdirSync(productUploadsDir, { recursive: true });
+}
+
+// Multer config specifically for product images
+const productImageStorage = multer.diskStorage({
+    destination: (req, file, cb) => cb(null, 'uploads/products/'),
+    filename: (req, file, cb) => {
+        const ext = path.extname(file.originalname);
+        cb(null, 'product-' + Date.now() + ext);
+    }
+});
+const uploadProductImage = multer({
+    storage: productImageStorage,
+    limits: { fileSize: 10 * 1024 * 1024 }, // 10MB
+    fileFilter: (req, file, cb) => {
+        if (file.mimetype.startsWith('image/')) cb(null, true);
+        else cb(new Error('Only image files allowed'));
+    }
+});
+
 // Basic middleware to check for a hardcoded admin token
 const checkAdminAuth = (req, res, next) => {
     const token = req.headers['authorization'];
@@ -253,6 +276,13 @@ const checkAdminAuth = (req, res, next) => {
 // ============================================
 // PRODUCT API ROUTES
 // ============================================
+
+// Admin: Upload a product image and get back its URL
+app.post('/api/admin/upload-product-image', checkAdminAuth, uploadProductImage.single('image'), (req, res) => {
+    if (!req.file) return res.status(400).json({ error: 'No image uploaded' });
+    const url = '/uploads/products/' + req.file.filename;
+    res.json({ url });
+});
 
 // Get all products (Public)
 app.get('/api/products', (req, res) => {

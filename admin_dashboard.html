@@ -944,7 +944,8 @@
                 document.getElementById('pmSlug').readOnly = false;
                 document.getElementById('pmSlug').classList.remove('bg-slate-100', 'text-slate-500');
                 
-                imageRowsContainer.innerHTML = '<input type="text" class="pmk-image-row w-full bg-white border border-slate-200 rounded-xl px-4 py-2 focus:border-primary focus:ring-1 focus:ring-primary outline-none text-sm placeholder-slate-300" placeholder="https://lh3.googleusercontent.com/aida-public/...">';
+                imageRowsContainer.innerHTML = '';
+                imageRowsContainer.appendChild(createImageRow(''));
                 productError.classList.add('hidden');
                 productModal.classList.remove('hidden');
             });
@@ -954,13 +955,58 @@
             closeProductModalBtn.addEventListener('click', () => productModal.classList.add('hidden'));
         }
         
+        function createImageRow(value) {
+            const row = document.createElement('div');
+            row.className = 'pmk-image-row-wrapper flex gap-2 items-center mt-2';
+            row.innerHTML = `
+                <input type="text" class="pmk-image-row flex-1 bg-white border border-slate-200 rounded-xl px-4 py-2 focus:border-primary focus:ring-1 focus:ring-primary outline-none text-sm placeholder-slate-300" placeholder="Image URL or upload below..." value="${value || ''}">
+                <label class="shrink-0 flex items-center gap-1 bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-600 text-xs font-bold px-3 py-2 rounded-xl cursor-pointer transition-colors">
+                    <span class="material-symbols-outlined text-sm">upload</span>
+                    Upload
+                    <input type="file" accept="image/*" class="hidden pmk-file-input">
+                </label>
+                <button type="button" class="shrink-0 text-slate-400 hover:text-red-500 transition-colors pmk-remove-img" title="Remove image">
+                    <span class="material-symbols-outlined text-lg">close</span>
+                </button>
+            `;
+            // File upload handler
+            const fileInput = row.querySelector('.pmk-file-input');
+            const urlInput = row.querySelector('.pmk-image-row');
+            fileInput.addEventListener('change', async () => {
+                if (!fileInput.files[0]) return;
+                const label = row.querySelector('label');
+                const origText = label.innerHTML;
+                label.innerHTML = '<span class="material-symbols-outlined text-sm animate-spin">progress_activity</span> Uploading...';
+                try {
+                    const fd = new FormData();
+                    fd.append('image', fileInput.files[0]);
+                    const res = await fetch('/api/admin/upload-product-image', {
+                        method: 'POST',
+                        headers: { 'Authorization': authToken },
+                        body: fd
+                    });
+                    const data = await res.json();
+                    if (res.ok) {
+                        urlInput.value = data.url;
+                        label.innerHTML = '<span class="material-symbols-outlined text-sm text-green-500">check_circle</span> Done';
+                        setTimeout(() => { label.innerHTML = origText; }, 2000);
+                    } else {
+                        alert('Upload failed: ' + (data.error || 'Unknown error'));
+                        label.innerHTML = origText;
+                    }
+                } catch(e) {
+                    alert('Upload error: ' + e.message);
+                    label.innerHTML = origText;
+                }
+            });
+            // Remove button
+            row.querySelector('.pmk-remove-img').addEventListener('click', () => row.remove());
+            return row;
+        }
+
         if (addImgRowBtn) {
             addImgRowBtn.addEventListener('click', () => {
-                const input = document.createElement('input');
-                input.type = 'text';
-                input.className = 'pmk-image-row w-full bg-white border border-slate-200 rounded-xl px-4 py-2 focus:border-primary focus:ring-1 focus:ring-primary outline-none text-sm placeholder-slate-300 mt-2';
-                input.placeholder = "Additional image URL...";
-                imageRowsContainer.appendChild(input);
+                imageRowsContainer.appendChild(createImageRow(''));
             });
         }
         
@@ -988,18 +1034,10 @@
             
             imageRowsContainer.innerHTML = '';
             if (product.images && product.images.length > 0) {
-                product.images.forEach(img => {
-                    const input = document.createElement('input');
-                    input.type = 'text';
-                    input.value = img;
-                    input.className = 'pmk-image-row w-full bg-white border border-slate-200 rounded-xl px-4 py-2 focus:border-primary focus:ring-1 focus:ring-primary outline-none text-sm mt-2';
-                    imageRowsContainer.appendChild(input);
-                });
+                product.images.forEach(img => imageRowsContainer.appendChild(createImageRow(img)));
             } else {
-                imageRowsContainer.innerHTML = '<input type="text" class="pmk-image-row w-full bg-white border border-slate-200 rounded-xl px-4 py-2 focus:border-primary focus:ring-1 focus:ring-primary outline-none text-sm placeholder-slate-300 mt-2" placeholder="https://lh3.googleusercontent.com/aida-public/...">';
+                imageRowsContainer.appendChild(createImageRow(''));
             }
-            
-            if (imageRowsContainer.firstElementChild) imageRowsContainer.firstElementChild.classList.remove('mt-2');
             
             productModal.classList.remove('hidden');
         };
@@ -1037,7 +1075,7 @@
                 saveBtn.innerHTML = '<span class="material-symbols-outlined text-sm animate-spin">progress_activity</span> Saving...';
                 
                 const imageInputs = document.querySelectorAll('.pmk-image-row');
-                const images = Array.from(imageInputs).map(inp => inp.value.trim()).filter(val => val !== '');
+                const images = Array.from(imageInputs).map(inp => inp.value.trim()).filter(val => val !== '' && val.startsWith('/') || val.startsWith('http'));
                 
                 const body = {
                     slug: document.getElementById('pmSlug').value.trim(),
